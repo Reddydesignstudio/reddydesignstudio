@@ -17,17 +17,11 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
-
-/* grain */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   opacity:.022}
-
-/* cursor */
 #cur{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
 #cur-r{width:32px;height:32px;border:1px solid rgba(232,25,44,.45);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .25s cubic-bezier(.22,1,.36,1),top .25s cubic-bezier(.22,1,.36,1),width .3s,height .3s}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:rgba(8,8,9,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);transition:padding .3s}
 nav.scrolled{padding:.65rem 3.5rem;background:rgba(8,8,9,.95)}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.1em;color:var(--text);text-decoration:none}
@@ -42,240 +36,54 @@ nav.scrolled{padding:.65rem 3.5rem;background:rgba(8,8,9,.95)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
 .burger span{display:block;width:22px;height:1.5px;background:var(--text)}
 @media(max-width:860px){nav{padding:1rem 1.5rem}.nl,.ncta{display:none}.burger{display:flex}}
-
-/* drawer */
 .drawer{display:none;position:fixed;inset:0;background:rgba(8,8,9,.97);z-index:795;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
 .drawer.open{display:flex}
 .drawer a{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:var(--text);text-decoration:none;transition:color .2s}
 .drawer a:hover{color:var(--red)}
 .dx{position:absolute;top:1.4rem;right:1.8rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
-
-/* HERO */
 .ph{padding:8.5rem 3.5rem 3.5rem;border-bottom:1px solid var(--gb);display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;position:relative;overflow:hidden}
-.ph::before{content:'';position:absolute;bottom:-80px;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(232,25,44,.05),transparent 65%);pointer-events:none}
 .ph-tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
-.ph-tag::before{content:'';width:20px;height:1px;background:var(--red)}
-.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);line-height:.95;opacity:0;animation:fu .9s .2s forwards}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);line-height:.95}
 .ph-title span{color:var(--red)}
-.ph-sub{font-size:.9rem;line-height:1.8;color:var(--muted);max-width:480px;margin-top:1rem;opacity:0;animation:fu .9s .4s forwards}
+.ph-sub{font-size:.9rem;line-height:1.8;color:var(--muted);max-width:480px;margin-top:1rem}
 .ph-stats{display:flex;gap:2rem;flex-shrink:0}
 .st .n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--text);line-height:1}
 .st .n em{color:var(--red);font-style:normal}
 .st .l{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 @media(max-width:768px){.ph{grid-template-columns:1fr;padding:7.5rem 1.5rem 3rem}.ph-stats{display:none}}
-@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
-/* AD SLOTS — replace inner .adph divs with real AdSense ins tags */
-.ad-top{background:rgba(10,10,12,1);border-bottom:1px solid var(--gb);padding:.8rem 3.5rem;display:flex;align-items:center;justify-content:center;min-height:90px}
-.adph{width:100%;background:var(--glass);border:1px dashed rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:.8rem}
-.adph.leader{max-width:728px;min-height:88px}
-.adph.rect{max-width:300px;height:250px}
-.adph.inline{max-width:100%;min-height:80px}
-.adph.gate-ad{max-width:100%;min-height:96px}
-.adlbl{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.16)}
-.adsz{font-size:.6rem;color:rgba(255,255,255,.09)}
-
-/* LAYOUT */
 .wrap{display:grid;grid-template-columns:1fr 300px;gap:2rem;padding:2.5rem 3.5rem 6rem;align-items:start}
 @media(max-width:1050px){.wrap{grid-template-columns:1fr;padding:2rem 1.5rem 5rem}.sidebar{display:none}}
-
-/* SIDEBAR */
-.sidebar{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:80px}
-.sbox{background:var(--glass);border:1px solid var(--gb);padding:1.4rem}
-.stitle{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--gb)}
-.scat{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;color:var(--muted);font-size:.8rem;transition:color .2s}
-.scat:last-child{border-bottom:none}
-.scat:hover,.scat.on{color:var(--red)}
-.scat .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
-.scat .cnt{margin-left:auto;font-size:.66rem;opacity:.45}
-.hbox{background:linear-gradient(135deg,rgba(232,25,44,.07),rgba(232,25,44,.02));border:1px solid rgba(232,25,44,.18);padding:1.5rem}
-.hbox h4{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;margin-bottom:.4rem}
-.hbox h4 span{color:var(--red)}
-.hbox p{font-size:.75rem;color:var(--muted);line-height:1.65;margin-bottom:1.1rem}
-.hbtn{display:block;text-align:center;background:var(--red);color:#fff;padding:.7rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:box-shadow .2s}
-.hbtn:hover{box-shadow:0 4px 20px var(--red-glow)}
-
-/* CAT TABS */
+.adph{width:100%;background:var(--glass);border:1px dashed rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:.8rem}
+.adlbl{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.16)}
+.adsz{font-size:.6rem;color:rgba(255,255,255,.09)}
 .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.8rem}
 .tab{display:flex;align-items:center;gap:.5rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.48rem 1.1rem;border:1px solid var(--gb);background:none;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
-.tab svg{width:13px;height:13px;flex-shrink:0}
 .tab.on,.tab:hover{background:var(--red);border-color:var(--red);color:#fff}
-.tab .badge{background:rgba(255,255,255,.18);padding:0 .4rem;font-size:.56rem;border-radius:2px;line-height:1.6}
-
-/* SEARCH BAR */
-.search-wrap{position:relative;margin-bottom:1.4rem}
-.search-wrap svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none;transition:color .2s}
-.search-wrap.focused svg{color:var(--red)}
-#searchInput{width:100%;background:var(--glass);border:1px solid var(--gb);color:var(--text);padding:.78rem 3rem .78rem 2.6rem;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .25s,box-shadow .25s;letter-spacing:.01em}
-#searchInput::placeholder{color:var(--muted);opacity:.7}
-#searchInput:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(232,25,44,.08)}
-.search-clear{position:absolute;right:.85rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:.2rem .4rem;font-size:1rem;display:none;transition:color .2s;line-height:1}
-.search-clear:hover{color:var(--red)}
-.search-clear.show{display:block}
-.search-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;min-height:1.4rem}
-.search-results-label{font-size:.7rem;color:var(--muted);letter-spacing:.08em}
-.search-results-label span{color:var(--red);font-weight:500}
-.search-no-results{text-align:center;padding:3.5rem 1rem;color:var(--muted)}
-.search-no-results svg{width:40px;height:40px;color:var(--muted2);margin:0 auto .8rem;display:block}
-.search-no-results p{font-size:.85rem;margin-bottom:.4rem}
-.search-no-results small{font-size:.75rem;opacity:.6}
-/* highlight matched text */
-.hl{background:rgba(232,25,44,.22);color:var(--text);border-radius:2px;padding:0 1px}
-
-/* BREADCRUMB */
-.bc{display:flex;align-items:center;gap:.5rem;font-size:.7rem;color:var(--muted);margin-bottom:1.4rem;flex-wrap:wrap}
-.bcl{color:var(--red);cursor:pointer;transition:opacity .2s}
-.bcl:hover{opacity:.7}
-.bcs{opacity:.3}
-
-/* GRID VIEW */
-.gh{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
-.gh h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem}
-.gh h3 span{color:var(--red)}
-.gh .ic{font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+.tab .badge{background:rgba(255,255,255,.18);padding:0 .4rem;font-size:.56rem;border-radius:2px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gb)}
 @media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:380px){.grid{grid-template-columns:1fr}}
-
-/* ITEM CARD */
 .card{background:var(--bg2);cursor:pointer;position:relative;overflow:hidden;transition:background .25s;display:flex;flex-direction:column}
 .card:hover{background:var(--bg3)}
-.cthumb{height:118px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.cthumb svg{width:34px;height:34px;color:rgba(255,255,255,.07);position:relative;z-index:1}
+.cthumb{height:118px;display:flex;align-items:center;justify-content:center;position:relative}
 .tf{background:linear-gradient(135deg,#14060a,#240c12)}
 .tb{background:linear-gradient(135deg,#060e18,#0c1a2c)}
 .tp{background:linear-gradient(135deg,#0c1606,#16220a)}
 .tv{background:linear-gradient(135deg,#120614,#1e0a20)}
-.cbadge{position:absolute;top:.5rem;left:.5rem;z-index:2;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(232,25,44,.9);color:#fff;padding:.14rem .5rem}
-.cfmt{position:absolute;top:.5rem;right:.5rem;z-index:2;font-size:.54rem;text-transform:uppercase;background:rgba(0,0,0,.72);color:var(--muted);padding:.14rem .44rem;border:1px solid rgba(255,255,255,.06)}
-.cov{position:absolute;inset:0;background:rgba(232,25,44,.12);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;z-index:3}
-.cov span{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--red);padding:.32rem .88rem}
-.card:hover .cov{opacity:1}
-.cinfo{padding:.88rem 1rem 1rem;flex:1}
-.ctitle{font-size:.84rem;font-weight:500;color:var(--text);margin-bottom:.3rem;line-height:1.3}
-.cmeta{font-size:.66rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
-.csz{opacity:.55}
-.ctag{font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;background:var(--red-dim);color:var(--red);padding:.14rem .48rem}
-.corner{position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 20px 20px 0;border-color:transparent var(--red) transparent transparent;opacity:0;transition:opacity .2s;z-index:4}
-.card:hover .corner{opacity:1}
-.ad-between{margin:1.8rem 0}
-
-/* DETAIL VIEW */
-.dg{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-@media(max-width:700px){.dg{grid-template-columns:1fr}}
-.dprev{aspect-ratio:4/3;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid var(--gb)}
-.dprev svg{width:64px;height:64px;color:rgba(255,255,255,.08)}
-.dpbadge{position:absolute;top:1rem;left:1rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:.24rem .7rem}
-.dpfmt{position:absolute;bottom:1rem;right:1rem;font-size:.64rem;text-transform:uppercase;background:rgba(0,0,0,.76);color:var(--muted);padding:.28rem .7rem;border:1px solid var(--gb)}
-.dinfo{display:flex;flex-direction:column;gap:1.2rem}
-.dcat{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.5rem}
-.dcat::before{content:'';width:16px;height:1px;background:var(--red)}
-.dtitle{font-family:'Bebas Neue',sans-serif;font-size:2.1rem;line-height:1.02}
-.ddesc{font-size:.85rem;line-height:1.78;color:var(--muted)}
-.dspecs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-.dspec{background:var(--glass);border:1px solid var(--gb);padding:.68rem .9rem}
-.dspec .sk{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
-.dspec .sv{font-size:.82rem;color:var(--text)}
-.dtags{display:flex;flex-wrap:wrap;gap:.4rem}
-.dtag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:var(--red-dim);color:var(--red);padding:.18rem .58rem}
-
-/* DOWNLOAD PANEL */
-.dlp{background:var(--glass);border:1px solid var(--gb);padding:1.8rem;position:relative;overflow:hidden}
-.dlp::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
-.dlh{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem;display:flex;align-items:center;gap:.6rem}
-.dlh::before{content:'';width:14px;height:1px;background:var(--muted)}
-
-/* gate states */
-.g-idle,.g-watch,.g-ready{display:none}
-.g-idle.on,.g-watch.on,.g-ready.on{display:block}
-
-/* IDLE */
-.ibox{background:rgba(10,10,12,1);border:1px dashed rgba(255,255,255,.09);padding:1.8rem 1.4rem;text-align:center}
-.iico{width:44px;height:44px;color:var(--red);margin:0 auto .9rem}
-.itxt{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
-.itxt strong{color:var(--text)}
-.bwatch{background:var(--red);color:#fff;border:none;cursor:pointer;padding:.9rem 1.8rem;font-family:'DM Sans',sans-serif;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 4px 20px var(--red-glow);display:inline-flex;align-items:center;gap:.6rem;width:100%;justify-content:center;transition:box-shadow .2s,transform .2s}
-.bwatch:hover{box-shadow:0 8px 36px rgba(232,25,44,.55);transform:translateY(-1px)}
-.bwatch svg{width:16px;height:16px;flex-shrink:0}
-
-/* WATCHING */
-.wbox{background:rgba(10,10,12,1);border:1px solid rgba(232,25,44,.18);padding:1.4rem;text-align:center}
-.ring-wrap{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.1rem 0 .9rem}
-.ring{position:relative;width:62px;height:62px;flex-shrink:0}
-.ring svg{transform:rotate(-90deg)}
-.rb{fill:none;stroke:var(--muted2);stroke-width:3}
-.rp{fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round;stroke-dasharray:163;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear}
-.rnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--red)}
-.rstat{text-align:left;font-size:.78rem;color:var(--muted);line-height:1.55}
-.rstat strong{color:var(--text);display:block;font-size:.86rem;margin-bottom:.18rem}
-.bar-w{height:3px;background:var(--muted2);margin-top:.6rem;overflow:hidden}
-.bar{height:100%;background:var(--red);width:0%;transition:width 1s linear}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.dot-live{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1.4s infinite;margin-right:.35rem;vertical-align:middle}
-
-/* READY */
-.rbox{background:rgba(34,197,94,.055);border:1px solid rgba(34,197,94,.22);padding:1.5rem;text-align:center}
-.rico{width:40px;height:40px;color:var(--green);margin:0 auto .8rem}
-.rtxt{font-size:.82rem;color:var(--muted);margin-bottom:1.2rem}
-.rtxt strong{color:var(--text);display:block;font-size:.92rem;margin-bottom:.2rem}
-.bdl{background:var(--green);color:#fff;border:none;cursor:pointer;padding:1rem 1.8rem;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 4px 20px var(--green-glow);display:inline-flex;align-items:center;gap:.7rem;width:100%;justify-content:center;transition:box-shadow .2s,transform .2s}
-.bdl:hover{box-shadow:0 8px 36px rgba(34,197,94,.5);transform:translateY(-1px)}
-.bdl:active{transform:scale(.98)}
-.bdl svg{width:16px;height:16px;flex-shrink:0}
-.breset{background:none;border:1px solid var(--gb);color:var(--muted);padding:.48rem 1rem;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:.7rem;width:100%;font-family:'DM Sans',sans-serif;transition:border-color .2s,color .2s}
-.breset:hover{border-color:var(--red);color:var(--red)}
-
-/* share row */
-.srow{display:flex;gap:.45rem;margin-top:.85rem}
-.sbtn{flex:1;border:1px solid var(--gb);background:none;color:var(--muted);padding:.48rem .3rem;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
-.sbtn:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
-
-/* RELATED */
-.rsec{margin-top:2.5rem}
-.rsec h3{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;margin-bottom:1rem}
-.rsec h3 span{color:var(--red)}
-.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gb)}
-@media(max-width:580px){.rgrid{grid-template-columns:repeat(2,1fr)}}
-.rcard{background:var(--bg2);cursor:pointer;display:flex;align-items:center;gap:.8rem;padding:.88rem;transition:background .2s}
-.rcard:hover{background:var(--bg3)}
-.rth{width:42px;height:42px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.rth svg{width:18px;height:18px;color:rgba(255,255,255,.1)}
-.rn{font-size:.78rem;color:var(--text);line-height:1.3}
-.rf{font-size:.62rem;color:var(--muted);margin-top:.14rem}
-
-/* WA float */
-.wa{position:fixed;bottom:2rem;right:2rem;z-index:850;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1da851);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.35);text-decoration:none;animation:wap 2.5s ease-in-out infinite;transition:transform .2s}
-.wa:hover{transform:scale(1.1)}
-.wa svg{width:26px;height:26px;fill:#fff}
-@keyframes wap{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 8px 28px rgba(37,211,102,.5),0 0 0 14px rgba(37,211,102,0)}}
-
-/* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--gb);padding:2rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.fl{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.1em}
-.fl span{color:var(--red)}
-.fc{font-size:.68rem;color:var(--muted)}
-.fs{display:flex;gap:.6rem}
-.fsi{width:30px;height:30px;border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.65rem;font-weight:700;transition:border-color .2s,color .2s}
-.fsi:hover{border-color:var(--red);color:var(--red)}
-@media(max-width:600px){footer{padding:1.5rem}.fc{order:3;width:100%;text-align:center}}
-
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s,transform .65s}
-.reveal.vis{opacity:1;transform:translateY(0)}
+.cbadge{position:absolute;top:.5rem;left:.5rem;font-size:.54rem;background:var(--red);padding:.14rem .5rem}
+.cinfo{padding:.88rem 1rem 1rem}
+.ctitle{font-size:.84rem;font-weight:500;margin-bottom:.3rem}
+.cmeta{font-size:.66rem;color:var(--muted);display:flex;justify-content:space-between}
+.dlp{background:var(--glass);border:1px solid var(--gb);padding:1.8rem;position:relative}
+.g-idle,.g-watch,.g-ready{display:none}.on{display:block}
+.bwatch,.bdl{background:var(--red);color:#fff;border:none;cursor:pointer;padding:.9rem;width:100%;text-transform:uppercase;letter-spacing:.1em;font-size:.75rem}
+.bdl{background:var(--green)}
+footer{background:var(--bg2);border-top:1px solid var(--gb);padding:2rem 3.5rem;display:flex;justify-content:space-between}
+.wa{position:fixed;bottom:2rem;right:2rem;width:52px;height:52px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1000}
 </style>
 </head>
 <body>
 <div id="cur"></div><div id="cur-r"></div>
 
-<!-- drawer -->
-<div class="drawer" id="drawer">
-  <button class="dx" onclick="D()">&#x2715;</button>
-  <a href="index.html" onclick="D()">Home</a>
-  <a href="services.html" onclick="D()">Services</a>
-  <a href="free-materials.html" onclick="D()">Free Materials</a>
-  <a href="contact.html" onclick="D()">Contact</a>
-</div>
-
-<!-- NAV -->
 <nav id="nav">
   <a href="index.html" class="logo">Reddy<span>.</span></a>
   <ul class="nl">
@@ -285,682 +93,137 @@ footer{background:var(--bg2);border-top:1px solid var(--gb);padding:2rem 3.5rem;
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="contact.html" class="ncta">Hire Us</a>
-  <button class="burger" onclick="D()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="ph">
   <div>
-    <div class="ph-tag">100% Free &middot; Individual Items Only &middot; No Bulk Downloads</div>
     <h1 class="ph-title">Free <span>Resources</span></h1>
-    <p class="ph-sub">Browse individual assets by category. Click any item to preview it — then watch a 5-second ad to unlock your free download.</p>
+    <p class="ph-sub">Your Google Drive assets are now live here automatically. Watch a 5s ad to unlock downloads.</p>
   </div>
   <div class="ph-stats">
-    <div class="st"><div class="n">42<em>+</em></div><div class="l">Free Items</div></div>
-    <div class="st"><div class="n">4</div><div class="l">Categories</div></div>
-    <div class="st"><div class="n">0<em>&#x20B9;</em></div><div class="l">Cost</div></div>
+    <div class="st"><div class="n" id="totalCount">0</div><div class="l">Items</div></div>
   </div>
 </div>
 
-<!-- *** ADSENSE SLOT 1: LEADERBOARD TOP ***
-     Replace the .adph div below with your actual AdSense ins tag:
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
-     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
--->
-<div class="ad-top">
-  <div class="adph leader">
-    <div class="adlbl">Advertisement &mdash; Leaderboard (728&times;90)</div>
-    <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
-  </div>
-</div>
-
-<!-- MAIN LAYOUT: Content + Sidebar -->
 <div class="wrap">
   <main id="MC">
-
-    <!-- CATEGORY TABS -->
     <div class="tabs" id="tabs">
-      <button class="tab on" data-c="all">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-        All <span class="badge">42</span>
-      </button>
-      <button class="tab" data-c="font">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-        Text Styles <span class="badge">10</span>
-      </button>
-      <button class="tab" data-c="bg">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Backgrounds &amp; PNGs <span class="badge">14</span>
-      </button>
-      <button class="tab" data-c="psd">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        PSD / Projects <span class="badge">8</span>
-      </button>
-      <button class="tab" data-c="video">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-        Video Assets <span class="badge">10</span>
-      </button>
+      <button class="tab on" onclick="filt('all')" data-c="all">All <span class="badge" id="badgeAll">0</span></button>
+      <button class="tab" onclick="filt('fonts')" data-c="fonts">Fonts</button>
+      <button class="tab" onclick="filt('backgrounds')" data-c="backgrounds">Backgrounds</button>
+      <button class="tab" onclick="filt('psdprojects')" data-c="psdprojects">PSD Files</button>
     </div>
 
-    <!-- SEARCH BAR -->
-    <div class="search-wrap" id="searchWrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <input type="text" id="searchInput" placeholder="Search items, formats, tags&hellip;" autocomplete="off" spellcheck="false"/>
-      <button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear">&#x2715;</button>
-    </div>
-    <div class="search-meta" id="searchMeta" style="display:none">
-      <div class="search-results-label" id="searchLabel"></div>
-      <div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em" id="searchCatNote"></div>
-    </div>
-
-    <!-- BREADCRUMB -->
-    <div class="bc" id="bc">
-      <span class="bcl" onclick="toGrid()">Free Resources</span>
-      <span class="bcs" id="bcs1" style="display:none">&#x203A;</span>
-      <span class="bcl" id="bcc" style="display:none"></span>
-      <span class="bcs" id="bcs2" style="display:none">&#x203A;</span>
-      <span id="bci" style="display:none;color:var(--muted);cursor:default"></span>
-    </div>
-
-    <!-- === GRID VIEW === -->
     <div id="vGrid">
-      <div class="gh">
-        <h3 id="gtitle">All <span>Items</span></h3>
-        <div class="ic" id="gcount">42 items</div>
-      </div>
-      <!-- First 6 items -->
-      <div class="grid" id="grid1"></div>
-
-      <!-- *** ADSENSE SLOT 2: INLINE (between grid rows) ***
-           Replace inner .adph with your AdSense ins tag -->
-      <div class="ad-between" id="adBetween">
-        <div class="adph inline">
-          <div class="adlbl">Advertisement &mdash; Inline (468&times;60)</div>
-          <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
-        </div>
-      </div>
-
-      <!-- Remaining items -->
-      <div class="grid" id="grid2"></div>
+      <div class="grid" id="mainGrid"></div>
     </div>
 
-    <!-- === DETAIL VIEW === -->
     <div id="vDetail" style="display:none">
-      <div class="dg">
-        <!-- LEFT: Preview + in-article ad -->
-        <div>
-          <div class="dprev" id="dPrev">
-            <svg id="dIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="64" height="64"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-            <div class="dpbadge">FREE</div>
-            <div class="dpfmt" id="dFmt">PNG</div>
-          </div>
-          <!-- *** ADSENSE SLOT 3: IN-ARTICLE ***
-               Replace inner .adph with your AdSense ins tag -->
-          <div style="margin-top:1rem">
-            <div class="adph" style="max-width:100%;min-height:110px">
-              <div class="adlbl">Advertisement &mdash; In-Article (336&times;280)</div>
-              <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
+       <button onclick="toGrid()" style="color:var(--red); margin-bottom:1rem">← Back to Grid</button>
+       <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem">
+          <div id="dPrev" style="height:300px; background:var(--bg2); display:flex; align-items:center; justify-content:center">PREVIEW</div>
+          <div>
+            <h2 id="dTitle" style="font-family:'Bebas Neue'; font-size:2.5rem"></h2>
+            <p id="dDesc" style="color:var(--muted); margin:1rem 0"></p>
+            <div class="dlp">
+              <div id="gIdle" class="g-idle on"><button class="bwatch" onclick="startGate()">Watch Ad & Unlock</button></div>
+              <div id="gWatch" class="g-watch" style="text-align:center">Ad is playing... <span id="rnum">5</span>s</div>
+              <div id="gReady" class="g-ready"><button class="bdl" id="dlBtn" onclick="doDL()">Download Now</button></div>
             </div>
           </div>
-        </div>
-
-        <!-- RIGHT: Info + Download gate -->
-        <div class="dinfo">
-          <div class="dcat" id="dCat">Category</div>
-          <h2 class="dtitle" id="dTitle">Item Title</h2>
-          <p class="ddesc" id="dDesc">Description.</p>
-          <div class="dspecs" id="dSpecs"></div>
-          <div class="dtags" id="dTags"></div>
-
-          <!-- ============================================================
-               DOWNLOAD PANEL WITH AD-GATE
-               ============================================================ -->
-          <div class="dlp">
-            <div class="dlh">Download This Item</div>
-
-            <!-- STATE 1: IDLE — user must click to trigger ad -->
-            <div class="g-idle on" id="gIdle">
-              <div class="ibox">
-                <svg class="iico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
-                </svg>
-                <p class="itxt">This item is <strong>100% free</strong>.<br/>Watch a short 5-second ad to unlock your download and support the studio.</p>
-                <button class="bwatch" onclick="startGate()">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  Watch Ad &amp; Unlock Download
-                </button>
-              </div>
-            </div>
-
-            <!-- STATE 2: WATCHING — 5s countdown + ad slot visible -->
-            <div class="g-watch" id="gWatch">
-              <div class="wbox">
-                <!-- *** ADSENSE SLOT 4: AD-GATE (shown during countdown — primary revenue slot) ***
-                     Replace inner .adph with your AdSense ins tag.
-                     This slot fires every single download attempt = highest impression count. -->
-                <div class="adph gate-ad" id="gateAdSlot">
-                  <div class="adlbl">Advertisement &mdash; Ad Gate (300&times;100 or Responsive)</div>
-                  <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
-                </div>
-
-                <!-- Circular countdown timer -->
-                <div class="ring-wrap">
-                  <div class="ring">
-                    <svg viewBox="0 0 62 62" width="62" height="62">
-                      <circle class="rb" cx="31" cy="31" r="26"/>
-                      <circle class="rp" id="rp" cx="31" cy="31" r="26"/>
-                    </svg>
-                    <div class="rnum" id="rnum">5</div>
-                  </div>
-                  <div class="rstat">
-                    <strong><span class="dot-live"></span>Ad is playing&hellip;</strong>
-                    Download unlocks in <span id="rsec">5</span> seconds.<br/>
-                    <span style="font-size:.68rem;color:var(--muted2)">Please do not close this panel.</span>
-                  </div>
-                </div>
-                <div class="bar-w"><div class="bar" id="bar"></div></div>
-              </div>
-            </div>
-
-            <!-- STATE 3: READY — download button active -->
-            <div class="g-ready" id="gReady">
-              <div class="rbox">
-                <svg class="rico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-                <div class="rtxt"><strong>&#x2713; Download Unlocked!</strong>Your file is ready. Click below.</div>
-                <button class="bdl" id="dlBtn" onclick="doDL()">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                  Download Now &mdash; Free
-                </button>
-                <button class="breset" onclick="resetGate()">&#x21A9; Watch another ad (re-unlock)</button>
-              </div>
-            </div>
-
-            <!-- Share row -->
-            <div class="srow">
-              <button class="sbtn" onclick="share('tw')">&#x1D54F; Share</button>
-              <button class="sbtn" onclick="share('wa')">WA Share</button>
-              <button class="sbtn" onclick="copyURL(event)">&#x1F517; Copy Link</button>
-            </div>
-          </div><!-- end .dlp -->
-        </div><!-- end .dinfo -->
-      </div><!-- end .dg -->
-
-      <!-- Related items + ad between -->
-      <div class="rsec">
-        <h3>More <span>Like This</span></h3>
-        <!-- *** ADSENSE SLOT 5: BETWEEN CONTENT ***
-             Replace inner .adph with your AdSense ins tag -->
-        <div style="margin-bottom:1rem">
-          <div class="adph inline">
-            <div class="adlbl">Advertisement &mdash; Between Content (728&times;90)</div>
-            <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
-          </div>
-        </div>
-        <div class="rgrid" id="related"></div>
-      </div>
-    </div><!-- end #vDetail -->
-
+       </div>
+    </div>
   </main>
+</div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <!-- *** ADSENSE SLOT 6: SIDEBAR RECTANGLE (sticky) ***
-         Replace inner .adph with your AdSense ins tag -->
-    <div class="adph rect">
-      <div class="adlbl">Advertisement &mdash; Sidebar (300&times;250)</div>
-      <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
-    </div>
-
-    <!-- Category list -->
-    <div class="sbox">
-      <div class="stitle">Browse Categories</div>
-      <div class="scat on" data-sc="all" onclick="filt('all')"><div class="dot"></div>All Resources<span class="cnt">42</span></div>
-      <div class="scat" data-sc="font" onclick="filt('font')"><div class="dot"></div>Text Styles &amp; Fonts<span class="cnt">10</span></div>
-      <div class="scat" data-sc="bg" onclick="filt('bg')"><div class="dot"></div>Backgrounds &amp; PNGs<span class="cnt">14</span></div>
-      <div class="scat" data-sc="psd" onclick="filt('psd')"><div class="dot"></div>PSD / Project Files<span class="cnt">8</span></div>
-      <div class="scat" data-sc="video" onclick="filt('video')"><div class="dot"></div>Video Assets<span class="cnt">10</span></div>
-    </div>
-
-    <!-- *** ADSENSE SLOT 7: SIDEBAR RECTANGLE 2 ***
-         Replace inner .adph with your AdSense ins tag -->
-    <div class="adph rect">
-      <div class="adlbl">Advertisement &mdash; Sidebar (300&times;250)</div>
-      <div class="adsz">Replace with your Google AdSense &lt;ins&gt; tag</div>
-    </div>
-
-    <!-- Hire CTA -->
-    <div class="hbox">
-      <h4>Need Custom<br/><span>Work Done?</span></h4>
-      <p>Professional thumbnails, graphics, and videos tailored to your brand.</p>
-      <a href="contact.html" class="hbtn">Hire Us &#x2192;</a>
-    </div>
-  </aside>
-</div><!-- end .wrap -->
-
-<footer>
-  <div class="fl">Reddy<span>.</span></div>
-  <div class="fc">&copy; 2025 Reddy Design Studio &middot; Hyderabad, India</div>
-  <div class="fs">
-    <a class="fsi" href="#">YT</a><a class="fsi" href="#">IG</a>
-    <a class="fsi" href="#">Be</a><a class="fsi" href="#">in</a>
-  </div>
-</footer>
-
-<!-- WhatsApp float -->
-<a class="wa" href="https://wa.me/919999999999?text=Hi%20Reddy%20Design%20Studio!" target="_blank">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-</a>
+<a class="wa" href="https://wa.me/919999999999" target="_blank"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
 
 <script>
-/* ================================================================
-   DATA — 42 individual items across 4 categories
-   No packs — every entry is a single downloadable asset
-   ================================================================ */
-const DB=[
-  // TEXT STYLES / FONTS (10)
-  {id:"f01",c:"font",title:"Neon Glow Text Style",desc:"Bold neon glow layer style for Photoshop. Single-click apply with smart object support. Ideal for gaming thumbnails and dark-themed poster designs.",fmt:"ASL",sz:"1.2 MB",tags:["Photoshop","Layer Style","Neon","Gaming"],specs:{Software:"Photoshop CC+",Compat:"CS6 and above",Resolution:"Any",License:"Free Commercial Use"}},
-  {id:"f02",c:"font",title:"Chrome Metal Text Effect",desc:"Realistic chrome and metallic Photoshop text effect. Includes 3 colour variants: silver, gold, and dark chrome. Smart object ready.",fmt:"PSD",sz:"4.8 MB",tags:["Photoshop","Metal","Chrome","Text FX"],specs:{Software:"Photoshop CC 2019+",Resolution:"300 DPI",SmartObjects:"Yes",License:"Free Commercial Use"}},
-  {id:"f03",c:"font",title:"Horror Drip Display Font",desc:"Free horror/drip aesthetic display font. OTF and TTF formats. Perfect for gaming, Halloween, and music thumbnails.",fmt:"OTF",sz:"0.8 MB",tags:["Font","Horror","Display","Gaming"],specs:{Type:"Display",Format:"OTF + TTF",Glyphs:"240+",License:"Free Commercial Use"}},
-  {id:"f04",c:"font",title:"Cinematic MOGRT Title Pack",desc:"7 Premiere Pro MOGRT title animations: clean lower thirds, full-screen cinematic titles, and sub-titles. Drag and drop ready.",fmt:"MOGRT",sz:"18 MB",tags:["Premiere Pro","MOGRT","Titles","Cinematic"],specs:{Software:"Premiere Pro 2020+",Animations:"7",FPS:"24 / 30 / 60",License:"Free Commercial Use"}},
-  {id:"f05",c:"font",title:"Retro Varsity Collegiate Font",desc:"Bold retro varsity/collegiate display font. Free for personal and commercial use. Includes numerals and punctuation.",fmt:"TTF",sz:"0.6 MB",tags:["Font","Retro","Varsity","Bold"],specs:{Type:"Display",Format:"TTF",Glyphs:"180+",License:"Free Commercial Use"}},
-  {id:"f06",c:"font",title:"Fire Flame Photoshop Style",desc:"Realistic fire text layer style for Photoshop. Includes smart object template and animated GIF export preset.",fmt:"ASL",sz:"2.1 MB",tags:["Photoshop","Fire","Layer Style","Effects"],specs:{Software:"Photoshop CC 2020+",SmartObject:"Yes",Resolution:"Any",License:"Free Commercial Use"}},
-  {id:"f07",c:"font",title:"Grunge Textured Typeface",desc:"Raw grunge/textured typeface for dark backgrounds. 2 weights included: Regular and Bold. Great for streetwear and music content.",fmt:"OTF",sz:"1.1 MB",tags:["Font","Grunge","Texture","Street"],specs:{Type:"Display",Format:"OTF",Weights:"Regular + Bold",License:"Free Commercial Use"}},
-  {id:"f08",c:"font",title:"Outline Shadow Text Style",desc:"Clean outline + offset shadow Photoshop text style. Minimal and editorial feel. Compatible with both light and dark backgrounds.",fmt:"ASL",sz:"0.5 MB",tags:["Photoshop","Outline","Shadow","Minimal"],specs:{Software:"Photoshop CS6+",Style:"Outline + Shadow",Resolution:"Any",License:"Free Commercial Use"}},
-  {id:"f09",c:"font",title:"3D Extrude CSS Text Animation",desc:"Pure CSS + SVG animated 3D extruded text style. No plugins required. Includes red, white, and black colour variants.",fmt:"HTML",sz:"0.3 MB",tags:["CSS","HTML","3D","Animation"],specs:{Tech:"HTML + CSS",Browser:"All Modern Browsers",Animation:"CSS Only",License:"Free Commercial Use"}},
-  {id:"f10",c:"font",title:"Brush Script Handwriting Font",desc:"Authentic brush script handwriting font for social media thumbnails and quote graphics. Includes swash alternates.",fmt:"OTF",sz:"0.9 MB",tags:["Font","Brush","Script","Handwriting"],specs:{Type:"Script",Format:"OTF",Glyphs:"320+",License:"Free Commercial Use"}},
-  // BACKGROUNDS & PNGs (14)
-  {id:"b01",c:"bg",title:"Dark Red Bokeh Background",desc:"Ultra-HD dark red bokeh background at 3840x2160. Comes in 3 colour tones. Perfect for thumbnails, posters, and social media.",fmt:"PNG",sz:"8.4 MB",tags:["Background","Bokeh","Dark","4K"],specs:{Resolution:"3840x2160",Format:"PNG",Tones:"3 Variants",License:"Free Commercial Use"}},
-  {id:"b02",c:"bg",title:"White Smoke Transparent PNG",desc:"Single high-res transparent smoke PNG overlay. White smoke on transparent background. Drag-and-drop for Photoshop and Canva.",fmt:"PNG",sz:"3.2 MB",tags:["Smoke","Overlay","PNG","Transparent"],specs:{Resolution:"4K",Background:"Transparent",Format:"PNG",License:"Free Commercial Use"}},
-  {id:"b03",c:"bg",title:"Dark Gradient Mesh Background",desc:"Premium dark gradient mesh background. Deep charcoal and subtle warm tones. Exported at 4K as PNG and JPEG.",fmt:"PNG",sz:"5.1 MB",tags:["Background","Gradient","Mesh","4K"],specs:{Resolution:"4K",Format:"PNG + JPG",Style:"Dark Mesh",License:"Free Commercial Use"}},
-  {id:"b04",c:"bg",title:"VHS Glitch Distortion PNG",desc:"Single VHS/glitch distortion transparent PNG overlay for cyberpunk effects. RGB split and scan line styles.",fmt:"PNG",sz:"2.8 MB",tags:["Glitch","VHS","Overlay","Cyberpunk"],specs:{Background:"Transparent",Format:"PNG",Style:"VHS / Glitch",License:"Free Commercial Use"}},
-  {id:"b05",c:"bg",title:"Neon Grid Synthwave Wallpaper",desc:"Dark neon grid synthwave wallpaper background at 3840x2160. Perfect for gaming channel art and tech thumbnails.",fmt:"JPG",sz:"4.6 MB",tags:["Background","Neon","Synthwave","Grid"],specs:{Resolution:"3840x2160",Format:"JPG",Style:"Synthwave",License:"Free Commercial Use"}},
-  {id:"b06",c:"bg",title:"Particle Dust Overlay PNG",desc:"Single transparent particle/dust PNG overlay for adding depth and atmosphere to dark poster and thumbnail compositions.",fmt:"PNG",sz:"2.4 MB",tags:["Particles","Dust","Overlay","Transparent"],specs:{Background:"Transparent",Resolution:"2K+",Format:"PNG",License:"Free Commercial Use"}},
-  {id:"b07",c:"bg",title:"Black Marble Seamless Texture",desc:"Seamless black marble texture at 4000x4000px. Tileable. Perfect for luxury brand design and dark backgrounds.",fmt:"JPG",sz:"6.8 MB",tags:["Texture","Marble","Black","Seamless"],specs:{Resolution:"4000x4000",Tileable:"Yes",Format:"JPG",License:"Free Commercial Use"}},
-  {id:"b08",c:"bg",title:"Realistic Fire Cutout PNG",desc:"High-res realistic fire/flame transparent PNG cutout. Perfect for dramatic thumbnail compositions. Screen blend mode ready.",fmt:"PNG",sz:"4.2 MB",tags:["Fire","Flame","Cutout","PNG"],specs:{Background:"Transparent",Resolution:"3K",Format:"PNG",License:"Free Commercial Use"}},
-  {id:"b09",c:"bg",title:"Lightning Strike PNG Overlay",desc:"Lightning bolt transparent PNG overlay. White/blue tone on black background. Use Screen blend mode for best results.",fmt:"PNG",sz:"2.1 MB",tags:["Lightning","Effect","Overlay","Screen"],specs:{Background:"Black",BlendMode:"Screen",Format:"PNG",License:"Free Commercial Use"}},
-  {id:"b10",c:"bg",title:"Geometric Lines SVG Shape",desc:"Abstract geometric line SVG shape. Scalable vector, fully editable. Great for futuristic and tech-themed design layouts.",fmt:"SVG",sz:"0.2 MB",tags:["Geometric","SVG","Abstract","Lines"],specs:{Format:"SVG",Scalable:"Yes",Editable:"Yes",License:"Free Commercial Use"}},
-  {id:"b11",c:"bg",title:"Urban Concrete Texture",desc:"High-res gritty urban concrete texture at 5000x3000px. Perfect for streetwear, music, and dark-themed thumbnails.",fmt:"JPG",sz:"9.2 MB",tags:["Texture","Concrete","Urban","Gritty"],specs:{Resolution:"5000x3000",Tileable:"Yes",Format:"JPG",License:"Free Commercial Use"}},
-  {id:"b12",c:"bg",title:"Sci-Fi HUD Overlay PNG",desc:"Transparent sci-fi tech HUD overlay PNG. Futuristic data readout and scan line elements. Great for gaming content.",fmt:"PNG",sz:"3.5 MB",tags:["HUD","Sci-Fi","Tech","Overlay"],specs:{Background:"Transparent",Style:"Sci-Fi HUD",Format:"PNG",License:"Free Commercial Use"}},
-  {id:"b13",c:"bg",title:"Warm Light Leak PNG",desc:"Warm lens flare / light leak transparent PNG overlay. Cinematic bokeh tones. Use Screen or Lighten blend mode.",fmt:"PNG",sz:"3.8 MB",tags:["Light Leak","Lens Flare","Warm","Cinematic"],specs:{Background:"Transparent",BlendMode:"Screen / Lighten",Format:"PNG",License:"Free Commercial Use"}},
-  {id:"b14",c:"bg",title:"Deep Space Galaxy Background",desc:"Deep space and galaxy background at 3840x2160. Dark blues and purples with dense star field. Ideal for fantasy content.",fmt:"JPG",sz:"7.4 MB",tags:["Space","Galaxy","Stars","Dark"],specs:{Resolution:"3840x2160",Format:"JPG",Style:"Galaxy",License:"Free Commercial Use"}},
-  // PSD / PROJECT FILES (8)
-  {id:"p01",c:"psd",title:"YouTube Thumbnail PSD Template",desc:"Editable PSD thumbnail template with smart object layers. Dark red colour scheme, pre-styled text. Replace image with one click.",fmt:"PSD",sz:"35 MB",tags:["PSD","Thumbnail","YouTube","Template"],specs:{Software:"Photoshop CC+",Resolution:"1280x720",SmartObjects:"Yes",License:"Free Commercial Use"}},
-  {id:"p02",c:"psd",title:"Instagram Post PSD Template",desc:"Instagram post PSD: 1080x1080 with story size variant. Drag-and-drop smart object image placement.",fmt:"PSD",sz:"28 MB",tags:["PSD","Instagram","Social Media","1080x1080"],specs:{Software:"Photoshop CC+",Sizes:"1:1 and 9:16",Resolution:"300 DPI",License:"Free Commercial Use"}},
-  {id:"p03",c:"psd",title:"Dark Logo Mockup PSD",desc:"Premium dark logo presentation mockup. 3 viewing angles. Smart object placement for instant logo preview.",fmt:"PSD",sz:"42 MB",tags:["PSD","Mockup","Logo","Presentation"],specs:{Software:"Photoshop CC+",SmartObjects:"Yes",Angles:"3 Views",License:"Free Commercial Use"}},
-  {id:"p04",c:"psd",title:"A4 Event Poster PSD Template",desc:"A4 dark event/concert poster template. Fully layered with smart object image placement and editable typography.",fmt:"PSD",sz:"55 MB",tags:["PSD","Poster","A4","Event"],specs:{Software:"Photoshop CC+",Size:"A4 at 300 DPI",Layers:"Fully Editable",License:"Free Commercial Use"}},
-  {id:"p05",c:"psd",title:"Gaming Thumbnail PSD — Red Theme",desc:"Aggressive gaming thumbnail PSD in dark red theme. Character image zone, neon title text layer, and glow effects built in.",fmt:"PSD",sz:"48 MB",tags:["PSD","Gaming","Thumbnail","Red"],specs:{Software:"Photoshop CC+",Resolution:"1280x720",SmartObjects:"Yes",License:"Free Commercial Use"}},
-  {id:"p06",c:"psd",title:"Business Card PSD — Dark Theme",desc:"Double-sided business card PSD in dark theme. Print-ready at 3.5x2in with full bleed and crop marks.",fmt:"PSD",sz:"22 MB",tags:["PSD","Business Card","Print","Dark"],specs:{Software:"Photoshop CC+",Size:"3.5x2 in + Bleed",Resolution:"300 DPI",License:"Free Commercial Use"}},
-  {id:"p07",c:"psd",title:"YouTube Channel Art PSD",desc:"YouTube channel art PSD template at 2560x1440. Safe zone guides included. Smart objects for easy customisation.",fmt:"PSD",sz:"30 MB",tags:["PSD","YouTube","Channel Art","Banner"],specs:{Software:"Photoshop CC+",Size:"2560x1440",SafeZone:"Guides Included",License:"Free Commercial Use"}},
-  {id:"p08",c:"psd",title:"Invoice & Quote PSD Template",desc:"Professional invoice and quote PSD/PDF in dark theme. Fully editable fields, logo placement zone, and itemised rows.",fmt:"PSD",sz:"8 MB",tags:["PSD","Invoice","Business","Template"],specs:{Software:"Photoshop + Acrobat",Size:"A4 (210x297mm)",Format:"PSD + PDF",License:"Free Commercial Use"}},
-  // VIDEO ASSETS (10)
-  {id:"v01",c:"video",title:"Cinematic LUT — Teal Orange",desc:"Single cinematic teal-orange colour LUT (.cube) for Premiere Pro, DaVinci Resolve, and FCPX. Industry-standard look.",fmt:".CUBE",sz:"0.3 MB",tags:["LUT","Teal Orange","Cinematic","Premiere"],specs:{Format:".CUBE",Compatible:"Premiere / DaVinci / FCPX",Style:"Teal and Orange",License:"Free Commercial Use"}},
-  {id:"v02",c:"video",title:"Glitch Transition MOGRT",desc:"Single glitch/distortion video transition for Premiere Pro in MOGRT format. RGB split effect. Drag and drop.",fmt:"MOGRT",sz:"4.2 MB",tags:["Transition","Glitch","Premiere","MOGRT"],specs:{Software:"Premiere Pro CC+",FPS:"24 / 30 / 60",Style:"Glitch RGB Split",License:"Free Commercial Use"}},
-  {id:"v03",c:"video",title:"Whoosh SFX — Cinematic Hit",desc:"Single cinematic whoosh/hit sound effect in WAV format. High quality 44.1kHz 24-bit. Perfect for transition edits.",fmt:"WAV",sz:"3.1 MB",tags:["SFX","Whoosh","WAV","Transition"],specs:{Format:"WAV",Quality:"44.1kHz / 24-bit",Type:"Whoosh + Hit",License:"Free Commercial Use"}},
-  {id:"v04",c:"video",title:"Particle Spark Explosion MOV",desc:"Single particle spark explosion video (MOV with alpha channel). Screen blend mode ready. Ideal for thumbnail and intro reveals.",fmt:"MOV",sz:"38 MB",tags:["Particles","Explosion","MOV","Alpha"],specs:{Format:"MOV with Alpha",BlendMode:"Screen",Resolution:"2K",License:"Free Commercial Use"}},
-  {id:"v05",c:"video",title:"Countdown Intro MOGRT",desc:"Stylish 5-second animated countdown MOGRT for Premiere Pro. Dark theme, bold numbers, customisable accent colour.",fmt:"MOGRT",sz:"8 MB",tags:["Intro","Countdown","Premiere","Timer"],specs:{Software:"Premiere Pro",Duration:"5 seconds",Customisable:"Yes",License:"Free Commercial Use"}},
-  {id:"v06",c:"video",title:"Dark Moody LUT — Crushed Shadows",desc:"Single dark moody LUT with crushed blacks. Desaturated for cinematic tension. Great for drama and thriller edits.",fmt:".CUBE",sz:"0.3 MB",tags:["LUT","Dark","Moody","DaVinci"],specs:{Format:".CUBE",Compatible:"DaVinci / Premiere / FCPX",Style:"Crushed Dark",License:"Free Commercial Use"}},
-  {id:"v07",c:"video",title:"Lower Third Title MOGRT",desc:"Single animated lower third MOGRT for Premiere Pro. Minimal design, editable text and accent colour. Fully customisable.",fmt:"MOGRT",sz:"2.1 MB",tags:["Lower Third","Premiere","Typography","MOGRT"],specs:{Software:"Premiere Pro CC+",Style:"Minimal",Editable:"Text and Colour",License:"Free Commercial Use"}},
-  {id:"v08",c:"video",title:"4K Film Grain Overlay Loop",desc:"10-second seamless 4K film grain video loop (MOV). Use Overlay blend mode for authentic vintage film texture in any edit.",fmt:"MOV",sz:"95 MB",tags:["Film Grain","4K","Overlay","Loop"],specs:{Format:"MOV",Resolution:"4K at 30fps",Duration:"10s Seamless Loop",License:"Free Commercial Use"}},
-  {id:"v09",c:"video",title:"Speed Ramp Zoom Transition",desc:"Single speed ramp + zoom blur MOGRT transition. Viral short-form style. Perfect for Reels, YouTube Shorts, and TikTok edits.",fmt:"MOGRT",sz:"3.4 MB",tags:["Speed Ramp","Zoom","Reels","Shorts"],specs:{Software:"Premiere Pro CC+",Style:"Speed Ramp + Zoom",Use:"Reels / Shorts / TikTok",License:"Free Commercial Use"}},
-  {id:"v10",c:"video",title:"Thumbnail Reveal After Effects",desc:"After Effects template for an animated thumbnail reveal with red accent flash and bold title animation. Easy to customise.",fmt:"AEPX",sz:"22 MB",tags:["After Effects","Thumbnail","Animation","Reveal"],specs:{Software:"After Effects CC+",Duration:"5 seconds",Customisable:"Yes",License:"Free Commercial Use"}},
-];
+let DB = [];
+let activeCat = "all", activeItem = null, timer = null;
+const apiURL = 'https://script.google.com/macros/s/AKfycbwHG6jSF_Qj0mK_-YD_Nq51BWPCfc-U7f9see0MenuR5wqSQloY87uupj5092xEUXovug/exec';
 
-/* ================================================================
-   ICON MARKUP & HELPERS
-   ================================================================ */
-const ICO={
-  font:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>',
-  bg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
-  psd:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>',
-  video:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
-};
-const TC={font:"tf",bg:"tb",psd:"tp",video:"tv"};
-const CN={all:"All",font:"Text Styles",bg:"Backgrounds & PNGs",psd:"PSD / Projects",video:"Video Assets"};
-
-/* ================================================================
-   STATE
-   ================================================================ */
-let activeCat="all", activeItem=null, timer=null;
-const SECS=5, CIRC=163; // 2*pi*26
-
-/* ================================================================
-   GRID RENDER
-   ================================================================ */
-/* ================================================================
-   SEARCH LOGIC
-   ================================================================ */
-let searchQuery = "";
-
-function highlight(text, query) {
-  if (!query) return text;
-  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return text.replace(new RegExp(escaped, "gi"), m => '<mark class="hl">' + m + "</mark>");
-}
-
-function matchItem(item, q) {
-  if (!q) return true;
-  const lq = q.toLowerCase();
-  return (
-    item.title.toLowerCase().includes(lq) ||
-    item.desc.toLowerCase().includes(lq) ||
-    item.fmt.toLowerCase().includes(lq) ||
-    item.tags.some(t => t.toLowerCase().includes(lq)) ||
-    Object.values(item.specs).some(v => String(v).toLowerCase().includes(lq)) ||
-    item.c.toLowerCase().includes(lq)
-  );
-}
-
-function getFilteredItems() {
-  let items = activeCat === "all" ? DB : DB.filter(x => x.c === activeCat);
-  if (searchQuery) items = items.filter(x => matchItem(x, searchQuery));
-  return items;
-}
-
-function cardHSearch(item, query) {
-  const f = item.fmt.split("x")[0].split("+")[0].split(" ")[0];
-  const title = highlight(item.title, query);
-  return `<div class="card" onclick="openItem(\'${item.id}\')">
-    <div class="corner"></div>
-    <div class="cthumb ${TC[item.c]}">${ICO[item.c]}
-      <div class="cbadge">FREE</div>
-      <div class="cfmt">${f}</div>
-      <div class="cov"><span>View &amp; Download</span></div>
-    </div>
-    <div class="cinfo">
-      <div class="ctitle">${title}</div>
-      <div class="cmeta"><span class="csz">${item.sz}</span><span class="ctag">${f}</span></div>
-    </div>
-  </div>`;
-}
-
-function renderSearch() {
-  const items = getFilteredItems();
-  const meta = document.getElementById("searchMeta");
-  const label = document.getElementById("searchLabel");
-  const catNote = document.getElementById("searchCatNote");
-  const grid1 = document.getElementById("grid1");
-  const grid2 = document.getElementById("grid2");
-  const adBetween = document.getElementById("adBetween");
-  const gtitle = document.getElementById("gtitle");
-  const gcount = document.getElementById("gcount");
-
-  if (searchQuery) {
-    meta.style.display = "flex";
-    const catStr = activeCat !== "all" ? " in <strong>" + CN[activeCat] + "</strong>" : "";
-    label.innerHTML = '<span>' + items.length + '</span> result' + (items.length !== 1 ? "s" : "") + " for &ldquo;<span>" + searchQuery + "</span>&rdquo;" + catStr;
-    catNote.textContent = activeCat !== "all" ? "" : "All categories";
-    gtitle.innerHTML = "Search <span>Results</span>";
-    gcount.textContent = items.length + " items";
-  } else {
-    meta.style.display = "none";
-    const cat = activeCat;
-    gtitle.innerHTML = cat === "all" ? "All <span>Items</span>" : CN[cat] + " <span>Items</span>";
-    gcount.textContent = items.length + " items";
+async function loadData() {
+  document.getElementById("mainGrid").innerHTML = "<p style='padding:20px'>Loading Drive assets...</p>";
+  try {
+    const res = await fetch(apiURL);
+    DB = await res.json();
+    document.getElementById("totalCount").textContent = DB.length;
+    document.getElementById("badgeAll").textContent = DB.length;
+    renderGrid("all");
+  } catch (e) {
+    document.getElementById("mainGrid").innerHTML = "<p style='padding:20px;color:red'>Failed to connect to Drive API.</p>";
   }
-
-  if (items.length === 0) {
-    grid1.innerHTML = `<div class="search-no-results" style="grid-column:1/-1">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <p>No results for &ldquo;${searchQuery}&rdquo;</p>
-      <small>Try a different keyword or browse by category</small>
-    </div>`;
-    grid2.innerHTML = "";
-    adBetween.style.display = "none";
-    return;
-  }
-
-  const b1 = items.slice(0, 6), b2 = items.slice(6);
-  grid1.innerHTML = b1.map(x => cardHSearch(x, searchQuery)).join("");
-  grid2.innerHTML = b2.map(x => cardHSearch(x, searchQuery)).join("");
-  adBetween.style.display = b2.length ? "block" : "none";
 }
 
-function doSearch(q) {
-  searchQuery = q.trim();
-  const clearBtn = document.getElementById("searchClear");
-  clearBtn.classList.toggle("show", searchQuery.length > 0);
+function renderGrid(cat) {
+  activeCat = cat;
+  const items = cat === "all" ? DB : DB.filter(x => x.c === cat);
+  document.getElementById("mainGrid").innerHTML = items.map(item => `
+    <div class="card" onclick="openItem('${item.id}')">
+      <div class="cthumb tb">${item.fmt}</div>
+      <div class="cinfo">
+        <div class="ctitle">${item.title}</div>
+        <div class="cmeta"><span>${item.sz}</span><span>${item.fmt}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openItem(id) {
+  activeItem = DB.find(x => x.id === id);
+  document.getElementById("vGrid").style.display = "none";
+  document.getElementById("vDetail").style.display = "block";
+  document.getElementById("dTitle").textContent = activeItem.title;
+  document.getElementById("dDesc").textContent = activeItem.desc;
+  resetGate();
+}
+
+function toGrid() {
   document.getElementById("vGrid").style.display = "";
   document.getElementById("vDetail").style.display = "none";
-  activeItem = null;
-  resetGate();
-  if (searchQuery) {
-    setBc(activeCat, null);
-  }
-  renderSearch();
 }
 
-function clearSearch() {
-  document.getElementById("searchInput").value = "";
-  document.getElementById("searchInput").focus();
-  doSearch("");
-}
-
-function renderGrid(cat){
-  activeCat=cat;
-  renderSearch();
-  setBc(cat,null);
-}
-function cardH(item){
-  const f=item.fmt.split("x")[0].split("+")[0].split(" ")[0];
-  return `<div class="card" onclick="openItem('${item.id}')">
-    <div class="corner"></div>
-    <div class="cthumb ${TC[item.c]}">${ICO[item.c]}
-      <div class="cbadge">FREE</div>
-      <div class="cfmt">${f}</div>
-      <div class="cov"><span>View &amp; Download</span></div>
-    </div>
-    <div class="cinfo">
-      <div class="ctitle">${item.title}</div>
-      <div class="cmeta"><span class="csz">${item.sz}</span><span class="ctag">${f}</span></div>
-    </div>
-  </div>`;
-}
-
-/* ================================================================
-   OPEN ITEM DETAIL
-   ================================================================ */
-function openItem(id){
-  const item=DB.find(x=>x.id===id);
-  if(!item)return;
-  activeItem=item;
-  document.getElementById("vGrid").style.display="none";
-  document.getElementById("vDetail").style.display="block";
-
-  // preview
-  const prev=document.getElementById("dPrev");
-  prev.className="dprev "+TC[item.c];
-  // rebuild SVG inside preview
-  prev.innerHTML=`${ICO[item.c].replace('<svg','<svg width="64" height="64"')}
-    <div class="dpbadge">FREE</div>
-    <div class="dpfmt" id="dFmt">${item.fmt.split("x")[0].split("+")[0]}</div>`;
-
-  // info
-  document.getElementById("dCat").textContent=CN[item.c];
-  document.getElementById("dTitle").textContent=item.title;
-  document.getElementById("dDesc").textContent=item.desc;
-  document.getElementById("dSpecs").innerHTML=Object.entries(item.specs)
-    .map(([k,v])=>`<div class="dspec"><div class="sk">${k}</div><div class="sv">${v}</div></div>`).join("");
-  document.getElementById("dTags").innerHTML=item.tags
-    .map(t=>`<span class="dtag">${t}</span>`).join("");
-
-  // related (same category, different item)
-  const rel=DB.filter(x=>x.c===item.c&&x.id!==item.id).slice(0,6);
-  document.getElementById("related").innerHTML=rel.map(r=>
-    `<div class="rcard" onclick="openItem('${r.id}')">
-      <div class="rth ${TC[r.c]}">${ICO[r.c]}</div>
-      <div><div class="rn">${r.title}</div><div class="rf">${r.fmt} &middot; ${r.sz}</div></div>
-    </div>`).join("");
-
-  resetGate();
-  setBc(item.c, item.title);
-  document.getElementById("MC").scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-/* ================================================================
-   BACK TO GRID
-   ================================================================ */
-function toGrid(){
-  document.getElementById("vGrid").style.display="";
-  document.getElementById("vDetail").style.display="none";
-  activeItem=null;
-  resetGate();
-  setBc(activeCat,null);
-}
-
-/* ================================================================
-   BREADCRUMB
-   ================================================================ */
-function setBc(cat,itemTitle){
-  const s1=document.getElementById("bcs1"),cc=document.getElementById("bcc");
-  const s2=document.getElementById("bcs2"),ci=document.getElementById("bci");
-  if(cat&&cat!=="all"){
-    s1.style.display="";cc.style.display="";
-    cc.textContent=CN[cat];cc.onclick=()=>filt(cat);
-  } else { s1.style.display="none";cc.style.display="none"; }
-  if(itemTitle){s2.style.display="";ci.style.display="";ci.textContent=itemTitle;}
-  else{s2.style.display="none";ci.style.display="none";}
-}
-
-/* ================================================================
-   FILTER
-   ================================================================ */
-function filt(cat){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.c===cat));
-  document.querySelectorAll(".scat").forEach(s=>s.classList.toggle("on",s.dataset.sc===cat));
-  toGrid(); renderGrid(cat);
-}
-
-/* ================================================================
-   AD-GATE LOGIC
-   Three states: idle → watching (5s countdown) → ready
-   The ad slot in STATE 2 is the primary revenue slot — fires on
-   every single download attempt.
-   ================================================================ */
-function setGate(s){
-  document.getElementById("gIdle").className  ="g-idle"  +(s==="idle"  ?" on":"");
-  document.getElementById("gWatch").className ="g-watch" +(s==="watch" ?" on":"");
-  document.getElementById("gReady").className ="g-ready" +(s==="ready" ?" on":"");
-}
-function resetGate(){
-  if(timer){clearInterval(timer);timer=null;}
-  document.getElementById("rnum").textContent=SECS;
-  document.getElementById("rsec").textContent=SECS;
-  document.getElementById("rp").style.strokeDashoffset="0";
-  document.getElementById("bar").style.width="0%";
-  const btn=document.getElementById("dlBtn");
-  btn.disabled=false;
-  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Now &mdash; Free';
-  btn.style.background="";
-  setGate("idle");
-}
-function startGate(){
-  setGate("watch");
-  // ── Push AdSense ad here in production ──
-  // try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}
-  let rem=SECS;
-  tick(rem);
-  timer=setInterval(()=>{
+function startGate() {
+  document.getElementById("gIdle").classList.remove("on");
+  document.getElementById("gWatch").classList.add("on");
+  let rem = 5;
+  timer = setInterval(() => {
     rem--;
-    tick(rem);
-    if(rem<=0){clearInterval(timer);timer=null;setTimeout(()=>setGate("ready"),300);}
-  },1000);
-}
-function tick(rem){
-  const elapsed=SECS-rem;
-  document.getElementById("rp").style.strokeDashoffset=(elapsed/SECS)*CIRC;
-  document.getElementById("rnum").textContent=rem;
-  document.getElementById("rsec").textContent=rem;
-  document.getElementById("bar").style.width=((elapsed/SECS)*100)+"%";
-}
-function doDL(){
-  if(!activeItem)return;
-  const btn=document.getElementById("dlBtn");
-  btn.textContent="Preparing download…";
-  btn.disabled=true;
-  /*
-   * In production replace this timeout with:
-   *   window.location.href = activeItem.downloadUrl;
-   *   or
-   *   window.open(activeItem.downloadUrl, "_blank");
-   */
-  setTimeout(()=>{
-    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>✓ Downloaded!';
-    btn.style.background="#16a34a";
-  },1400);
+    document.getElementById("rnum").textContent = rem;
+    if(rem <= 0) {
+      clearInterval(timer);
+      document.getElementById("gWatch").classList.remove("on");
+      document.getElementById("gReady").classList.add("on");
+    }
+  }, 1000);
 }
 
-/* ================================================================
-   SHARE & COPY
-   ================================================================ */
-function share(p){
-  const url=encodeURIComponent(location.href);
-  const txt=encodeURIComponent("Free "+(activeItem?activeItem.title:"design resources")+" from Reddy Design Studio");
-  if(p==="tw")window.open("https://twitter.com/intent/tweet?text="+txt+"&url="+url,"_blank");
-  if(p==="wa")window.open("https://wa.me/?text="+txt+"%20"+url,"_blank");
-}
-function copyURL(e){
-  navigator.clipboard.writeText(location.href).then(()=>{
-    e.target.textContent="Copied!";
-    setTimeout(()=>e.target.textContent="\uD83D\uDD17 Copy Link",2000);
-  });
+function doDL() {
+  window.open(activeItem.dlUrl, "_blank");
+  document.getElementById("dlBtn").textContent = "✓ Download Started";
 }
 
-/* ================================================================
-   CURSOR
-   ================================================================ */
+function resetGate() {
+  if(timer) clearInterval(timer);
+  document.getElementById("gIdle").classList.add("on");
+  document.getElementById("gWatch").classList.remove("on");
+  document.getElementById("gReady").classList.remove("on");
+  document.getElementById("rnum").textContent = "5";
+}
+
+function filt(c) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.c === c));
+  renderGrid(c);
+}
+
+window.onload = loadData;
+
+// Cursor logic
 const $c=document.getElementById("cur"),$r=document.getElementById("cur-r");
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;$c.style.left=mx+"px";$c.style.top=my+"px"});
 (function L(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;$r.style.left=rx+"px";$r.style.top=ry+"px";requestAnimationFrame(L)})();
-document.querySelectorAll("a,button,.card,.rcard,.tab,.scat").forEach(el=>{
-  el.addEventListener("mouseenter",()=>{$r.style.width="50px";$r.style.height="50px"});
-  el.addEventListener("mouseleave",()=>{$r.style.width="32px";$r.style.height="32px"});
-});
-
-/* ================================================================
-   SCROLL REVEAL
-   ================================================================ */
-const ro=new IntersectionObserver(es=>es.forEach((e,i)=>{
-  if(e.isIntersecting){setTimeout(()=>e.target.classList.add("vis"),i*80);ro.unobserve(e.target)}
-}),{threshold:.1});
-document.querySelectorAll(".reveal").forEach(x=>ro.observe(x));
-
-/* ================================================================
-   NAV + DRAWER
-   ================================================================ */
-window.addEventListener("scroll",()=>document.getElementById("nav").classList.toggle("scrolled",scrollY>60));
-function D(){document.getElementById("drawer").classList.toggle("open")}
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>filt(t.dataset.c)));
-
-/* ================================================================
-   SEARCH EVENT WIRING
-   ================================================================ */
-(function(){
-  const inp = document.getElementById("searchInput");
-  const wrap = document.getElementById("searchWrap");
-  let debounce;
-  inp.addEventListener("input", e => {
-    clearTimeout(debounce);
-    debounce = setTimeout(() => doSearch(e.target.value), 180);
-  });
-  inp.addEventListener("keydown", e => {
-    if (e.key === "Escape") { clearSearch(); inp.blur(); }
-  });
-  inp.addEventListener("focus", () => wrap.classList.add("focused"));
-  inp.addEventListener("blur", () => wrap.classList.remove("focused"));
-})();
-
-/* ================================================================
-   INIT
-   ================================================================ */
-renderGrid("all");
 </script>
 </body>
 </html>
