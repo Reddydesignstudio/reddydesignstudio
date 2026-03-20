@@ -33,51 +33,31 @@ nav.scrolled{padding:.65rem 3.5rem;background:rgba(8,8,9,.95)}
 .nl a:hover::after,.nl a.active::after{width:100%}
 .ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:.45rem 1.1rem;text-decoration:none;transition:background .2s,color .2s}
 .ncta:hover{background:var(--red);color:#fff}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
-.burger span{display:block;width:22px;height:1.5px;background:var(--text)}
-@media(max-width:860px){nav{padding:1rem 1.5rem}.nl,.ncta{display:none}.burger{display:flex}}
-.drawer{display:none;position:fixed;inset:0;background:rgba(8,8,9,.97);z-index:795;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
-.drawer.open{display:flex}
-.drawer a{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:var(--text);text-decoration:none;transition:color .2s}
-.drawer a:hover{color:var(--red)}
-.dx{position:absolute;top:1.4rem;right:1.8rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
 .ph{padding:8.5rem 3.5rem 3.5rem;border-bottom:1px solid var(--gb);display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;position:relative;overflow:hidden}
-.ph-tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
-.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);line-height:.95}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6.5rem);line-height:.95}
 .ph-title span{color:var(--red)}
 .ph-sub{font-size:.9rem;line-height:1.8;color:var(--muted);max-width:480px;margin-top:1rem}
-.ph-stats{display:flex;gap:2rem;flex-shrink:0}
-.st .n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--text);line-height:1}
-.st .n em{color:var(--red);font-style:normal}
-.st .l{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-@media(max-width:768px){.ph{grid-template-columns:1fr;padding:7.5rem 1.5rem 3rem}.ph-stats{display:none}}
 .wrap{display:grid;grid-template-columns:1fr 300px;gap:2rem;padding:2.5rem 3.5rem 6rem;align-items:start}
-@media(max-width:1050px){.wrap{grid-template-columns:1fr;padding:2rem 1.5rem 5rem}.sidebar{display:none}}
-.adph{width:100%;background:var(--glass);border:1px dashed rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:.8rem}
-.adlbl{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.16)}
-.adsz{font-size:.6rem;color:rgba(255,255,255,.09)}
+@media(max-width:1050px){.wrap{grid-template-columns:1fr;padding:2rem 1.5rem 5rem}}
+.search-wrap{position:relative;margin-bottom:2rem}
+#searchInput{width:100%;background:var(--glass);border:1px solid var(--gb);color:var(--text);padding:1rem 1rem 1rem 3rem;font-size:.9rem;outline:none;transition:border-color .25s}
+#searchInput:focus{border-color:var(--red)}
 .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.8rem}
-.tab{display:flex;align-items:center;gap:.5rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.48rem 1.1rem;border:1px solid var(--gb);background:none;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.tab{display:flex;align-items:center;gap:.5rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.48rem 1.1rem;border:1px solid var(--gb);background:none;color:var(--muted);cursor:pointer;transition:all .2s}
 .tab.on,.tab:hover{background:var(--red);border-color:var(--red);color:#fff}
-.tab .badge{background:rgba(255,255,255,.18);padding:0 .4rem;font-size:.56rem;border-radius:2px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gb)}
 @media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
 .card{background:var(--bg2);cursor:pointer;position:relative;overflow:hidden;transition:background .25s;display:flex;flex-direction:column}
 .card:hover{background:var(--bg3)}
-.cthumb{height:118px;display:flex;align-items:center;justify-content:center;position:relative}
-.tf{background:linear-gradient(135deg,#14060a,#240c12)}
-.tb{background:linear-gradient(135deg,#060e18,#0c1a2c)}
-.tp{background:linear-gradient(135deg,#0c1606,#16220a)}
-.tv{background:linear-gradient(135deg,#120614,#1e0a20)}
-.cbadge{position:absolute;top:.5rem;left:.5rem;font-size:.54rem;background:var(--red);padding:.14rem .5rem}
+.cthumb{height:160px;display:flex;align-items:center;justify-content:center;position:relative;background-size:cover;background-position:center}
+.cbadge{position:absolute;top:.5rem;left:.5rem;font-size:.54rem;background:var(--red);padding:.14rem .5rem;z-index:2}
 .cinfo{padding:.88rem 1rem 1rem}
 .ctitle{font-size:.84rem;font-weight:500;margin-bottom:.3rem}
 .cmeta{font-size:.66rem;color:var(--muted);display:flex;justify-content:space-between}
-.dlp{background:var(--glass);border:1px solid var(--gb);padding:1.8rem;position:relative}
+.dlp{background:var(--glass);border:1px solid var(--gb);padding:1.8rem;margin-top:1.5rem}
 .g-idle,.g-watch,.g-ready{display:none}.on{display:block}
-.bwatch,.bdl{background:var(--red);color:#fff;border:none;cursor:pointer;padding:.9rem;width:100%;text-transform:uppercase;letter-spacing:.1em;font-size:.75rem}
+.bwatch,.bdl{background:var(--red);color:#fff;border:none;cursor:pointer;padding:1rem;width:100%;text-transform:uppercase;letter-spacing:.1em;font-size:.75rem}
 .bdl{background:var(--green)}
-footer{background:var(--bg2);border-top:1px solid var(--gb);padding:2rem 3.5rem;display:flex;justify-content:space-between}
 .wa{position:fixed;bottom:2rem;right:2rem;width:52px;height:52px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1000}
 </style>
 </head>
@@ -98,20 +78,22 @@ footer{background:var(--bg2);border-top:1px solid var(--gb);padding:2rem 3.5rem;
 <div class="ph">
   <div>
     <h1 class="ph-title">Free <span>Resources</span></h1>
-    <p class="ph-sub">Your Google Drive assets are now live here automatically. Watch a 5s ad to unlock downloads.</p>
-  </div>
-  <div class="ph-stats">
-    <div class="st"><div class="n" id="totalCount">0</div><div class="l">Items</div></div>
+    <p class="ph-sub">Premium assets synced directly from our studio drive. Search and discover individual resources below.</p>
   </div>
 </div>
 
 <div class="wrap">
   <main id="MC">
+    <div class="search-wrap">
+      <svg style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); width:18px; color:var(--muted)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" oninput="doSearch(this.value)" placeholder="Search by name, format or category..." autocomplete="off">
+    </div>
+
     <div class="tabs" id="tabs">
-      <button class="tab on" onclick="filt('all')" data-c="all">All <span class="badge" id="badgeAll">0</span></button>
+      <button class="tab on" onclick="filt('all')" data-c="all">All Items</button>
       <button class="tab" onclick="filt('fonts')" data-c="fonts">Fonts</button>
       <button class="tab" onclick="filt('backgrounds')" data-c="backgrounds">Backgrounds</button>
-      <button class="tab" onclick="filt('psdprojects')" data-c="psdprojects">PSD Files</button>
+      <button class="tab" onclick="filt('psdprojects')" data-c="psdprojects">PSD Projects</button>
     </div>
 
     <div id="vGrid">
@@ -119,21 +101,33 @@ footer{background:var(--bg2);border-top:1px solid var(--gb);padding:2rem 3.5rem;
     </div>
 
     <div id="vDetail" style="display:none">
-       <button onclick="toGrid()" style="color:var(--red); margin-bottom:1rem">← Back to Grid</button>
-       <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem">
-          <div id="dPrev" style="height:300px; background:var(--bg2); display:flex; align-items:center; justify-content:center">PREVIEW</div>
+       <button onclick="toGrid()" style="color:var(--red); margin-bottom:1.5rem; text-transform:uppercase; font-size:.7rem; letter-spacing:1px">← Back to Resources</button>
+       <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start">
+          <div id="dPrev" style="aspect-ratio:4/3; background:var(--bg2); display:flex; align-items:center; justify-content:center; background-size:contain; background-repeat:no-repeat; background-position:center; border:1px solid var(--gb)"></div>
           <div>
-            <h2 id="dTitle" style="font-family:'Bebas Neue'; font-size:2.5rem"></h2>
-            <p id="dDesc" style="color:var(--muted); margin:1rem 0"></p>
+            <h2 id="dTitle" style="font-family:'Bebas Neue'; font-size:3rem; line-height:1"></h2>
+            <p id="dDesc" style="color:var(--muted); margin:1.2rem 0; line-height:1.7"></p>
+            <div id="dSpecs" style="display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:1.5rem"></div>
             <div class="dlp">
-              <div id="gIdle" class="g-idle on"><button class="bwatch" onclick="startGate()">Watch Ad & Unlock</button></div>
-              <div id="gWatch" class="g-watch" style="text-align:center">Ad is playing... <span id="rnum">5</span>s</div>
-              <div id="gReady" class="g-ready"><button class="bdl" id="dlBtn" onclick="doDL()">Download Now</button></div>
+              <div id="gIdle" class="g-idle on"><button class="bwatch" onclick="startGate()">Watch Ad & Unlock Download</button></div>
+              <div id="gWatch" class="g-watch" style="text-align:center; padding:1rem; border:1px dashed var(--red)">
+                <div style="color:var(--red); font-weight:bold; margin-bottom:.5rem">Ad is playing...</div>
+                <div style="font-size:2rem; font-family:'Bebas Neue'" id="rnum">5</div>
+              </div>
+              <div id="gReady" class="g-ready"><button class="bdl" id="dlBtn" onclick="doDL()">Download Now — Free</button></div>
             </div>
           </div>
        </div>
     </div>
   </main>
+
+  <aside class="sidebar">
+     <div style="background:var(--glass); padding:1.5rem; border:1px solid var(--gb)">
+        <h4 style="font-family:'Bebas Neue'; font-size:1.5rem; margin-bottom:.5rem">Need Custom <span>Work?</span></h4>
+        <p style="font-size:.8rem; color:var(--muted); margin-bottom:1rem">Get professional designs tailored specifically for your brand.</p>
+        <a href="contact.html" style="color:var(--red); font-size:.7rem; text-transform:uppercase; font-weight:bold">Hire Us →</a>
+     </div>
+  </aside>
 </div>
 
 <a class="wa" href="https://wa.me/919999999999" target="_blank"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
@@ -144,44 +138,80 @@ let activeCat = "all", activeItem = null, timer = null;
 const apiURL = 'https://script.google.com/macros/s/AKfycbwYd3r_CQ7U4QqVWBw9_zAUTEwM_6Z5mdihCZ46O3-WPNJ6rDrKwfDn4desw8NvoFnQJw/exec';
 
 async function loadData() {
-  document.getElementById("mainGrid").innerHTML = "<p style='padding:20px'>Loading Drive assets...</p>";
+  document.getElementById("mainGrid").innerHTML = "<p style='padding:2rem; color:var(--muted)'>Connecting to Studio Drive...</p>";
   try {
     const res = await fetch(apiURL);
     DB = await res.json();
-    document.getElementById("totalCount").textContent = DB.length;
-    document.getElementById("badgeAll").textContent = DB.length;
     renderGrid("all");
   } catch (e) {
-    document.getElementById("mainGrid").innerHTML = "<p style='padding:20px;color:red'>Failed to connect to Drive API.</p>";
+    document.getElementById("mainGrid").innerHTML = "<p style='padding:2rem; color:var(--red)'>Error: Could not sync with Drive API.</p>";
   }
 }
 
 function renderGrid(cat) {
   activeCat = cat;
   const items = cat === "all" ? DB : DB.filter(x => x.c === cat);
-  document.getElementById("mainGrid").innerHTML = items.map(item => `
+  renderFilteredGrid(items);
+}
+
+function renderFilteredGrid(items) {
+  const grid = document.getElementById("mainGrid");
+  if(items.length === 0) {
+    grid.innerHTML = "<p style='padding:2rem; color:var(--muted)'>No items found.</p>";
+    return;
+  }
+  grid.innerHTML = items.map(item => `
     <div class="card" onclick="openItem('${item.id}')">
-      <div class="cthumb tb">${item.fmt}</div>
+      <div class="cthumb" style="${item.thumbnail ? `background-image:url(${item.thumbnail})` : `background:var(--bg3)`}">
+        ${!item.thumbnail ? `<span style="font-family:'Bebas Neue'; font-size:1.5rem; color:var(--glass-b)">${item.fmt}</span>` : ''}
+        <div class="cbadge">FREE</div>
+      </div>
       <div class="cinfo">
         <div class="ctitle">${item.title}</div>
-        <div class="cmeta"><span>${item.sz}</span><span>${item.fmt}</span></div>
+        <div class="cmeta"><span>${item.sz}</span><span style="color:var(--red); text-transform:uppercase">${item.fmt}</span></div>
       </div>
     </div>
   `).join('');
+}
+
+function doSearch(q) {
+  const query = q.toLowerCase();
+  const filtered = DB.filter(item => 
+    item.title.toLowerCase().includes(query) || 
+    item.fmt.toLowerCase().includes(query) ||
+    item.c.toLowerCase().includes(query)
+  );
+  renderFilteredGrid(filtered);
 }
 
 function openItem(id) {
   activeItem = DB.find(x => x.id === id);
   document.getElementById("vGrid").style.display = "none";
   document.getElementById("vDetail").style.display = "block";
+  document.getElementById("tabs").style.display = "none";
+  
   document.getElementById("dTitle").textContent = activeItem.title;
   document.getElementById("dDesc").textContent = activeItem.desc;
+  document.getElementById("dPrev").style.backgroundImage = activeItem.thumbnail ? `url(${activeItem.thumbnail})` : 'none';
+  
+  // Render specs
+  const specs = { Format: activeItem.fmt, Size: activeItem.sz, ...activeItem.specs };
+  document.getElementById("dSpecs").innerHTML = Object.entries(specs).map(([k,v]) => `
+    <div style="background:var(--glass); padding:.6rem; border:1px solid var(--gb)">
+      <div style="font-size:.5rem; text-transform:uppercase; color:var(--muted)">${k}</div>
+      <div style="font-size:.8rem">${v}</div>
+    </div>
+  `).join('');
+  
   resetGate();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function toGrid() {
   document.getElementById("vGrid").style.display = "";
   document.getElementById("vDetail").style.display = "none";
+  document.getElementById("tabs").style.display = "flex";
+  activeItem = null;
 }
 
 function startGate() {
@@ -200,8 +230,11 @@ function startGate() {
 }
 
 function doDL() {
+  if(!activeItem) return;
   window.open(activeItem.dlUrl, "_blank");
-  document.getElementById("dlBtn").textContent = "✓ Download Started";
+  const btn = document.getElementById("dlBtn");
+  btn.textContent = "✓ Download Started";
+  btn.style.background = "#16a34a";
 }
 
 function resetGate() {
@@ -210,6 +243,8 @@ function resetGate() {
   document.getElementById("gWatch").classList.remove("on");
   document.getElementById("gReady").classList.remove("on");
   document.getElementById("rnum").textContent = "5";
+  document.getElementById("dlBtn").textContent = "Download Now — Free";
+  document.getElementById("dlBtn").style.background = "var(--green)";
 }
 
 function filt(c) {
