@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Reddy Design Studio — Premium Creative Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red:#E8192C; --red-glow:rgba(232,25,44,.35); --red-dim:rgba(232,25,44,.1);
+      --bg:#080809; --bg2:#0f0f11;
+      --glass:rgba(255,255,255,.035); --glass-b:rgba(255,255,255,.08);
+      --text:#f2efe9; --muted:#6b6b74;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.028}
+
+    /* CURSOR */
+    #cur{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    #cur-r{width:32px;height:32px;border:1px solid rgba(232,25,44,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .28s cubic-bezier(.22,1,.36,1),top .28s cubic-bezier(.22,1,.36,1),width .3s,height .3s}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:rgba(8,8,9,.75);backdrop-filter:blur(24px);border-bottom:1px solid var(--glass-b);transition:padding .3s}
+    nav.scrolled{padding:.7rem 3.5rem;background:rgba(8,8,9,.94)}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.1em;color:var(--text);text-decoration:none}
+    .nav-logo span{color:var(--red)}
+    .nav-links{display:flex;gap:2.2rem;list-style:none}
+    .nav-links a{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;transition:color .2s}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:.45rem 1.1rem;text-decoration:none;transition:background .2s,color .2s}
+    .nav-cta:hover{background:var(--red);color:#fff}
+    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+    .burger span{display:block;width:22px;height:1.5px;background:var(--text)}
+    @media(max-width:860px){nav{padding:1rem 1.5rem}.nav-links,.nav-cta{display:none}.burger{display:flex}}
+
+    /* DRAWER */
+    .drawer{display:none;position:fixed;inset:0;background:rgba(8,8,9,.97);z-index:790;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+    .drawer.open{display:flex}
+    .drawer a{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:var(--text);text-decoration:none;transition:color .2s}
+    .drawer a:hover{color:var(--red)}
+    .drawer-x{position:absolute;top:1.4rem;right:1.8rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
+
+    /* THREE.JS CANVAS */
+    #hero-canvas{position:absolute;inset:0;z-index:0}
+
+    /* HERO */
+    #hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 3.5rem 5rem;overflow:hidden}
+
+    .hero-label{position:relative;z-index:2;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:1.6rem;display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-label::before{content:'';width:28px;height:1px;background:var(--red)}
+
+    .hero-title{position:relative;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,12vw,11rem);line-height:.9;letter-spacing:.02em;margin-bottom:2rem;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-title .red{color:var(--red)}
+    .hero-title .outline{-webkit-text-stroke:1px rgba(242,239,233,.25);color:transparent}
+
+    .hero-sub{position:relative;z-index:2;max-width:460px;font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:3rem;opacity:0;animation:fadeUp .9s .7s forwards}
+
+    .hero-btns{position:relative;z-index:2;display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards}
+    .btn-red{background:var(--red);color:#fff;padding:.85rem 2rem;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 24px var(--red-glow);transition:box-shadow .3s,transform .2s;display:inline-block}
+    .btn-red:hover{box-shadow:0 8px 40px rgba(232,25,44,.6);transform:translateY(-2px)}
+    .btn-ghost{color:var(--muted);border:1px solid var(--glass-b);padding:.82rem 2rem;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:color .2s,border-color .2s}
+    .btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+
+    /* SCROLL INDICATOR */
+    .scroll-ind{position:absolute;bottom:2.5rem;right:3.5rem;z-index:2;writing-mode:vertical-rl;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.8rem}
+    .scroll-ind::after{content:'';width:1px;height:56px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollLine 2s ease-in-out infinite}
+    @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{transform:scaleY(1);transform-origin:top;opacity:1}60%{transform:scaleY(1);transform-origin:bottom;opacity:1}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
+
+    /* MARQUEE STRIP */
+    .marquee-wrap{background:var(--red);overflow:hidden;white-space:nowrap;padding:.7rem 0}
+    .marquee-track{display:inline-flex;gap:3rem;animation:marquee 18s linear infinite}
+    .marquee-track span{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;color:#fff;opacity:.85}
+    .marquee-track .dot{color:rgba(255,255,255,.4)}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* SERVICES PREVIEW */
+    #services-preview{padding:7rem 3.5rem}
+    .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--glass-b);margin-top:3rem}
+    .sp-card{background:var(--bg2);padding:2.4rem 1.8rem;position:relative;overflow:hidden;cursor:default;transition:background .3s}
+    .sp-card::before{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--red);transition:width .45s cubic-bezier(.22,1,.36,1)}
+    .sp-card:hover{background:rgba(232,25,44,.04)}
+    .sp-card:hover::before{width:100%}
+    .sp-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:rgba(232,25,44,.1);line-height:1;margin-bottom:1.2rem;transition:color .3s}
+    .sp-card:hover .sp-num{color:rgba(232,25,44,.2)}
+    .sp-ico{width:38px;height:38px;color:var(--red);margin-bottom:1.2rem}
+    .sp-title{font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.6rem;letter-spacing:.02em}
+    .sp-desc{font-size:.8rem;line-height:1.7;color:var(--muted)}
+    @media(max-width:900px){.sp-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:540px){.sp-grid{grid-template-columns:1fr}}
+
+    /* STATS */
+    #stats{padding:5rem 3.5rem;background:var(--bg2);border-top:1px solid var(--glass-b);border-bottom:1px solid var(--glass-b)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--text);line-height:1}
+    .stat-num span{color:var(--red)}
+    .stat-label{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+    @media(max-width:700px){.stats-grid{grid-template-columns:1fr 1fr}}
+
+    /* WORK PREVIEW */
+    #work-preview{padding:7rem 3.5rem}
+    .wp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--glass-b);margin-top:3rem}
+    .wp-item{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer}
+    .wp-bg{position:absolute;inset:0;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+    .wp-item:hover .wp-bg{transform:scale(1.07)}
+    .wp-c1{background:linear-gradient(135deg,#1a0509,#2a0a10)}
+    .wp-c2{background:linear-gradient(135deg,#080d1a,#0f1628)}
+    .wp-c3{background:linear-gradient(135deg,#0d1a08,#12200d)}
+    .wp-c4{background:linear-gradient(135deg,#1a1208,#22190b)}
+    .wp-c5{background:linear-gradient(135deg,#0d0818,#160e24)}
+    .wp-c6{background:linear-gradient(135deg,#1a0808,#200d0d)}
+    .wp-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem}
+    .wp-ph svg{width:32px;height:32px;color:rgba(255,255,255,.06)}
+    .wp-ph span{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.05)}
+    .wp-ov{position:absolute;inset:0;background:rgba(8,8,9,.88);display:flex;flex-direction:column;justify-content:flex-end;padding:1.6rem;opacity:0;transition:opacity .35s;z-index:2}
+    .wp-item:hover .wp-ov{opacity:1}
+    .wp-cat{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}
+    .wp-name{font-size:.95rem;font-weight:500;color:var(--text)}
+    .wp-corner{position:absolute;top:0;right:0;z-index:3;width:0;height:0;border-style:solid;border-width:0 24px 24px 0;border-color:transparent var(--red) transparent transparent;opacity:0;transition:opacity .3s}
+    .wp-item:hover .wp-corner{opacity:1}
+    @media(max-width:800px){.wp-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:500px){.wp-grid{grid-template-columns:1fr}}
+
+    /* CTA BAND */
+    #cta-band{padding:6rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+    #cta-band::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,.08),transparent 70%);pointer-events:none}
+    .cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);line-height:1;margin-bottom:1.5rem}
+    .cta-title span{color:var(--red)}
+
+    /* FOOTER */
+    footer{background:var(--bg2);border-top:1px solid var(--glass-b);padding:2.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .f-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.1em}
+    .f-logo span{color:var(--red)}
+    .f-copy{font-size:.68rem;color:var(--muted);letter-spacing:.06em}
+    .f-socs{display:flex;gap:.6rem}
+    .f-soc{width:30px;height:30px;border:1px solid var(--glass-b);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.65rem;font-weight:700;transition:border-color .2s,color .2s}
+    .f-soc:hover{border-color:var(--red);color:var(--red)}
+    @media(max-width:600px){footer{padding:2rem 1.5rem}.f-copy{order:3;width:100%;text-align:center}}
+
+    /* WA FLOAT */
+    .wa{position:fixed;bottom:2rem;right:2rem;z-index:850;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1da851);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.35);text-decoration:none;animation:wap 2.5s ease-in-out infinite;transition:transform .2s}
+    .wa:hover{transform:scale(1.1)}
+    .wa svg{width:26px;height:26px;fill:#fff}
+    @keyframes wap{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 8px 28px rgba(37,211,102,.5),0 0 0 14px rgba(37,211,102,0)}}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ANIMS */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+    @media(max-width:768px){
+      #hero{padding:7rem 1.5rem 4rem}
+      #services-preview,#stats,#work-preview,#cta-band{padding:5rem 1.5rem}
+      .scroll-ind{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <button class="drawer-x" onclick="toggleDrawer()">✕</button>
+  <a href="index.html" onclick="toggleDrawer()">Home</a>
+  <a href="services.html" onclick="toggleDrawer()">Services</a>
+  <a href="free-materials.html" onclick="toggleDrawer()">Free Materials</a>
+  <a href="contact.html" onclick="toggleDrawer()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Reddy<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="free-materials.html">Free Materials</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Us</a>
+  <button class="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-label">Premium Creative Studio · Est. 2020</div>
+  <h1 class="hero-title">
+    REDDY<br/>
+    <span class="outline">DESIGN</span><br/>
+    <span class="red">STUDIO</span>
+  </h1>
+  <p class="hero-sub">We craft bold visuals, cinematic edits, and high-CTR thumbnails — for brands that demand to be seen.</p>
+  <div class="hero-btns">
+    <a href="services.html" class="btn-red">Explore Services</a>
+    <a href="free-materials.html" class="btn-ghost">Free Resources →</a>
+  </div>
+  <div class="scroll-ind">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Graphic Design</span><span class="dot">✦</span>
+    <span>Video Editing</span><span class="dot">✦</span>
+    <span>Thumbnail Design</span><span class="dot">✦</span>
+    <span>Website Development</span><span class="dot">✦</span>
+    <span>Brand Identity</span><span class="dot">✦</span>
+    <span>YouTube Strategy</span><span class="dot">✦</span>
+    <span>Motion Graphics</span><span class="dot">✦</span>
+    <span>Social Media Kits</span><span class="dot">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Graphic Design</span><span class="dot">✦</span>
+    <span>Video Editing</span><span class="dot">✦</span>
+    <span>Thumbnail Design</span><span class="dot">✦</span>
+    <span>Website Development</span><span class="dot">✦</span>
+    <span>Brand Identity</span><span class="dot">✦</span>
+    <span>YouTube Strategy</span><span class="dot">✦</span>
+    <span>Motion Graphics</span><span class="dot">✦</span>
+    <span>Social Media Kits</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-preview">
+  <div class="section-tag">What We Do</div>
+  <h2 class="section-title reveal">Four disciplines.<br/><em style="font-style:italic;color:var(--red)">One studio.</em></h2>
+  <div class="sp-grid">
+
+    <div class="sp-card reveal">
+      <div class="sp-num">01</div>
+      <svg class="sp-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
+      <div class="sp-title">Graphic Design</div>
+      <p class="sp-desc">Brand identities, social media kits, and digital assets built to communicate at first glance.</p>
+    </div>
+
+    <div class="sp-card reveal">
+      <div class="sp-num">02</div>
+      <svg class="sp-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M17 9l5-3v12l-5-3V9z"/></svg>
+      <div class="sp-title">Video Editing</div>
+      <p class="sp-desc">Cinematic YouTube videos, Reels, promos — colour graded, paced, and motion-enhanced.</p>
+    </div>
+
+    <div class="sp-card reveal">
+      <div class="sp-num">03</div>
+      <svg class="sp-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+      <div class="sp-title">Thumbnail Strategy</div>
+      <p class="sp-desc">High-CTR YouTube thumbnails and A/B-tested strategies that convert views into subscribers.</p>
+    </div>
+
+    <div class="sp-card reveal">
+      <div class="sp-num">04</div>
+      <svg class="sp-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <div class="sp-title">Website Design & Dev</div>
+      <p class="sp-desc">Premium responsive websites and landing pages — designed and coded from scratch for your brand.</p>
+    </div>
+
+  </div>
+  <div style="margin-top:2rem;text-align:right"><a href="services.html" style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);text-decoration:none">View All Services →</a></div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="reveal" style="text-align:center">
+      <div class="stat-num">200<span>+</span></div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+    <div class="reveal" style="text-align:center">
+      <div class="stat-num">50<span>+</span></div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="reveal" style="text-align:center">
+      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="reveal" style="text-align:center">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Core Disciplines</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK PREVIEW -->
+<section id="work-preview">
+  <div class="section-tag">Selected Work</div>
+  <h2 class="section-title reveal">Projects that<br/><em style="font-style:italic;color:var(--red)">made impact</em></h2>
+
+  <div class="wp-grid">
+    <div class="wp-item">
+      <div class="wp-bg wp-c1"></div>
+      <div class="wp-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Your Image Here</span></div>
+      <div class="wp-corner"></div>
+      <div class="wp-ov"><div class="wp-cat">Thumbnail Design</div><div class="wp-name">Gaming Channel Series</div></div>
+    </div>
+    <div class="wp-item">
+      <div class="wp-bg wp-c2"></div>
+      <div class="wp-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span>Your Image Here</span></div>
+      <div class="wp-corner"></div>
+      <div class="wp-ov"><div class="wp-cat">Video Editing</div><div class="wp-name">Brand Promo Reel</div></div>
+    </div>
+    <div class="wp-item">
+      <div class="wp-bg wp-c3"></div>
+      <div class="wp-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>Your Image Here</span></div>
+      <div class="wp-corner"></div>
+      <div class="wp-ov"><div class="wp-cat">Graphic Design</div><div class="wp-name">Brand Identity System</div></div>
+    </div>
+    <div class="wp-item">
+      <div class="wp-bg wp-c4"></div>
+      <div class="wp-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Your Image Here</span></div>
+      <div class="wp-corner"></div>
+      <div class="wp-ov"><div class="wp-cat">Website Dev</div><div class="wp-name">Creative Agency Site</div></div>
+    </div>
+    <div class="wp-item">
+      <div class="wp-bg wp-c5"></div>
+      <div class="wp-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Your Image Here</span></div>
+      <div class="wp-corner"></div>
+      <div class="wp-ov"><div class="wp-cat">Social Media</div><div class="wp-name">Instagram Content Kit</div></div>
+    </div>
+    <div class="wp-item">
+      <div class="wp-bg wp-c6"></div>
+      <div class="wp-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span>Your Image Here</span></div>
+      <div class="wp-corner"></div>
+      <div class="wp-ov"><div class="wp-cat">Video Editing</div><div class="wp-name">Cinematic Short Film</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="cta-band">
+  <h2 class="cta-title reveal">Ready to build<br/>something <span>remarkable?</span></h2>
+  <p style="color:var(--muted);font-size:.95rem;margin-bottom:2.5rem" class="reveal">Let's talk about your project — no obligations, just ideas.</p>
+  <div class="reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a href="contact.html" class="btn-red">Start a Project</a>
+    <a href="free-materials.html" style="color:var(--muted);border:1px solid var(--glass-b);padding:.82rem 2rem;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--text)';this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--glass-b)'">Grab Free Resources</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Reddy<span>.</span></div>
+  <div class="f-copy">© 2025 Reddy Design Studio · Hyderabad, India</div>
+  <div class="f-socs">
+    <a class="f-soc" href="#">YT</a>
+    <a class="f-soc" href="#">IG</a>
+    <a class="f-soc" href="#">Be</a>
+    <a class="f-soc" href="#">in</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a class="wa" href="https://wa.me/919999999999?text=Hi%20Reddy%20Design%20Studio%2C%20I%27m%20interested%20in%20your%20services!" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.sp-card,.wp-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{curR.style.width='52px';curR.style.height='52px'});
+  el.addEventListener('mouseleave',()=>{curR.style.width='32px';curR.style.height='32px'});
+});
+
+/* NAV SCROLL */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+/* DRAWER */
+function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
+
+/* REVEAL */
+const obs=new IntersectionObserver(entries=>entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*90);obs.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+/* THREE.JS HERO */
+(function(){
+  const canvas=document.getElementById('hero-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,1,0.1,100);
+  camera.position.set(0,0,5);
+
+  function resize(){
+    const W=canvas.parentElement.offsetWidth,H=canvas.parentElement.offsetHeight;
+    renderer.setSize(W,H);
+    camera.aspect=W/H; camera.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener('resize',resize);
+
+  /* Particles */
+  const geo=new THREE.BufferGeometry();
+  const N=1800;
+  const pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-0.5)*18;
+    pos[i*3+1]=(Math.random()-0.5)*12;
+    pos[i*3+2]=(Math.random()-0.5)*10;
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const mat=new THREE.PointsMaterial({color:0xe8192c,size:0.028,transparent:true,opacity:0.55});
+  const pts=new THREE.Points(geo,mat);
+  scene.add(pts);
+
+  /* Rotating wireframe torus */
+  const tGeo=new THREE.TorusGeometry(2.2,0.6,14,60);
+  const tMat=new THREE.MeshBasicMaterial({color:0xe8192c,wireframe:true,transparent:true,opacity:0.07});
+  const torus=new THREE.Mesh(tGeo,tMat);
+  torus.position.set(3.5,-0.5,0);
+  scene.add(torus);
+
+  /* Icosahedron */
+  const iGeo=new THREE.IcosahedronGeometry(1.1,1);
+  const iMat=new THREE.MeshBasicMaterial({color:0xe8192c,wireframe:true,transparent:true,opacity:0.1});
+  const ico=new THREE.Mesh(iGeo,iMat);
+  ico.position.set(-3.5,1.5,-1);
+  scene.add(ico);
+
+  let mx2=0,my2=0;
+  document.addEventListener('mousemove',e=>{mx2=(e.clientX/window.innerWidth-.5)*2;my2=-(e.clientY/window.innerHeight-.5)*2});
+
+  const clock=new THREE.Clock();
+  (function animate(){
+    requestAnimationFrame(animate);
+    const t=clock.getElapsedTime();
+    pts.rotation.y=t*0.05;
+    pts.rotation.x=t*0.02;
+    torus.rotation.x=t*0.3;
+    torus.rotation.y=t*0.2;
+    ico.rotation.y=t*0.4;
+    ico.rotation.x=t*0.25;
+    camera.position.x+=(mx2*0.4-camera.position.x)*0.03;
+    camera.position.y+=(my2*0.3-camera.position.y)*0.03;
+    camera.lookAt(scene.position);
+    renderer.render(scene,camera);
+  })();
+})();
+</script>
+</body>
+</html>
