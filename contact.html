@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Contact &mdash; Reddy Design Studio</title>
 <script src="https://cdn.tailwindcss.com"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"/>
 <style>
 [data-theme="dark"]{
@@ -21,27 +22,20 @@
   --card:rgba(255,255,255,.8);--cborder:rgba(0,0,0,.1);
   --nav:rgba(247,245,241,.93);--inp:rgba(0,0,0,.05);
 }
-:root{
-  --red:#E8192C;--rg:rgba(232,25,44,.38);--rd:rgba(232,25,44,.11);
-  --green:#22c55e;--gg:rgba(34,197,94,.35);
-}
+:root{--red:#E8192C;--rg:rgba(232,25,44,.38);--rd:rgba(232,25,44,.11);--green:#22c55e;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;transition:background .35s,color .35s}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   opacity:.022}
-
-/* CURSOR */
 #cur{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s}
-#cur-r{width:32px;height:32px;border:1.5px solid rgba(232,25,44,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .2s cubic-bezier(.22,1,.36,1),top .2s cubic-bezier(.22,1,.36,1),width .25s,height .25s,border-color .25s}
+#cur-r{width:32px;height:32px;border:1.5px solid rgba(232,25,44,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .2s cubic-bezier(.22,1,.36,1),top .2s cubic-bezier(.22,1,.36,1),width .25s,height .25s}
 body.chov #cur{transform:translate(-50%,-50%) scale(2.2);opacity:.6}
 body.chov #cur-r{width:50px;height:50px;border-color:rgba(232,25,44,.7)}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:var(--nav);backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--sb);transition:padding .3s,background .35s}
 nav.scrolled{padding:.65rem 3.5rem}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:var(--text);text-decoration:none;transition:color .3s}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:var(--text);text-decoration:none}
 .logo span{color:var(--red)}
 .nl{display:flex;gap:2rem;list-style:none;align-items:center}
 .nl a{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;transition:color .2s}
@@ -56,31 +50,23 @@ nav.scrolled{padding:.65rem 3.5rem}
 .nav-cta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:.44rem 1.1rem;text-decoration:none;transition:background .2s,color .2s}
 .nav-cta:hover{background:var(--red);color:#fff}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
-.burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.3s}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text)}
 @media(max-width:900px){nav{padding:1rem 1.5rem}.nl,.nav-cta{display:none}.burger{display:flex}}
-
-/* DRAWER */
 .drawer{display:none;position:fixed;inset:0;background:rgba(8,8,9,.97);z-index:795;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
 .drawer.open{display:flex}
 .drawer a,.drawer .dl{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:var(--text);text-decoration:none;background:none;border:none;cursor:pointer;transition:color .2s}
 .drawer a:hover,.drawer .dl:hover{color:var(--red)}
 .dx{position:absolute;top:1.4rem;right:1.8rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
-
-/* SHARED BUTTONS */
 .btn-red{background:var(--red);color:#fff;padding:.88rem 2.2rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 24px var(--rg);transition:box-shadow .3s,transform .2s;display:inline-block;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
 .btn-red:hover{box-shadow:0 8px 40px rgba(232,25,44,.6);transform:translateY(-2px)}
 .btn-ghost{color:var(--muted);border:1px solid var(--sb);padding:.85rem 2.2rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:color .2s,border-color .2s;background:none;cursor:pointer;font-family:'DM Sans',sans-serif}
 .btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
-
-/* SECTIONS */
 section{padding:7rem 3.5rem}
 @media(max-width:768px){section{padding:5rem 1.5rem}}
 .sec-tag{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
 .sec-tag::before{content:'';width:22px;height:1px;background:var(--red)}
 .sec-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:1rem;color:var(--text)}
 .sec-title em{font-style:italic;color:var(--red)}
-
-/* PAGE HERO */
 .ph{padding:10rem 3.5rem 5rem;border-bottom:1px solid var(--sb);position:relative;overflow:hidden}
 .ph::before{content:'';position:absolute;top:0;right:0;width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,.055),transparent 65%);pointer-events:none}
 .ph-tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
@@ -89,14 +75,10 @@ section{padding:7rem 3.5rem}
 .ph-title span{color:var(--red)}
 .ph-sub{max-width:520px;font-size:1rem;line-height:1.8;color:var(--muted);margin-top:1rem;opacity:0;animation:fu .9s .45s forwards}
 @media(max-width:768px){.ph{padding:8rem 1.5rem 3.5rem}}
-
-/* WA FLOAT */
 .waf{position:fixed;bottom:2rem;right:2rem;z-index:850;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1da851);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.35);text-decoration:none;animation:wap 2.5s ease-in-out infinite;transition:transform .2s}
 .waf:hover{transform:scale(1.1)}
 .waf svg{width:26px;height:26px;fill:#fff}
 @keyframes wap{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 8px 28px rgba(37,211,102,.5),0 0 0 14px rgba(37,211,102,0)}}
-
-/* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .flogo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--text)}
 .flogo span{color:var(--red)}
@@ -105,13 +87,11 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .fsoc{width:32px;height:32px;border:1px solid var(--sb);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.65rem;font-weight:700;transition:all .2s}
 .fsoc:hover{border-color:var(--red);color:var(--red)}
 @media(max-width:600px){footer{padding:2rem 1.5rem}.fcopy{order:3;width:100%;text-align:center}}
-
-/* ADMIN MODAL */
 .adm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:3000;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .adm-modal.open{display:flex}
 .adm-box{background:var(--bg2);border:1px solid var(--sb);width:90%;max-width:440px;padding:2.5rem;position:relative}
 .adm-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
-.adm-close-btn{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s}
+.adm-close-btn{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer}
 .adm-close-btn:hover{color:var(--red)}
 .adm-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text);margin-bottom:.3rem}
 .adm-sub{font-size:.78rem;color:var(--muted);margin-bottom:1.8rem}
@@ -121,33 +101,72 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .fin:focus{border-color:var(--red)}
 .fin option{background:var(--bg2)}
 .flabel{font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.4rem}
-
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
 .reveal.vis{opacity:1;transform:translateY(0)}
 @keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--red);color:#fff;padding:.75rem 1.8rem;font-size:.8rem;letter-spacing:.05em;z-index:9999;opacity:0;transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .3s;pointer-events:none;white-space:nowrap;border-radius:2px}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);color:#fff;padding:.75rem 1.8rem;font-size:.8rem;letter-spacing:.05em;z-index:9999;opacity:0;transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .3s;pointer-events:none;white-space:nowrap;border-radius:3px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.success{background:var(--green)}
+.toast.err{background:#E8192C}
+.toast.ok{background:var(--green)}
+.toast.warn{background:#f59e0b}
+/* Portfolio grid shared */
+.pf-grid-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--sb)}
+@media(max-width:800px){.pf-grid-wrap{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.pf-grid-wrap{grid-template-columns:1fr}}
+.pf-item{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:var(--bg3)}
+.pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.pf-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.pf-item:hover .pf-img,.pf-item:hover .pf-vid{transform:scale(1.07)}
+.pf-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+.pf-placeholder svg{width:32px;height:32px;color:rgba(255,255,255,.06)}
+.pf-bg-grad{position:absolute;inset:0}
+.pf1{background:linear-gradient(135deg,#1a0509,#2a0a10)}
+.pf2{background:linear-gradient(135deg,#080d1a,#101528)}
+.pf3{background:linear-gradient(135deg,#0d1a08,#121f0e)}
+.pf4{background:linear-gradient(135deg,#1a1508,#22190b)}
+.pf5{background:linear-gradient(135deg,#10051a,#1a0a28)}
+.pf6{background:linear-gradient(135deg,#1a0808,#200d0d)}
+.pf7{background:linear-gradient(135deg,#051a14,#0a2820)}
+.pf8{background:linear(135deg,#1a1a05,#222205)}
+.pf9{background:linear-gradient(135deg,#0d0d1a,#141422)}
+.pf-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,9,.95) 0%,rgba(8,8,9,.4) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.6rem;opacity:0;transition:opacity .35s;z-index:2}
+.pf-item:hover .pf-ov{opacity:1}
+.pf-cat-lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}
+.pf-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text)}
+.pf-zoom{margin-top:.6rem;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:.4rem}
+.pf-corner{position:absolute;top:0;right:0;z-index:3;width:0;height:0;border-style:solid;border-width:0 24px 24px 0;border-color:transparent var(--red) transparent transparent;opacity:0;transition:opacity .3s}
+.pf-item:hover .pf-corner{opacity:1}
+.pf-feat-badge{position:absolute;top:.7rem;left:.7rem;z-index:4;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:.18rem .6rem}
+.pf-vid-badge{position:absolute;bottom:.6rem;right:.6rem;z-index:4;background:rgba(0,0,0,.75);color:#fff;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .6rem}
+/* Lightbox */
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(10px);padding:1rem}
+.lb.open{display:flex}
+.lb-box{background:var(--bg2);border:1px solid var(--sb);max-width:820px;width:100%;position:relative;max-height:92vh;overflow-y:auto}
+.lb-cls{position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,.5);border:1px solid var(--sb);color:var(--text);font-size:1.3rem;cursor:pointer;transition:color .2s;z-index:10;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+.lb-cls:hover{color:var(--red);border-color:var(--red)}
+.lb-media{height:320px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg3)}
+.lb-media img,.lb-media video{width:100%;height:100%;object-fit:cover}
+.lb-media-ph{font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(232,25,44,.12);line-height:1}
+.lb-body{padding:2rem}
+.lb-cl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.lb-cl::before{content:'';width:14px;height:1px;background:var(--red)}
+.lb-ti{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:var(--text);margin-bottom:.7rem}
+.lb-de{font-size:.88rem;line-height:1.78;color:var(--muted);margin-bottom:1.2rem}
+.lb-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.lb-tag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--rd);color:var(--red);padding:.2rem .6rem}
+.lb-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;border-top:1px solid var(--sb);padding-top:1.2rem}
+.lb-mk{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;text-align:center}
+.lb-mv{font-size:.88rem;color:var(--text);font-weight:500;text-align:center}
 
-/* GLASS CARD */
-.gc{background:var(--card);border:1px solid var(--cborder);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .3s}
-.gc:hover{transform:translateY(-5px);border-color:rgba(232,25,44,.25);box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 36px rgba(232,25,44,.06)}
-
-/* CONTACT PAGE */
 .contact-wrap{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;padding:5rem 3.5rem 6rem;align-items:start}
 @media(max-width:900px){.contact-wrap{grid-template-columns:1fr;gap:3rem;padding:4rem 1.5rem}}
-
-/* INFO SIDE */
-.ci-head{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:1rem;color:var(--text)}
-.ci-head em{color:var(--red);font-style:normal}
-.ci-desc{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:2.2rem}
-.c-det{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.2rem}
-.c-ico{width:38px;height:38px;border:1px solid var(--sb);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--red);transition:all .2s}
-.c-ico svg{width:15px;height:15px}
-.c-det:hover .c-ico{border-color:rgba(232,25,44,.3);background:var(--rd)}
+.ci-h{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:1rem;color:var(--text)}
+.ci-h em{color:var(--red);font-style:normal}
+.ci-d{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:2.2rem}
+.cdet{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.2rem}
+.cico{width:38px;height:38px;border:1px solid var(--sb);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--red);transition:all .2s}
+.cico svg{width:15px;height:15px}
+.cdet:hover .cico{border-color:rgba(232,25,44,.3);background:var(--rd)}
 .clbl{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
 .cval{font-size:.88rem;color:var(--text)}
 .cval a{color:var(--text);text-decoration:none;transition:color .2s}
@@ -156,26 +175,21 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .wa-big:hover{border-color:rgba(37,211,102,.45);background:rgba(37,211,102,.12)}
 .wa-ico{width:42px;height:42px;background:linear-gradient(135deg,#25d366,#1da851);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .wa-ico svg{width:22px;height:22px;fill:#fff}
-.wa-txt strong{display:block;font-size:.88rem;font-weight:500;color:var(--text)}
-.wa-txt span{font-size:.75rem;color:var(--muted)}
-
-/* FORM SIDE */
+.wa-tx strong{display:block;font-size:.88rem;font-weight:500;color:var(--text)}
+.wa-tx span{font-size:.75rem;color:var(--muted)}
 .cform{background:var(--card);border:1px solid var(--cborder);padding:2.5rem;position:relative;display:flex;flex-direction:column;gap:1.1rem}
 .cform::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:500px){.frow{grid-template-columns:1fr}}
 .fg{display:flex;flex-direction:column;gap:.4rem}
-.fsuccess{display:none;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.22);padding:1rem 1.2rem;font-size:.84rem;color:var(--green);text-align:center}
-.fspinner{display:none;text-align:center;font-size:.82rem;color:var(--muted);padding:.5rem}
-
-/* PACKAGES */
+.fsuccess{display:none;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.22);padding:1rem 1.2rem;font-size:.84rem;color:var(--green);text-align:center;border-radius:2px}
 .pkg-section{padding:0 3.5rem 6rem}
 @media(max-width:768px){.pkg-section{padding:0 1.5rem 4rem}}
 .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
 @media(max-width:800px){.pkg-grid{grid-template-columns:1fr}}
-.pkg{background:var(--card);border:1px solid var(--cborder);padding:2rem;position:relative;transition:border-color .3s,transform .3s,box-shadow .3s}
-.pkg:hover{border-color:rgba(232,25,44,.2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
-.pkg.featured{border-color:rgba(232,25,44,.3);background:linear-gradient(135deg,rgba(232,25,44,.06),rgba(232,25,44,.02))}
+.pkg{background:var(--card);border:1px solid var(--cborder);padding:2rem;position:relative;transition:border-color .3s,transform .3s}
+.pkg:hover{border-color:rgba(232,25,44,.2);transform:translateY(-4px)}
+.pkg.feat{border-color:rgba(232,25,44,.3);background:linear-gradient(135deg,rgba(232,25,44,.06),rgba(232,25,44,.02))}
 .pkg-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .8rem;white-space:nowrap}
 .pkg-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;margin-bottom:.3rem;color:var(--text)}
 .pkg-price{font-size:2rem;font-weight:500;color:var(--red);margin-bottom:.2rem;line-height:1}
@@ -183,9 +197,9 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .pkg-desc{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--sb)}
 .pkg-feats{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem}
 .pkg-feat{display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--muted)}
-.pkg-feat::before{content:'✓';color:var(--red);font-size:.75rem;flex-shrink:0}
+.pkg-feat::before{content:'\2713';color:var(--red);font-size:.75rem;flex-shrink:0}
 .pkg-btn{display:block;text-align:center;padding:.75rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--red);color:var(--red);transition:background .2s,color .2s}
-.pkg-btn:hover,.pkg.featured .pkg-btn{background:var(--red);color:#fff}
+.pkg-btn:hover,.pkg.feat .pkg-btn{background:var(--red);color:#fff}
 </style>
 </head>
 <body>
@@ -193,11 +207,7 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 
 <div class="drawer" id="drawer">
   <button class="dx" onclick="DD()">&#x2715;</button>
-  <a href="index.html" onclick="DD()">Home</a>
-  <a href="portfolio.html" onclick="DD()">Portfolio</a>
-  <a href="services.html" onclick="DD()">Services</a>
-  <a href="free-materials.html" onclick="DD()">Free Materials</a>
-  <a href="contact.html" onclick="DD()">Contact</a>
+  <a href="index.html" onclick="DD()">Home</a><a href="portfolio.html" onclick="DD()">Portfolio</a><a href="services.html" onclick="DD()">Services</a><a href="free-materials.html" onclick="DD()">Free Materials</a><a href="contact.html" onclick="DD()">Contact</a>
   <button class="dl" onclick="DD();openAdm()">Admin</button>
 </div>
 <nav id="nav">
@@ -207,7 +217,7 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
     <li><a href="portfolio.html" >Portfolio</a></li>
     <li><a href="services.html" >Services</a></li>
     <li><a href="free-materials.html" >Free Materials</a></li>
-    <li><a href="contact.html" class='active'>Contact</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <div class="nav-r">
     <button class="btn-th" id="thBtn" onclick="toggleTheme()" title="Toggle theme">&#9790;</button>
@@ -217,47 +227,25 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
   <button class="burger" onclick="DD()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="ph">
   <div class="ph-tag">Get In Touch</div>
   <h1 class="ph-title">Let's Build<br/><span>Together</span></h1>
   <p class="ph-sub">Have a project in mind? We respond within 24 hours. Every inquiry gets personal attention.</p>
 </div>
-
-<!-- CONTACT GRID -->
 <div class="contact-wrap">
-
-  <!-- LEFT: Info -->
   <div class="reveal">
-    <h3 class="ci-head">Start a <em>conversation</em></h3>
-    <p class="ci-desc">Whether it's a thumbnail, a brand identity, a video, or a complete website — we'd love to hear about your vision and make it real.</p>
-
-    <div class="c-det">
-      <div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <div><div class="clbl">Email</div><div class="cval"><a href="mailto:omkar@reddydesignstudio.com">omkar@reddydesignstudio.com</a></div></div>
-    </div>
-    <div class="c-det">
-      <div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72 19.79 19.79 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l1.12-.9a2 2 0 0 1 2.11-.45 19.79 19.79 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <div><div class="clbl">WhatsApp / Phone</div><div class="cval"><a href="tel:+919404873078">+91 94048 73078</a></div></div>
-    </div>
-    <div class="c-det">
-      <div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-      <div><div class="clbl">Location</div><div class="cval">Hyderabad, India &mdash; Available Worldwide</div></div>
-    </div>
-    <div class="c-det">
-      <div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div><div class="clbl">Response Time</div><div class="cval">Within 24 hours &middot; Mon&ndash;Sat</div></div>
-    </div>
-
+    <h3 class="ci-h">Start a <em>conversation</em></h3>
+    <p class="ci-d">Whether it's a thumbnail, brand identity, video, or full website — we'd love to hear your vision and make it real.</p>
+    <div class="cdet"><div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="clbl">Email</div><div class="cval"><a href="mailto:omkar@reddydesignstudio.com">omkar@reddydesignstudio.com</a></div></div></div>
+    <div class="cdet"><div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72 19.79 19.79 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l1.12-.9a2 2 0 0 1 2.11-.45 19.79 19.79 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="clbl">WhatsApp / Phone</div><div class="cval"><a href="tel:+919404873078">+91 94048 73078</a></div></div></div>
+    <div class="cdet"><div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="clbl">Location</div><div class="cval">Hyderabad, India &mdash; Available Worldwide</div></div></div>
     <a class="wa-big" href="https://wa.me/919404873078?text=Hi%20Omkar%2C%20I%27d%20like%20to%20discuss%20a%20project!" target="_blank">
       <div class="wa-ico"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></div>
-      <div class="wa-txt"><strong>Chat on WhatsApp</strong><span>Usually replies within 1 hour</span></div>
+      <div class="wa-tx"><strong>Chat on WhatsApp</strong><span>Usually replies within 1 hour</span></div>
     </a>
   </div>
-
-  <!-- RIGHT: Form -->
   <div class="reveal">
-    <form class="cform" id="cForm" onsubmit="submitInquiry(event)">
+    <form class="cform" id="cForm" onsubmit="submitForm(event)">
       <div class="frow">
         <div class="fg"><label class="flabel">Your Name *</label><input id="f_name" type="text" class="fin" placeholder="Omkar Reddy" required/></div>
         <div class="fg"><label class="flabel">Email Address *</label><input id="f_email" type="email" class="fin" placeholder="hello@example.com" required/></div>
@@ -267,70 +255,27 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
         <div class="fg"><label class="flabel">Service Needed</label>
           <select id="f_service" class="fin">
             <option value="">Select a service...</option>
-            <option>Graphic Design</option>
-            <option>Video Editing</option>
-            <option>YouTube Thumbnail</option>
-            <option>YouTube Channel Strategy</option>
-            <option>Website Design &amp; Development</option>
-            <option>Full Creative Package</option>
+            <option>Graphic Design</option><option>Video Editing</option>
+            <option>YouTube Thumbnail</option><option>YouTube Strategy</option>
+            <option>Website Design &amp; Development</option><option>Full Creative Package</option>
           </select>
         </div>
       </div>
       <div class="fg"><label class="flabel">Project Brief</label><textarea id="f_msg" class="fin" rows="5" placeholder="Tell us about your project, goals, and timeline..."></textarea></div>
-      <div class="fspinner" id="fSpinner">&#9679; Sending your message...</div>
+      <button type="submit" class="btn-red" id="fBtn">Send Message &#x2192;</button>
       <div class="fsuccess" id="fsuccess">&#x2713; Message received! We'll reply within 24 hours.</div>
-      <button type="submit" class="btn-red" id="fSubmit">Send Message &#x2192;</button>
     </form>
   </div>
 </div>
-
-<!-- PACKAGES -->
 <div class="pkg-section">
   <div class="sec-tag">Transparent Pricing</div>
   <h2 class="sec-title reveal">Simple <em>Packages</em></h2>
   <div class="pkg-grid">
-    <div class="pkg reveal">
-      <div class="pkg-name">Starter</div>
-      <div class="pkg-price">&#x20B9;999 <span>/ project</span></div>
-      <p class="pkg-desc">Perfect for single deliverables — thumbnails, social posts, or short edits.</p>
-      <div class="pkg-feats">
-        <div class="pkg-feat">1 design or edit</div>
-        <div class="pkg-feat">2 revisions included</div>
-        <div class="pkg-feat">48-hour delivery</div>
-        <div class="pkg-feat">Source file included</div>
-      </div>
-      <a href="https://wa.me/919404873078" target="_blank" class="pkg-btn">Get Started</a>
-    </div>
-    <div class="pkg featured reveal">
-      <div class="pkg-badge">Most Popular</div>
-      <div class="pkg-name">Creator</div>
-      <div class="pkg-price">&#x20B9;4,999 <span>/ month</span></div>
-      <p class="pkg-desc">Monthly retainer for content creators. Unlimited thumbnails and weekly edits.</p>
-      <div class="pkg-feats">
-        <div class="pkg-feat">8 thumbnails / month</div>
-        <div class="pkg-feat">4 video edits / month</div>
-        <div class="pkg-feat">Unlimited revisions</div>
-        <div class="pkg-feat">24-hour turnaround</div>
-        <div class="pkg-feat">Priority WhatsApp support</div>
-      </div>
-      <a href="https://wa.me/919404873078" target="_blank" class="pkg-btn">Choose Creator</a>
-    </div>
-    <div class="pkg reveal">
-      <div class="pkg-name">Studio</div>
-      <div class="pkg-price">&#x20B9;14,999 <span>/ month</span></div>
-      <p class="pkg-desc">Full-service creative studio — branding, web, video, and social all under one roof.</p>
-      <div class="pkg-feats">
-        <div class="pkg-feat">Everything in Creator</div>
-        <div class="pkg-feat">Brand identity design</div>
-        <div class="pkg-feat">1 website / landing page</div>
-        <div class="pkg-feat">Social media kit</div>
-        <div class="pkg-feat">Dedicated account manager</div>
-      </div>
-      <a href="https://wa.me/919404873078" target="_blank" class="pkg-btn">Go Studio</a>
-    </div>
+    <div class="pkg reveal"><div class="pkg-name">Starter</div><div class="pkg-price">&#x20B9;999 <span>/ project</span></div><p class="pkg-desc">Perfect for single deliverables.</p><div class="pkg-feats"><div class="pkg-feat">1 design or edit</div><div class="pkg-feat">2 revisions</div><div class="pkg-feat">48-hour delivery</div><div class="pkg-feat">Source file</div></div><a href="https://wa.me/919404873078" target="_blank" class="pkg-btn">Get Started</a></div>
+    <div class="pkg feat reveal"><div class="pkg-badge">Most Popular</div><div class="pkg-name">Creator</div><div class="pkg-price">&#x20B9;4,999 <span>/ month</span></div><p class="pkg-desc">Monthly retainer for content creators.</p><div class="pkg-feats"><div class="pkg-feat">8 thumbnails/month</div><div class="pkg-feat">4 video edits</div><div class="pkg-feat">Unlimited revisions</div><div class="pkg-feat">24-hour turnaround</div><div class="pkg-feat">Priority support</div></div><a href="https://wa.me/919404873078" target="_blank" class="pkg-btn">Choose Creator</a></div>
+    <div class="pkg reveal"><div class="pkg-name">Studio</div><div class="pkg-price">&#x20B9;14,999 <span>/ month</span></div><p class="pkg-desc">Full-service creative studio.</p><div class="pkg-feats"><div class="pkg-feat">Everything in Creator</div><div class="pkg-feat">Brand identity</div><div class="pkg-feat">1 website</div><div class="pkg-feat">Social media kit</div><div class="pkg-feat">Account manager</div></div><a href="https://wa.me/919404873078" target="_blank" class="pkg-btn">Go Studio</a></div>
   </div>
 </div>
-
 
 <footer>
   <div class="flogo">Reddy<span>.</span></div>
@@ -340,110 +285,164 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
     <a class="fsoc" href="#">Be</a><a class="fsoc" href="#">in</a>
   </div>
 </footer>
-<a class="waf" href="https://wa.me/919404873078?text=Hi%20Reddy%20Design%20Studio!" target="_blank">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-</a>
-
+<a class="waf" href="https://wa.me/919404873078?text=Hi%20Reddy%20Design%20Studio!" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
 <div class="adm-modal" id="admModal">
   <div class="adm-box">
     <button class="adm-close-btn" onclick="closeAdm()">&#x2715;</button>
     <div class="adm-title">Admin Login</div>
     <p class="adm-sub">Enter your credentials to access the Studio Dashboard.</p>
     <div class="adm-err" id="admErr">Incorrect username or password.</div>
-    <div style="margin-bottom:1rem">
-      <label class="flabel">Username</label>
-      <input id="admU" type="text" class="fin" placeholder="omkar"/>
-    </div>
-    <div style="margin-bottom:1.5rem">
-      <label class="flabel">Password</label>
-      <input id="admP" type="password" class="fin" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/>
-    </div>
+    <div style="margin-bottom:1rem"><label class="flabel">Username</label><input id="admU" type="text" class="fin" placeholder="omkar"/></div>
+    <div style="margin-bottom:1.5rem"><label class="flabel">Password</label><input id="admP" type="password" class="fin" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/></div>
     <button class="btn-red" style="width:100%" onclick="doLogin()">Access Dashboard &#x2192;</button>
   </div>
 </div>
 <div class="toast" id="globalToast"></div>
-<script type="module">
-
-/* ═══════════════════════════════════════════════════
-   FIREBASE INIT (module compat layer)
-═══════════════════════════════════════════════════ */
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, onSnapshot, serverTimestamp, query, orderBy }
-  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBYcE4HIl4oIJeYtU4g5KwB1_tO4b1WDxA",
-  authDomain: "reddy-design-studio.firebaseapp.com",
-  projectId: "reddy-design-studio",
-  storageBucket: "reddy-design-studio.firebasestorage.app",
-  messagingSenderId: "928134043383",
-  appId: "1:928134043383:web:4045c971f24dfd1e9565f2"
+<script>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CONFIG
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const RDS_CONFIG = {
+  cloudinary: {
+    cloud:  'dube5inxu',
+    preset: 'Reddy portfolio'
+  },
+  supabase: {
+    url: 'https://qlrxzjeahafiuehbledl.supabase.co',
+    key: 'sb_publishable_6R1NNcGUAPIiyELAqCmXAg_mQ2vV7vM'
+  }
 };
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
 
-/* ═══════════════════════════════════════════════════
-   THEME  —  localStorage persist, all pages sync
-═══════════════════════════════════════════════════ */
-(function applyTheme(){
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SUPABASE CLIENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const SB_HEADERS = {
+  'Content-Type':  'application/json',
+  'apikey':        RDS_CONFIG.supabase.key,
+  'Authorization': 'Bearer ' + RDS_CONFIG.supabase.key,
+  'Prefer':        'return=representation'
+};
+const SB_URL = RDS_CONFIG.supabase.url + '/rest/v1';
+
+async function sbSelect(table, params='') {
+  const r = await fetch(`${SB_URL}/${table}?${params}&order=created_at.desc`, { headers: SB_HEADERS });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function sbInsert(table, data) {
+  const r = await fetch(`${SB_URL}/${table}`, {
+    method: 'POST', headers: SB_HEADERS, body: JSON.stringify(data)
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function sbUpdate(table, id, data) {
+  const r = await fetch(`${SB_URL}/${table}?id=eq.${id}`, {
+    method: 'PATCH', headers: SB_HEADERS, body: JSON.stringify(data)
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function sbDelete(table, id) {
+  const r = await fetch(`${SB_URL}/${table}?id=eq.${id}`, {
+    method: 'DELETE', headers: { ...SB_HEADERS, Prefer: '' }
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return true;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CLOUDINARY UPLOAD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+async function uploadToCloudinary(file, onProgress) {
+  const fd = new FormData();
+  fd.append('file',          file);
+  fd.append('upload_preset', RDS_CONFIG.cloudinary.preset);
+  fd.append('folder',        'reddy_portfolio');
+
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST',
+      `https://api.cloudinary.com/v1_1/${RDS_CONFIG.cloudinary.cloud}/auto/upload`);
+    xhr.upload.onprogress = e => {
+      if (e.lengthComputable && onProgress)
+        onProgress(Math.round((e.loaded / e.total) * 100));
+    };
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const res = JSON.parse(xhr.responseText);
+        resolve({ url: res.secure_url, type: res.resource_type });
+      } else {
+        reject(new Error('Cloudinary error: ' + xhr.responseText));
+      }
+    };
+    xhr.onerror = () => reject(new Error('Network error during upload'));
+    xhr.send(fd);
+  });
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   THEME  (localStorage — all pages)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function applyTheme() {
   const t = localStorage.getItem('rds_theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
   document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('thBtn');
-    if (btn) btn.textContent = t === 'dark' ? '\u263E' : '\u2600';
+    const b = document.getElementById('thBtn');
+    if (b) b.textContent = t === 'dark' ? '\u263E' : '\u2600';
   });
 })();
-
 function toggleTheme() {
   const cur  = document.documentElement.getAttribute('data-theme') || 'dark';
   const next = cur === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('rds_theme', next);
-  const btn = document.getElementById('thBtn');
-  if (btn) btn.textContent = next === 'dark' ? '\u263E' : '\u2600';
+  const b = document.getElementById('thBtn');
+  if (b) b.textContent = next === 'dark' ? '\u263E' : '\u2600';
 }
 window.toggleTheme = toggleTheme;
 
-/* ═══════════════════════════════════════════════════
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CURSOR
-═══════════════════════════════════════════════════ */
-(function cursor(){
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function initCursor() {
   const $c = document.getElementById('cur');
   const $r = document.getElementById('cur-r');
   if (!$c || !$r) return;
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    $c.style.left = mx+'px'; $c.style.top = my+'px';
+    mx=e.clientX; my=e.clientY;
+    $c.style.left=mx+'px'; $c.style.top=my+'px';
   });
   (function L(){
-    rx += (mx-rx)*.16; ry += (my-ry)*.16;
-    $r.style.left = rx+'px'; $r.style.top = ry+'px';
+    rx+=(mx-rx)*.16; ry+=(my-ry)*.16;
+    $r.style.left=rx+'px'; $r.style.top=ry+'px';
     requestAnimationFrame(L);
   })();
-  document.querySelectorAll('a,button,.gc,.card,.pf-item,.svc-card,.tcard').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('chov'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('chov'));
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest('a,button,.pf-item,.svc-card,.gc,.card'))
+      document.body.classList.add('chov');
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest('a,button,.pf-item,.svc-card,.gc,.card'))
+      document.body.classList.remove('chov');
   });
 })();
 
-/* ═══════════════════════════════════════════════════
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NAV + DRAWER
-═══════════════════════════════════════════════════ */
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 window.addEventListener('scroll', () =>
-  document.getElementById('nav')?.classList.toggle('scrolled', scrollY > 60)
-);
-function DD(){ document.getElementById('drawer')?.classList.toggle('open'); }
+  document.getElementById('nav')?.classList.toggle('scrolled', scrollY > 60));
+function DD() { document.getElementById('drawer')?.classList.toggle('open'); }
 window.DD = DD;
 
-/* ═══════════════════════════════════════════════════
-   ADMIN LOGIN MODAL
-═══════════════════════════════════════════════════ */
-function openAdm(){ document.getElementById('admModal')?.classList.add('open'); }
-function closeAdm(){ document.getElementById('admModal')?.classList.remove('open'); }
-window.openAdm = openAdm;
-window.closeAdm = closeAdm;
-
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ADMIN LOGIN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function openAdm()  { document.getElementById('admModal')?.classList.add('open');    }
+function closeAdm() { document.getElementById('admModal')?.classList.remove('open'); }
+window.openAdm = openAdm; window.closeAdm = closeAdm;
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('admModal')?.addEventListener('click', e => {
     if (e.target === e.currentTarget) closeAdm();
@@ -452,111 +451,103 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') doLogin();
   });
 });
-
 function doLogin() {
-  const u = document.getElementById('admU')?.value.trim();
-  const p = document.getElementById('admP')?.value;
+  const u   = document.getElementById('admU')?.value.trim();
+  const p   = document.getElementById('admP')?.value;
   const err = document.getElementById('admErr');
   if (u === 'omkar' && p === 'Reddy#2020') {
     closeAdm();
     if (typeof openDash === 'function') openDash();
-    else window.location.href = 'index.html#dash';
+    else { window.location.href = 'index.html'; }
   } else {
     if (err) err.style.display = 'block';
   }
 }
 window.doLogin = doLogin;
 
-/* ═══════════════════════════════════════════════════
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    TOAST
-═══════════════════════════════════════════════════ */
-function showToast(msg, type='error') {
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function showToast(msg, type='err') {
   let t = document.getElementById('globalToast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'globalToast';
-    t.className = 'toast';
-    document.body.appendChild(t);
-  }
+  if (!t) { t=document.createElement('div'); t.id='globalToast'; t.className='toast'; document.body.appendChild(t); }
   t.textContent = msg;
-  t.className = 'toast' + (type==='success' ? ' success' : '');
+  t.className = 'toast ' + type;
   t.classList.add('show');
   clearTimeout(t._tid);
-  t._tid = setTimeout(() => t.classList.remove('show'), 2800);
+  t._tid = setTimeout(() => t.classList.remove('show'), 3000);
 }
 window.showToast = showToast;
 
-/* ═══════════════════════════════════════════════════
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SCROLL REVEAL
-═══════════════════════════════════════════════════ */
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 document.addEventListener('DOMContentLoaded', () => {
   const ro = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
+    entries.forEach((e,i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('vis'), i * 90);
+        setTimeout(() => e.target.classList.add('vis'), i*90);
         ro.unobserve(e.target);
       }
     });
-  }, { threshold: .1 });
+  }, { threshold:.1 });
   document.querySelectorAll('.reveal').forEach(x => ro.observe(x));
 });
 
-/* ═══════════════════════════════════════════════════
-   SHARED FIREBASE HELPERS
-═══════════════════════════════════════════════════ */
-window._db = db;
-window._col = collection;
-window._addDoc = addDoc;
-window._getDocs = getDocs;
-window._deleteDoc = deleteDoc;
-window._doc = doc;
-window._setDoc = setDoc;
-window._onSnapshot = onSnapshot;
-window._serverTimestamp = serverTimestamp;
-window._query = query;
-window._orderBy = orderBy;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED PORTFOLIO RENDER HELPER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const CATS = {
+  graphic: 'Graphic Design', video: 'Video Editing',
+  thumb: 'Thumbnails', web: 'Web Design'
+};
+const BG_CLASSES = ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf9'];
+function pfItemHTML(p, onClickFn) {
+  const cat    = CATS[p.cat] || p.cat || 'Design';
+  const hasImg = p.media_url && p.media_type === 'image';
+  const hasVid = p.media_url && p.media_type === 'video';
+  const bg     = p.bg || BG_CLASSES[Math.floor(Math.random()*BG_CLASSES.length)];
+  return `
+  <div class="pf-item" onclick="${onClickFn}('${p.id}')">
+    ${hasImg ? `<img class="pf-img" src="${p.media_url}" alt="${p.name}" loading="lazy"/>` :
+      hasVid  ? `<video class="pf-vid" src="${p.media_url}" muted autoplay loop playsinline></video>` :
+      `<div class="pf-bg-grad ${bg}"></div>
+       <div class="pf-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`}
+    ${p.featured ? '<div class="pf-feat-badge">Featured</div>' : ''}
+    ${hasVid ? '<div class="pf-vid-badge">&#x25B6; Video</div>' : ''}
+    <div class="pf-corner"></div>
+    <div class="pf-ov">
+      <div class="pf-cat-lbl">${cat}</div>
+      <div class="pf-name">${p.name}</div>
+      <div class="pf-zoom">&#x2197; View Details</div>
+    </div>
+  </div>`;
+}
+window.pfItemHTML = pfItemHTML;
+window.CATS = CATS;
 
-
-/* CONTACT FORM → Firebase Firestore */
-async function submitInquiry(e) {
+async function submitForm(e) {
   e.preventDefault();
   const name    = document.getElementById('f_name').value.trim();
   const email   = document.getElementById('f_email').value.trim();
   const phone   = document.getElementById('f_phone').value.trim();
   const service = document.getElementById('f_service').value || 'General Inquiry';
-  const msg     = document.getElementById('f_msg').value.trim();
-
-  const btn = document.getElementById('fSubmit');
-  const spinner = document.getElementById('fSpinner');
-  const success = document.getElementById('fsuccess');
-
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  spinner.style.display = 'block';
-
+  const message = document.getElementById('f_msg').value.trim();
+  const btn     = document.getElementById('fBtn');
+  btn.disabled = true; btn.textContent = 'Sending...';
   try {
-    await _addDoc(_col(_db, 'inquiries'), {
-      name, email, phone, service,
-      message: msg,
-      timestamp: _serverTimestamp(),
-      read: false,
-      page: 'contact'
-    });
-    spinner.style.display = 'none';
-    success.style.display = 'block';
+    await sbInsert('inquiries', { name, email, phone, service, message, read: false });
+    document.getElementById('fsuccess').style.display = 'block';
     document.getElementById('cForm').reset();
     btn.textContent = '\u2713 Sent!';
-    showToast('\u2713 Message saved to Firebase!', 'success');
-  } catch (err) {
-    spinner.style.display = 'none';
-    btn.disabled = false;
-    btn.textContent = 'Send Message \u2192';
-    showToast('Error: ' + err.message, 'error');
+    showToast('\u2713 Message saved successfully!','ok');
+  } catch(err) {
+    showToast('Error: ' + err.message,'err');
+    btn.disabled = false; btn.textContent = 'Send Message \u2192';
     console.error(err);
   }
 }
-window.submitInquiry = submitInquiry;
-
+window.submitForm = submitForm;
 </script>
 </body>
 </html>
