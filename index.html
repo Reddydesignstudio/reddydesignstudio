@@ -302,7 +302,6 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
   </ul>
   <div class="nav-r">
     <button class="btn-th" id="thBtn" onclick="toggleTheme()" title="Toggle theme">&#9790;</button>
-    <button class="btn-adm" onclick="openAdm()">&#x1F512; Admin</button>
     <a href="contact.html" class="nav-cta">Hire Us</a>
   </div>
   <button class="burger" onclick="DD()"><span></span><span></span><span></span></button>
@@ -473,20 +472,41 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 
     <!-- TESTIMONIALS PANEL -->
     <div class="dpanel" id="dp4">
-      <div class="add-form">
-        <div class="dtitle">&#x2795; Add New Testimonial</div>
+
+      <!-- ADD / EDIT FORM -->
+      <div class="add-form" id="testiForm">
+        <div class="dtitle" id="testiFormTitle">&#x2795; Add New Client Review</div>
+        <input type="hidden" id="tEditId"/>
         <div class="ag2" style="margin-bottom:.8rem">
-          <div><label class="flabel">Client Name *</label><input id="tName" class="fin" type="text" placeholder="e.g. Ravi Kumar"/></div>
-          <div><label class="flabel">Role / Company *</label><input id="tRole" class="fin" type="text" placeholder="e.g. YouTuber — Tech Reviews"/></div>
+          <div>
+            <label class="flabel">Client Name *</label>
+            <input id="tName" class="fin" type="text" placeholder="e.g. Ravi Kumar"/>
+          </div>
+          <div>
+            <label class="flabel">Role / Company</label>
+            <input id="tRole" class="fin" type="text" placeholder="e.g. YouTuber — Tech Reviews"/>
+          </div>
         </div>
-        <div style="margin-bottom:.8rem"><label class="flabel">Testimonial Text *</label><textarea id="tText" class="fin" rows="3" placeholder="What the client said about your work..."></textarea></div>
+        <div style="margin-bottom:1rem">
+          <label class="flabel">Review Text *</label>
+          <textarea id="tText" class="fin" rows="4" placeholder="What the client said about your work — be specific about results achieved..."></textarea>
+        </div>
         <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap">
-          <button class="btn-red" id="tAddBtn" style="font-size:.72rem;padding:.65rem 1.8rem" onclick="addTestimonial()">&#x2795; Add Testimonial</button>
-          <span id="tAddMsg" style="font-size:.8rem;color:var(--green);display:none">&#x2713; Added!</span>
+          <button class="btn-red" id="tSaveBtn" style="font-size:.72rem;padding:.65rem 1.8rem" onclick="saveTestimonial()">&#x2795; Save Review</button>
+          <button class="btn-ghost" id="tCancelBtn" style="font-size:.7rem;padding:.6rem 1.2rem;display:none" onclick="cancelTestiEdit()">&#x2715; Cancel Edit</button>
+          <span id="tAddMsg" style="font-size:.8rem;color:var(--green);display:none">&#x2713; Saved successfully!</span>
         </div>
       </div>
-      <div class="dtitle">All Testimonials (<span id="testiCount">0</span>)</div>
-      <div id="testiList"><div style="color:var(--muted);padding:1.5rem;text-align:center;font-size:.84rem">Click this tab to load...</div></div>
+
+      <!-- LIST -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
+        <div class="dtitle" style="margin:0">Client Reviews (<span id="testiCount">0</span>)</div>
+        <button class="dbtn" onclick="loadTestiAdmin()">&#x21BB; Refresh</button>
+      </div>
+      <div id="testiList">
+        <div style="color:var(--muted);padding:2rem;text-align:center;font-size:.84rem">Click this tab to load reviews...</div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -842,42 +862,51 @@ window.openLB = openLB; window.closeLB = closeLB;
    TESTIMONIALS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const DEFAULT_TESTIS=[
-  {id:'t1',text:'Omkar transformed our YouTube channel completely. Our CTR doubled within 3 weeks of using his thumbnails.',author:'Ravi Kumar',role:'YouTuber — Tech Reviews'},
-  {text:'The brand identity Reddy Design Studio created is exactly what we envisioned — premium, bold, and memorable.',author:'Priya Sharma',role:'Founder — Bloom Studio'},
-  {text:'Our website got so many compliments after the redesign. Clean, fast, and stunningly beautiful.',author:'Arjun Mehta',role:'CEO — DigitalWave Agency'},
-  {text:'The video edit quality is absolutely cinematic. Our corporate promo looks like a production house made it.',author:'Sunita Reddy',role:'Marketing Head — TechCorp'},
+  {id:'dt1',author:'Ravi Kumar',role:'YouTuber — Tech Reviews',text:'Omkar transformed our YouTube channel completely. Our CTR doubled within 3 weeks of using his thumbnails.'},
+  {id:'dt2',author:'Priya Sharma',role:'Founder — Bloom Studio',text:'The brand identity Reddy Design Studio created is exactly what we envisioned — premium, bold, and memorable.'},
+  {id:'dt3',author:'Arjun Mehta',role:'CEO — DigitalWave Agency',text:'Our website got so many compliments after the redesign. Clean, fast, and stunningly beautiful.'},
+  {id:'dt4',author:'Sunita Reddy',role:'Marketing Head — TechCorp',text:'The video edit quality is absolutely cinematic. Our corporate promo looks like a production house made it.'},
 ];
 let LIVE_TESTIS = [...DEFAULT_TESTIS];
-let tIdx=0;
+let tIdx = 0;
+let _teTimer = null;
 
-function initials(name){ return (name||'R').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
-
-function renderTestiSlider(items) {
-  const track = document.getElementById('ttrack');
-  const dots  = document.getElementById('tdots');
-  if (!track || !items.length) return;
-  track.innerHTML = items.map(t =>
-    `<div class="tcard">
-      <div class="tquote">&ldquo;</div>
-      <p class="ttext">${t.text}</p>
-      <div class="tauthor">
-        <div class="tavatar">${initials(t.author||t.name)}</div>
-        <div><div class="tname">${t.author||t.name||''}</div><div class="trole">${t.role||''}</div></div>
-      </div>
-    </div>`
-  ).join('');
-  dots.innerHTML = items.map((_,i) =>
-    `<div class="tcdot ${i===0?'on':''}" onclick="teGo(${i})"></div>`
-  ).join('');
-  tIdx = 0;
-  track.style.transform = 'translateX(0)';
+function initials(name){
+  return (name||'R').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
 }
 
-async function loadTestimonials() {
-  try {
+function renderTestiSlider(items){
+  const track = document.getElementById('ttrack');
+  const dots  = document.getElementById('tdots');
+  if(!track) return;
+  const list = items.length ? items : DEFAULT_TESTIS;
+  track.innerHTML = list.map(t=>`
+    <div class="tcard">
+      <div class="tquote">&ldquo;</div>
+      <p class="ttext">${t.text||''}</p>
+      <div class="tauthor">
+        <div class="tavatar">${initials(t.author||t.name)}</div>
+        <div>
+          <div class="tname">${t.author||t.name||''}</div>
+          <div class="trole">${t.role||''}</div>
+        </div>
+      </div>
+    </div>`).join('');
+  if(dots) dots.innerHTML = list.map((_,i)=>
+    `<div class="tcdot ${i===0?'on':''}" onclick="teGo(${i})"></div>`).join('');
+  tIdx=0;
+  track.style.transform='translateX(0)';
+  // restart auto-advance
+  if(_teTimer) clearInterval(_teTimer);
+  _teTimer = setInterval(()=>teMove(1), 5000);
+}
+
+async function loadTestimonials(){
+  try{
     const rows = await sbSelect('testimonials');
     LIVE_TESTIS = rows.length ? rows : DEFAULT_TESTIS;
-  } catch(e) {
+  }catch(e){
+    console.warn('Testimonials load error:', e.message);
     LIVE_TESTIS = DEFAULT_TESTIS;
   }
   renderTestiSlider(LIVE_TESTIS);
@@ -885,90 +914,130 @@ async function loadTestimonials() {
 
 function teGo(i){
   tIdx=((i%LIVE_TESTIS.length)+LIVE_TESTIS.length)%LIVE_TESTIS.length;
-  document.getElementById('ttrack').style.transform=`translateX(-${tIdx*100}%)`;
+  const track=document.getElementById('ttrack');
+  if(track) track.style.transform=`translateX(-${tIdx*100}%)`;
   document.querySelectorAll('.tcdot').forEach((d,j)=>d.classList.toggle('on',j===tIdx));
 }
 function teMove(dir){ teGo(tIdx+dir); }
-let teTimer = setInterval(()=>teMove(1), 5000);
 window.teGo=teGo; window.teMove=teMove;
 
-/* ADMIN — Testimonials CRUD */
-async function loadTestiAdmin() {
-  const listEl = document.getElementById('testiList');
-  const countEl= document.getElementById('testiCount');
-  try {
-    let rows = await sbSelect('testimonials');
-    if (!rows.length) rows = [];
-    if (countEl) countEl.textContent = rows.length;
-    if (!listEl) return;
-    if (!rows.length) {
-      listEl.innerHTML = '<div style="color:var(--muted);padding:2rem;text-align:center;font-size:.84rem">No testimonials added yet. Add one above!</div>';
+/* ─────────────────────────────────────────────
+   ADMIN: Testimonials CRUD
+───────────────────────────────────────────── */
+async function loadTestiAdmin(){
+  const listEl  = document.getElementById('testiList');
+  const countEl = document.getElementById('testiCount');
+  if(listEl) listEl.innerHTML='<div style="color:var(--muted);padding:1.5rem;text-align:center;font-size:.84rem">Loading reviews...</div>';
+
+  try{
+    const rows = await sbSelect('testimonials');
+    if(countEl) countEl.textContent = rows.length;
+    if(!listEl) return;
+    if(!rows.length){
+      listEl.innerHTML='<div style="color:var(--muted);padding:2rem;text-align:center;font-size:.84rem">No reviews yet. Add your first client review above!</div>';
       return;
     }
-    listEl.innerHTML = rows.map(t => `
-      <div style="background:var(--card);border:1px solid var(--cborder);padding:1.2rem 1.5rem;margin-bottom:.7rem;position:relative">
-        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-          <div style="flex:1">
-            <div style="font-weight:500;color:var(--text);font-size:.92rem;margin-bottom:.2rem">${t.author||t.name||'—'}</div>
-            <div style="font-size:.72rem;color:var(--red);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem">${t.role||''}</div>
-            <div id="ttext_${t.id}" style="font-size:.84rem;color:var(--muted);line-height:1.6;font-style:italic">"${t.text||''}"</div>
+    listEl.innerHTML = rows.map((t,i)=>`
+      <div style="background:var(--card);border:1px solid var(--cborder);padding:1.4rem 1.6rem;margin-bottom:.8rem;border-left:3px solid var(--red);transition:border-color .2s">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+          <div style="flex:1;min-width:200px">
+            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.35rem">
+              <div style="width:32px;height:32px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;color:#fff;font-size:.9rem;flex-shrink:0">${initials(t.author||t.name)}</div>
+              <div>
+                <div style="font-weight:500;color:var(--text);font-size:.9rem">${t.author||t.name||'—'}</div>
+                <div style="font-size:.72rem;color:var(--red);letter-spacing:.08em;text-transform:uppercase">${t.role||''}</div>
+              </div>
+            </div>
+            <div id="ttext_${t.id}" style="font-size:.84rem;color:var(--muted);line-height:1.65;font-style:italic;margin-top:.5rem">&ldquo;${t.text||''}&rdquo;</div>
           </div>
-          <div style="display:flex;gap:.4rem;flex-shrink:0;flex-wrap:wrap">
-            <button class="dbtn" onclick="editTesti('${t.id}')">&#x270E; Edit</button>
-            <button class="dbtn del" onclick="deleteTesti('${t.id}')">&#x1F5D1;</button>
+          <div style="display:flex;flex-direction:column;gap:.4rem;flex-shrink:0">
+            <button class="dbtn" onclick="startEditTesti('${t.id}','${(t.author||t.name||'').replace(/'/g,"\\'")}','${(t.role||'').replace(/'/g,"\\'")}',document.getElementById('ttext_${t.id}'))">&#x270E; Edit</button>
+            <button class="dbtn del" onclick="deleteTesti('${t.id}')">&#x1F5D1; Delete</button>
           </div>
         </div>
       </div>`).join('');
-  } catch(e) {
-    if (listEl) listEl.innerHTML = `<div style="color:var(--red);padding:1rem;font-size:.84rem">Error: ${e.message}</div>`;
+  }catch(e){
+    if(listEl) listEl.innerHTML=`<div style="color:var(--red);padding:1.5rem;font-size:.84rem">&#x26A0; Error: ${e.message}<br/><small>Make sure the 'testimonials' table exists in Supabase.</small></div>`;
   }
 }
+window.loadTestiAdmin=loadTestiAdmin;
 
-async function addTestimonial() {
-  const name = document.getElementById('tName').value.trim();
-  const role = document.getElementById('tRole').value.trim();
-  const text = document.getElementById('tText').value.trim();
-  if (!name || !text) { showToast('Please fill Name and Text!','err'); return; }
-  const btn = document.getElementById('tAddBtn');
+/* Save (Add or Update) */
+async function saveTestimonial(){
+  const name   = document.getElementById('tName').value.trim();
+  const role   = document.getElementById('tRole').value.trim();
+  const text   = document.getElementById('tText').value.trim();
+  const editId = document.getElementById('tEditId').value.trim();
+
+  if(!name){ showToast('\u26A0 Please enter client name!','err'); document.getElementById('tName').focus(); return; }
+  if(!text){ showToast('\u26A0 Please enter review text!','err'); document.getElementById('tText').focus(); return; }
+
+  const btn=document.getElementById('tSaveBtn');
   btn.disabled=true; btn.textContent='Saving...';
-  try {
-    await sbInsert('testimonials', { author: name, role, text });
-    showToast('\u2713 Testimonial added!','ok');
-    document.getElementById('tName').value='';
-    document.getElementById('tRole').value='';
-    document.getElementById('tText').value='';
-    await loadTestiAdmin();
-    await loadTestimonials(); // refresh slider
-    const msg = document.getElementById('tAddMsg');
+
+  try{
+    if(editId){
+      // UPDATE existing
+      await sbUpdate('testimonials', editId, {author:name, role, text});
+      showToast('\u2713 Review updated!','ok');
+      cancelTestiEdit();
+    }else{
+      // INSERT new
+      await sbInsert('testimonials', {author:name, role, text});
+      showToast('\u2713 Review added to website!','ok');
+      document.getElementById('tName').value='';
+      document.getElementById('tRole').value='';
+      document.getElementById('tText').value='';
+    }
+    const msg=document.getElementById('tAddMsg');
     msg.style.display='inline'; setTimeout(()=>msg.style.display='none',2500);
-  } catch(e) { showToast(e.message,'err'); }
-  btn.disabled=false; btn.textContent='\u2795 Add Testimonial';
-}
-
-async function editTesti(id) {
-  const textEl = document.getElementById('ttext_'+id);
-  const cur = textEl?.textContent.replace(/^"|"$/g,'') || '';
-  const newText = prompt('Edit testimonial text:', cur);
-  if (newText === null || !newText.trim()) return;
-  try {
-    await sbUpdate('testimonials', id, { text: newText.trim() });
-    showToast('\u2713 Updated!','ok');
     await loadTestiAdmin();
-    await loadTestimonials();
-  } catch(e) { showToast(e.message,'err'); }
+    await loadTestimonials(); // refresh home slider live
+  }catch(e){
+    showToast(e.message,'err');
+    console.error('Save testi error:',e);
+  }
+  btn.disabled=false; btn.textContent=editId?'&#x2714; Update Review':'&#x2795; Save Review';
 }
+window.saveTestimonial=saveTestimonial;
 
-async function deleteTesti(id) {
-  if (!confirm('Delete this testimonial?')) return;
-  try {
+/* Start inline edit */
+function startEditTesti(id, name, role, textEl){
+  document.getElementById('tEditId').value = id;
+  document.getElementById('tName').value   = name;
+  document.getElementById('tRole').value   = role;
+  // Get actual text from the DOM element (strip quotes)
+  const raw = textEl ? textEl.textContent.replace(/^[\u201C\u201c"]+|[\u201D\u201d"]+$/g,'').trim() : '';
+  document.getElementById('tText').value   = raw;
+  document.getElementById('testiFormTitle').textContent = '\u270E Editing Review';
+  document.getElementById('tSaveBtn').textContent = '\u2714 Update Review';
+  document.getElementById('tCancelBtn').style.display = 'inline-flex';
+  // Scroll to form
+  document.getElementById('testiForm').scrollIntoView({behavior:'smooth',block:'start'});
+}
+window.startEditTesti=startEditTesti;
+
+function cancelTestiEdit(){
+  document.getElementById('tEditId').value = '';
+  document.getElementById('tName').value   = '';
+  document.getElementById('tRole').value   = '';
+  document.getElementById('tText').value   = '';
+  document.getElementById('testiFormTitle').textContent = '\u2795 Add New Client Review';
+  document.getElementById('tSaveBtn').textContent = '\u2795 Save Review';
+  document.getElementById('tCancelBtn').style.display = 'none';
+}
+window.cancelTestiEdit=cancelTestiEdit;
+
+/* Delete */
+async function deleteTesti(id){
+  if(!confirm('Delete this client review?')) return;
+  try{
     await sbDelete('testimonials', id);
-    showToast('Deleted.','warn');
+    showToast('Review deleted.','warn');
     await loadTestiAdmin();
     await loadTestimonials();
-  } catch(e) { showToast(e.message,'err'); }
+  }catch(e){ showToast(e.message,'err'); }
 }
-window.addTestimonial=addTestimonial;
-window.editTesti=editTesti;
 window.deleteTesti=deleteTesti;
 window.loadTestiAdmin=loadTestiAdmin;
 
