@@ -285,6 +285,30 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .edit-inp{background:rgba(255,255,255,.06);border:1px solid rgba(232,25,44,.3);color:var(--text);padding:.35rem .6rem;font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;width:100%;transition:border-color .2s}
 .edit-inp:focus{border-color:var(--red)}
 .edit-row td{background:rgba(232,25,44,.04)!important}
+
+/* ══════════════════════════════════
+   PORTFOLIO UPLOAD STYLES
+══════════════════════════════════ */
+.upload-zone{border:2px dashed var(--sb);padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;position:relative;background:var(--inp)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--red);background:var(--rd)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-zone svg{width:36px;height:36px;color:var(--muted);margin:0 auto .8rem;display:block}
+.upload-zone p{font-size:.82rem;color:var(--muted);margin-bottom:.3rem}
+.upload-zone small{font-size:.7rem;color:var(--muted2)}
+.upload-preview{margin-top:1rem;display:none}
+.upload-preview img,.upload-preview video{max-height:180px;max-width:100%;border:1px solid var(--sb);display:block}
+.upload-preview .up-name{font-size:.75rem;color:var(--muted);margin-top:.4rem}
+.upload-progress{height:3px;background:var(--sb);margin-top:.8rem;overflow:hidden;display:none}
+.upload-progress-bar{height:100%;background:var(--red);width:0%;transition:width .3s}
+.pf-thumb-wrap{position:relative;width:100%;height:100%}
+.pf-thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pf-thumb-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* table thumbnail */
+.tbl-thumb{width:52px;height:36px;object-fit:cover;border:1px solid var(--sb);flex-shrink:0}
+.tbl-thumb-ph{width:52px;height:36px;background:var(--bg3);border:1px solid var(--sb);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tbl-thumb-ph svg{width:16px;height:16px;color:var(--muted2)}
+.pf-media-badge{position:absolute;bottom:.5rem;right:.5rem;z-index:5;background:rgba(0,0,0,.7);color:#fff;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .5rem}
+
 </style>
 </head>
 <body>
@@ -444,8 +468,8 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
     <div class="dpanel" id="dp1">
       <div class="add-form">
         <div class="dtitle" style="margin-bottom:1rem">&#x2795; Add Portfolio Item</div>
-        <div class="ag3">
-          <input class="fin" type="text" id="apName" placeholder="Project name"/>
+        <div class="ag3" style="margin-bottom:.8rem">
+          <input class="fin" type="text" id="apName" placeholder="Project name *"/>
           <select class="fin" id="apCat">
             <option value="graphic">Graphic Design</option>
             <option value="video">Video Editing</option>
@@ -454,9 +478,33 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
           </select>
           <input class="fin" type="text" id="apDesc" placeholder="Short description"/>
         </div>
-        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.5rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem">
+          <input class="fin" type="text" id="apTags" placeholder="Tags (comma-separated: YouTube, Dark, Red)"/>
+          <input class="fin" type="text" id="apClient" placeholder="Client name (optional)"/>
+        </div>
+        <!-- MEDIA UPLOAD -->
+        <div style="margin-bottom:.8rem">
+          <label style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem">&#x1F4F8; Upload Image or Video (Firebase Storage)</label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="apMedia" accept="image/*,video/*" onchange="handleFileSelect(this)"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 5 17 10"/><line x1="12" y1="5" x2="12" y2="15"/></svg>
+            <p>Click to upload or drag &amp; drop</p>
+            <small>JPG, PNG, GIF, MP4, MOV &middot; Max 50MB</small>
+          </div>
+          <div class="upload-preview" id="uploadPreview">
+            <div id="previewMedia"></div>
+            <div class="up-name" id="previewName"></div>
+            <button onclick="clearUpload()" style="font-size:.65rem;color:var(--red);background:none;border:none;cursor:pointer;margin-top:.4rem">&#x2715; Remove file</button>
+          </div>
+          <div class="upload-progress" id="uploadProgress">
+            <div class="upload-progress-bar" id="uploadProgressBar"></div>
+          </div>
+          <div id="uploadStatus" style="font-size:.75rem;color:var(--muted);margin-top:.4rem"></div>
+        </div>
+        <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
           <button class="btn-red" style="font-size:.72rem;padding:.65rem 1.6rem" onclick="addPortfolioItem()">&#x2795; Add Item</button>
-          <span id="apMsg" style="font-size:.78rem;color:var(--green);display:none">&#x2713; Added!</span>
+          <button class="dbtn" onclick="clearAddForm()">&#x21A9; Clear</button>
+          <span id="apMsg" style="font-size:.78rem;color:var(--green);display:none">&#x2713; Item added!</span>
         </div>
       </div>
       <div class="dtitle">Portfolio Items (<span id="pfCount">0</span>)</div>
@@ -725,8 +773,10 @@ function renderPF(f) {
   const items = f==='all' ? PFDATA : PFDATA.filter(p=>p.cat===f);
   document.getElementById('pfGrid').innerHTML = items.map(p=>`
     <div class="pf-item" onclick="openLB('${p.id}')">
-      <div class="pf-bg ${p.bg}"></div>
-      <div class="pf-ph">${PICO[p.cat]||''}</div>
+      ${p.mediaUrl && p.mediaType==='image' ? `<img src="${p.mediaUrl}" class="pf-thumb-img"/>` :
+        p.mediaUrl && p.mediaType==='video' ? `<video src="${p.mediaUrl}" class="pf-thumb-vid" muted autoplay loop playsinline></video>` :
+        `<div class="pf-bg ${p.bg}"></div><div class="pf-ph">${PICO[p.cat]||''}</div>`}
+      ${p.mediaType==='video' ? '<div class="pf-media-badge">&#x25B6; Video</div>' : ''}
       <div class="pf-corner"></div>
       <div class="pf-ov">
         <div class="pf-cat-lbl">${CATS[p.cat]||p.cat}</div>
@@ -824,21 +874,122 @@ function loadPfData(){
 }
 function savePfData(data){ localStorage.setItem('rds_portfolio',JSON.stringify(data)); }
 
-function addPortfolioItem(){
-  const name=document.getElementById('apName').value.trim();
-  const cat=document.getElementById('apCat').value;
-  const desc=document.getElementById('apDesc').value.trim()||'Portfolio item.';
-  if(!name){showToast('Please enter a project name.','error');return;}
-  const data=loadPfData();
-  const bgs=['pf1','pf2','pf3','pf4','pf5','pf6'];
-  const newItem={id:'pf'+Date.now(),name,cat,desc,tags:[CATS[cat]||cat],bg:bgs[Math.floor(Math.random()*bgs.length)],dur:'',del:''};
+/* selected file state */
+let _pendingFile = null;
+let _pendingFileUrl = null;
+let _pendingFileType = null;
+
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 52428800) { showToast('File too large. Max 50MB.','error'); input.value=''; return; }
+  _pendingFile = file;
+  _pendingFileType = file.type.startsWith('video/') ? 'video' : 'image';
+  const previewEl = document.getElementById('previewMedia');
+  const nameEl = document.getElementById('previewName');
+  const prevWrap = document.getElementById('uploadPreview');
+  const objUrl = URL.createObjectURL(file);
+  if (_pendingFileType === 'image') {
+    previewEl.innerHTML = `<img src="${objUrl}" style="max-height:180px;max-width:100%;border:1px solid var(--sb)"/>`;
+  } else {
+    previewEl.innerHTML = `<video src="${objUrl}" controls style="max-height:180px;max-width:100%;border:1px solid var(--sb)"></video>`;
+  }
+  nameEl.textContent = file.name + ' (' + (file.size/1024/1024).toFixed(1) + ' MB)';
+  prevWrap.style.display = 'block';
+  document.getElementById('uploadZone').style.borderColor = 'var(--red)';
+  document.getElementById('uploadStatus').textContent = '\u2713 File selected — will upload when you click Add Item';
+}
+window.handleFileSelect = handleFileSelect;
+
+function clearUpload() {
+  _pendingFile = null; _pendingFileUrl = null; _pendingFileType = null;
+  document.getElementById('apMedia').value = '';
+  document.getElementById('uploadPreview').style.display = 'none';
+  document.getElementById('uploadZone').style.borderColor = '';
+  document.getElementById('uploadStatus').textContent = '';
+  document.getElementById('uploadProgress').style.display = 'none';
+  document.getElementById('uploadProgressBar').style.width = '0%';
+}
+window.clearUpload = clearUpload;
+
+async function uploadToFirebaseStorage(file) {
+  // Dynamic import Firebase Storage
+  const { getStorage, ref, uploadBytesResumable, getDownloadURL } =
+    await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
+  const storage = getStorage();
+  const ext = file.name.split('.').pop();
+  const path = 'portfolio/' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.' + ext;
+  const storageRef = ref(storage, path);
+  return new Promise((resolve, reject) => {
+    const task = uploadBytesResumable(storageRef, file);
+    const bar = document.getElementById('uploadProgressBar');
+    const prog = document.getElementById('uploadProgress');
+    const status = document.getElementById('uploadStatus');
+    prog.style.display = 'block';
+    task.on('state_changed',
+      snap => {
+        const pct = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+        bar.style.width = pct + '%';
+        status.textContent = 'Uploading... ' + pct + '%';
+      },
+      err => { reject(err); },
+      async () => {
+        const url = await getDownloadURL(task.snapshot.ref);
+        bar.style.width = '100%';
+        status.textContent = '\u2713 Upload complete!';
+        resolve(url);
+      }
+    );
+  });
+}
+
+async function addPortfolioItem(){
+  const name = document.getElementById('apName').value.trim();
+  const cat  = document.getElementById('apCat').value;
+  const desc = document.getElementById('apDesc').value.trim() || 'Portfolio item.';
+  const tagsRaw = document.getElementById('apTags')?.value.trim() || '';
+  const client = document.getElementById('apClient')?.value.trim() || '';
+  if (!name) { showToast('Please enter a project name.','error'); return; }
+
+  const btn = document.querySelector('[onclick="addPortfolioItem()"]');
+  if (btn) { btn.disabled=true; btn.textContent='Adding...'; }
+
+  let mediaUrl = null;
+  let mediaType = null;
+
+  // Upload file if selected
+  if (_pendingFile) {
+    try {
+      showToast('Uploading media to Firebase...','success');
+      mediaUrl = await uploadToFirebaseStorage(_pendingFile);
+      mediaType = _pendingFileType;
+    } catch(err) {
+      showToast('Upload failed: ' + err.message, 'error');
+      if (btn) { btn.disabled=false; btn.textContent='\u2795 Add Item'; }
+      return;
+    }
+  }
+
+  const bgs = ['pf1','pf2','pf3','pf4','pf5','pf6'];
+  const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [CATS[cat]||cat];
+  const newItem = {
+    id: 'pf'+Date.now(), name, cat, desc, tags,
+    client, mediaUrl, mediaType,
+    bg: bgs[Math.floor(Math.random()*bgs.length)],
+    dur: '', del: ''
+  };
+
+  const data = loadPfData();
   data.push(newItem); savePfData(data);
-  // also update PFDATA array in memory
-  PFDATA.push(newItem); renderPF('all');
-  renderPfTable();
-  document.getElementById('apName').value=''; document.getElementById('apDesc').value='';
-  const msg=document.getElementById('apMsg'); msg.style.display='inline'; setTimeout(()=>msg.style.display='none',2200);
-  showToast('\u2713 "'+name+'" added!','success');
+  PFDATA.push(newItem);
+  renderPF('all'); renderPfTable();
+
+  ['apName','apDesc','apTags','apClient'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  clearUpload();
+  if (btn) { btn.disabled=false; btn.textContent='\u2795 Add Item'; }
+  const msg = document.getElementById('apMsg');
+  msg.style.display='inline'; setTimeout(()=>msg.style.display='none', 2500);
+  showToast('\u2713 "'+name+'" added'+(mediaUrl?' with media!':'!'), 'success');
 }
 window.addPortfolioItem=addPortfolioItem;
 
@@ -848,7 +999,19 @@ function renderPfTable(){
   document.getElementById('dsPortfolio').textContent=data.length;
   document.getElementById('pfTableBody').innerHTML = data.map(p=>{
     if(editingPfId===p.id) return `<tr class="edit-row" id="er-${p.id}"><td><input class="edit-inp" id="ei-name" value="${p.name.replace(/"/g,'&quot;')}"/></td><td><select class="edit-inp" id="ei-cat"><option value="graphic" ${p.cat==='graphic'?'selected':''}>Graphic</option><option value="video" ${p.cat==='video'?'selected':''}>Video</option><option value="thumb" ${p.cat==='thumb'?'selected':''}>Thumb</option><option value="web" ${p.cat==='web'?'selected':''}>Web</option></select></td><td><div class="dact"><button class="dbtn save" onclick="savePfEdit('${p.id}')">&#x2714; Save</button><button class="dbtn" onclick="cancelPfEdit()">&#x2715;</button></div></td></tr>`;
-    return `<tr><td style="font-weight:500;color:var(--text)">${p.name}</td><td><span class="dcat-badge">${CATS[p.cat]||p.cat}</span></td><td><div class="dact"><button class="dbtn" onclick="startPfEdit('${p.id}')">&#x270E;</button><button class="dbtn del" onclick="deletePfItem('${p.id}')">&#x1F5D1;</button></div></td></tr>`;
+    return `<tr>
+      <td style="display:flex;align-items:center;gap:.7rem;min-width:180px">
+        ${p.mediaUrl && p.mediaType==='image' ? `<img src="${p.mediaUrl}" class="tbl-thumb"/>` :
+          p.mediaUrl && p.mediaType==='video' ? `<div class="tbl-thumb-ph" style="position:relative"><video src="${p.mediaUrl}" class="tbl-thumb" style="width:100%;height:100%;object-fit:cover"></video></div>` :
+          `<div class="tbl-thumb-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`}
+        <span style="font-weight:500;color:var(--text)">${p.name}</span>
+      </td>
+      <td><span class="dcat-badge">${CATS[p.cat]||p.cat}</span></td>
+      <td><div class="dact">
+        <button class="dbtn" onclick="startPfEdit('${p.id}')">&#x270E;</button>
+        <button class="dbtn del" onclick="deletePfItem('${p.id}')">&#x1F5D1;</button>
+      </div></td>
+    </tr>`;
   }).join('');
 }
 function startPfEdit(id){ editingPfId=id; renderPfTable(); }
