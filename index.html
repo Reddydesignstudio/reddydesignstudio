@@ -502,7 +502,7 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
           <div id="uploadStatus" style="font-size:.75rem;color:var(--muted);margin-top:.4rem"></div>
         </div>
         <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
-          <button class="btn-red" style="font-size:.72rem;padding:.65rem 1.6rem" onclick="addPortfolioItem()">&#x2795; Add Item</button>
+          <button class="btn-red" id="addPfBtn" style="font-size:.72rem;padding:.65rem 1.6rem" onclick="addPortfolioItem()">&#x2795; Add Item</button>
           <button class="dbtn" onclick="clearAddForm()">&#x21A9; Clear</button>
           <span id="apMsg" style="font-size:.78rem;color:var(--green);display:none">&#x2713; Item added!</span>
         </div>
@@ -957,83 +957,141 @@ function clearUpload() {
 window.clearUpload = clearUpload;
 
 async function uploadToFirebaseStorage(file) {
-  // Dynamic import Firebase Storage
-  const { getStorage, ref, uploadBytesResumable, getDownloadURL } =
-    await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
-  const storage = getStorage();
-  const ext = file.name.split('.').pop();
-  const path = 'portfolio/' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.' + ext;
-  const storageRef = ref(storage, path);
-  return new Promise((resolve, reject) => {
-    const task = uploadBytesResumable(storageRef, file);
-    const bar = document.getElementById('uploadProgressBar');
-    const prog = document.getElementById('uploadProgress');
-    const status = document.getElementById('uploadStatus');
-    prog.style.display = 'block';
-    task.on('state_changed',
-      snap => {
-        const pct = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
-        bar.style.width = pct + '%';
-        status.textContent = 'Uploading... ' + pct + '%';
-      },
-      err => { reject(err); },
-      async () => {
-        const url = await getDownloadURL(task.snapshot.ref);
+  const bar    = document.getElementById('uploadProgressBar');
+  const prog   = document.getElementById('uploadProgress');
+  const status = document.getElementById('uploadStatus');
+  prog.style.display = 'block';
+  bar.style.width = '0%';
+  status.textContent = 'Connecting to Firebase Storage...';
+
+  try {
+    const { getStorage, ref, uploadBytesResumable, getDownloadURL } =
+      await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
+    const storage = getStorage();
+    const ext = file.name.split('.').pop().toLowerCase();
+    const path = 'portfolio/' + Date.now() + '_' + Math.random().toString(36).slice(2,8) + '.' + ext;
+    const storageRef = ref(storage, path);
+
+    return new Promise((resolve, reject) => {
+      const task = uploadBytesResumable(storageRef, file);
+      task.on('state_changed',
+        snap => {
+          const pct = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+          bar.style.width = pct + '%';
+          status.textContent = '\u2B06 Uploading... ' + pct + '%';
+        },
+        err => {
+          console.error('Storage upload error:', err);
+          status.textContent = '\u26A0 Storage error: ' + err.code;
+          reject(err);
+        },
+        async () => {
+          const url = await getDownloadURL(task.snapshot.ref);
+          bar.style.width = '100%';
+          bar.style.background = 'var(--green)';
+          status.textContent = '\u2713 Upload complete!';
+          resolve(url);
+        }
+      );
+    });
+  } catch(importErr) {
+    console.error('Firebase Storage import failed:', importErr);
+    status.textContent = '\u26A0 Storage not available - saving as local preview';
+    // Fallback: convert to base64 data URL (works without Firebase Storage)
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
         bar.style.width = '100%';
-        status.textContent = '\u2713 Upload complete!';
-        resolve(url);
-      }
-    );
-  });
+        bar.style.background = '#f59e0b';
+        status.textContent = '\u26A0 Saved locally (enable Firebase Storage for permanent hosting)';
+        resolve(e.target.result);
+      };
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
 }
 
 async function addPortfolioItem(){
-  const name = document.getElementById('apName').value.trim();
-  const cat  = document.getElementById('apCat').value;
-  const desc = document.getElementById('apDesc').value.trim() || 'Portfolio item.';
+  const name    = document.getElementById('apName')?.value.trim() || '';
+  const cat     = document.getElementById('apCat')?.value || 'graphic';
+  const desc    = document.getElementById('apDesc')?.value.trim() || 'Portfolio item.';
   const tagsRaw = document.getElementById('apTags')?.value.trim() || '';
-  const client = document.getElementById('apClient')?.value.trim() || '';
-  if (!name) { showToast('Please enter a project name.','error'); return; }
+  const client  = document.getElementById('apClient')?.value.trim() || '';
 
-  const btn = document.querySelector('[onclick="addPortfolioItem()"]');
-  if (btn) { btn.disabled=true; btn.textContent='Adding...'; }
+  if (!name) {
+    showToast('\u26A0 Please enter a project name!', 'error');
+    document.getElementById('apName').focus();
+    return;
+  }
 
-  let mediaUrl = null;
+  const btn = document.getElementById('addPfBtn') || document.querySelector('button[onclick="addPortfolioItem()"]');
+  if (btn) { btn.disabled = true; btn.textContent = 'Adding...'; }
+
+  let mediaUrl  = null;
   let mediaType = null;
 
-  // Upload file if selected
+  // ── Upload if file is selected ──
   if (_pendingFile) {
     try {
-      showToast('Uploading media to Firebase...','success');
-      mediaUrl = await uploadToFirebaseStorage(_pendingFile);
+      showToast('Uploading image/video...', 'success');
+      mediaUrl  = await uploadToFirebaseStorage(_pendingFile);
       mediaType = _pendingFileType;
+      showToast('\u2713 Upload done!', 'success');
     } catch(err) {
-      showToast('Upload failed: ' + err.message, 'error');
-      if (btn) { btn.disabled=false; btn.textContent='\u2795 Add Item'; }
-      return;
+      console.error('Upload error:', err);
+      // Don't block adding — just add without image
+      showToast('\u26A0 Upload failed, adding without image', 'error');
+      mediaUrl  = null;
+      mediaType = null;
     }
   }
 
-  const bgs = ['pf1','pf2','pf3','pf4','pf5','pf6'];
-  const tags = tagsRaw ? tagsRaw.split(',').map(t=>t.trim()).filter(Boolean) : [CATS[cat]||cat];
+  // ── Build item ──
+  const bgs  = ['pf1','pf2','pf3','pf4','pf5','pf6'];
+  const tags = tagsRaw
+    ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean)
+    : [CATS[cat] || cat];
+
   const newItem = {
-    id: 'pf'+Date.now(), name, cat, desc, tags,
-    client, mediaUrl, mediaType,
-    bg: bgs[Math.floor(Math.random()*bgs.length)],
-    dur: '', del: ''
+    id:        'pf' + Date.now(),
+    name:      name,
+    cat:       cat,
+    desc:      desc,
+    tags:      tags,
+    client:    client,
+    mediaUrl:  mediaUrl,
+    mediaType: mediaType,
+    bg:        bgs[Math.floor(Math.random() * bgs.length)],
+    dur:       '',
+    del:       ''
   };
 
+  // ── Save to localStorage ──
   const data = loadPfData();
-  data.push(newItem); savePfData(data);
-  PFDATA.push(newItem);
-  renderPF('all'); renderPfTable();
+  data.push(newItem);
+  savePfData(data);
 
-  ['apName','apDesc','apTags','apClient'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  // ── Update in-memory PFDATA ──
+  PFDATA.push(newItem);
+
+  // ── Refresh UI ──
+  renderPF('all');
+  renderPfTable();
+
+  // ── Reset form ──
+  ['apName','apDesc','apTags','apClient'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
   clearUpload();
-  if (btn) { btn.disabled=false; btn.textContent='\u2795 Add Item'; }
+
+  if (btn) { btn.disabled = false; btn.textContent = '\u2795 Add Item'; }
+
   const msg = document.getElementById('apMsg');
-  msg.style.display='inline'; setTimeout(()=>msg.style.display='none', 2500);
-  showToast('\u2713 "'+name+'" added'+(mediaUrl?' with media!':'!'), 'success');
+  if (msg) { msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 3000); }
+
+  showToast('\u2713 "' + name + '" added to portfolio!', 'success');
 }
 window.addPortfolioItem=addPortfolioItem;
 
