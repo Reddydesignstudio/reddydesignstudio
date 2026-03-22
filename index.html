@@ -116,6 +116,9 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .pf-item{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:var(--bg3)}
 .pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .pf-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+/* Lightbox override — show full image */
+.lb-media img{object-fit:contain !important;background:#000}
+.lb-media video{object-fit:contain !important;background:#000}
 .pf-item:hover .pf-img,.pf-item:hover .pf-vid{transform:scale(1.07)}
 .pf-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
 .pf-placeholder svg{width:32px;height:32px;color:rgba(255,255,255,.06)}
@@ -141,11 +144,13 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 /* Lightbox */
 .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(10px);padding:1rem}
 .lb.open{display:flex}
-.lb-box{background:var(--bg2);border:1px solid var(--sb);max-width:820px;width:100%;position:relative;max-height:92vh;overflow-y:auto}
+.lb-box{background:var(--bg2);border:1px solid var(--sb);max-width:900px;width:95%;position:relative;max-height:95vh;overflow-y:auto}
 .lb-cls{position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,.5);border:1px solid var(--sb);color:var(--text);font-size:1.3rem;cursor:pointer;transition:color .2s;z-index:10;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
 .lb-cls:hover{color:var(--red);border-color:var(--red)}
-.lb-media{height:320px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg3)}
-.lb-media img,.lb-media video{width:100%;height:100%;object-fit:cover}
+.lb-media{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;max-height:70vh;min-height:200px}
+.lb-media img{width:100%;height:auto;max-height:70vh;object-fit:contain;display:block}
+.lb-media video{width:100%;height:auto;max-height:70vh;object-fit:contain;display:block}
+.lb-media-ph{font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(232,25,44,.12);line-height:1;padding:3rem}
 .lb-media-ph{font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(232,25,44,.12);line-height:1}
 .lb-body{padding:2rem}
 .lb-cl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
@@ -393,6 +398,7 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
       <button class="dtab" onclick="dTab(1)">&#x2795; Add Work</button>
       <button class="dtab" onclick="dTab(2)">&#x1F5BC; Manage Portfolio</button>
       <button class="dtab" onclick="dTab(3)">&#x1F4EC; Inquiries</button>
+      <button class="dtab" onclick="dTab(4)">&#x1F4AC; Testimonials</button>
     </div>
     <!-- OVERVIEW -->
     <div class="dpanel on" id="dp0">
@@ -463,6 +469,24 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
         <button class="dbtn" onclick="loadInquiries()">&#x21BB; Refresh</button>
       </div>
       <div id="inqList"><div style="color:var(--muted);font-size:.84rem;padding:2rem;text-align:center">Loading...</div></div>
+    </div>
+
+    <!-- TESTIMONIALS PANEL -->
+    <div class="dpanel" id="dp4">
+      <div class="add-form">
+        <div class="dtitle">&#x2795; Add New Testimonial</div>
+        <div class="ag2" style="margin-bottom:.8rem">
+          <div><label class="flabel">Client Name *</label><input id="tName" class="fin" type="text" placeholder="e.g. Ravi Kumar"/></div>
+          <div><label class="flabel">Role / Company *</label><input id="tRole" class="fin" type="text" placeholder="e.g. YouTuber — Tech Reviews"/></div>
+        </div>
+        <div style="margin-bottom:.8rem"><label class="flabel">Testimonial Text *</label><textarea id="tText" class="fin" rows="3" placeholder="What the client said about your work..."></textarea></div>
+        <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap">
+          <button class="btn-red" id="tAddBtn" style="font-size:.72rem;padding:.65rem 1.8rem" onclick="addTestimonial()">&#x2795; Add Testimonial</button>
+          <span id="tAddMsg" style="font-size:.8rem;color:var(--green);display:none">&#x2713; Added!</span>
+        </div>
+      </div>
+      <div class="dtitle">All Testimonials (<span id="testiCount">0</span>)</div>
+      <div id="testiList"><div style="color:var(--muted);padding:1.5rem;text-align:center;font-size:.84rem">Click this tab to load...</div></div>
     </div>
   </div>
 </div>
@@ -817,36 +841,152 @@ window.openLB = openLB; window.closeLB = closeLB;
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    TESTIMONIALS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const TESTIS=[
-  {text:'Omkar transformed our YouTube channel completely. Our CTR doubled within 3 weeks of using his thumbnails.',author:'Ravi Kumar',role:'YouTuber — Tech Reviews',init:'R'},
-  {text:'The brand identity Reddy Design Studio created is exactly what we envisioned — premium, bold, and memorable.',author:'Priya Sharma',role:'Founder — Bloom Studio',init:'P'},
-  {text:'Our website got so many compliments after the redesign. Clean, fast, and stunningly beautiful.',author:'Arjun Mehta',role:'CEO — DigitalWave Agency',init:'A'},
-  {text:'The video edit quality is absolutely cinematic. Our corporate promo looks like a production house made it.',author:'Sunita Reddy',role:'Marketing Head — TechCorp',init:'S'},
+const DEFAULT_TESTIS=[
+  {id:'t1',text:'Omkar transformed our YouTube channel completely. Our CTR doubled within 3 weeks of using his thumbnails.',author:'Ravi Kumar',role:'YouTuber — Tech Reviews'},
+  {text:'The brand identity Reddy Design Studio created is exactly what we envisioned — premium, bold, and memorable.',author:'Priya Sharma',role:'Founder — Bloom Studio'},
+  {text:'Our website got so many compliments after the redesign. Clean, fast, and stunningly beautiful.',author:'Arjun Mehta',role:'CEO — DigitalWave Agency'},
+  {text:'The video edit quality is absolutely cinematic. Our corporate promo looks like a production house made it.',author:'Sunita Reddy',role:'Marketing Head — TechCorp'},
 ];
+let LIVE_TESTIS = [...DEFAULT_TESTIS];
 let tIdx=0;
-(function(){
-  document.getElementById('ttrack').innerHTML=TESTIS.map(t=>`<div class="tcard"><div class="tquote">&ldquo;</div><p class="ttext">${t.text}</p><div class="tauthor"><div class="tavatar">${t.init}</div><div><div class="tname">${t.author}</div><div class="trole">${t.role}</div></div></div></div>`).join('');
-  document.getElementById('tdots').innerHTML=TESTIS.map((_,i)=>`<div class="tcdot ${i===0?'on':''}" onclick="teGo(${i})"></div>`).join('');
-})();
-function teGo(i){tIdx=((i%TESTIS.length)+TESTIS.length)%TESTIS.length;document.getElementById('ttrack').style.transform=`translateX(-${tIdx*100}%)`;document.querySelectorAll('.tcdot').forEach((d,j)=>d.classList.toggle('on',j===tIdx));}
-function teMove(dir){teGo(tIdx+dir);}
-setInterval(()=>teMove(1),5000);
-window.teGo=teGo;window.teMove=teMove;
+
+function initials(name){ return (name||'R').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+
+function renderTestiSlider(items) {
+  const track = document.getElementById('ttrack');
+  const dots  = document.getElementById('tdots');
+  if (!track || !items.length) return;
+  track.innerHTML = items.map(t =>
+    `<div class="tcard">
+      <div class="tquote">&ldquo;</div>
+      <p class="ttext">${t.text}</p>
+      <div class="tauthor">
+        <div class="tavatar">${initials(t.author||t.name)}</div>
+        <div><div class="tname">${t.author||t.name||''}</div><div class="trole">${t.role||''}</div></div>
+      </div>
+    </div>`
+  ).join('');
+  dots.innerHTML = items.map((_,i) =>
+    `<div class="tcdot ${i===0?'on':''}" onclick="teGo(${i})"></div>`
+  ).join('');
+  tIdx = 0;
+  track.style.transform = 'translateX(0)';
+}
+
+async function loadTestimonials() {
+  try {
+    const rows = await sbSelect('testimonials');
+    LIVE_TESTIS = rows.length ? rows : DEFAULT_TESTIS;
+  } catch(e) {
+    LIVE_TESTIS = DEFAULT_TESTIS;
+  }
+  renderTestiSlider(LIVE_TESTIS);
+}
+
+function teGo(i){
+  tIdx=((i%LIVE_TESTIS.length)+LIVE_TESTIS.length)%LIVE_TESTIS.length;
+  document.getElementById('ttrack').style.transform=`translateX(-${tIdx*100}%)`;
+  document.querySelectorAll('.tcdot').forEach((d,j)=>d.classList.toggle('on',j===tIdx));
+}
+function teMove(dir){ teGo(tIdx+dir); }
+let teTimer = setInterval(()=>teMove(1), 5000);
+window.teGo=teGo; window.teMove=teMove;
+
+/* ADMIN — Testimonials CRUD */
+async function loadTestiAdmin() {
+  const listEl = document.getElementById('testiList');
+  const countEl= document.getElementById('testiCount');
+  try {
+    let rows = await sbSelect('testimonials');
+    if (!rows.length) rows = [];
+    if (countEl) countEl.textContent = rows.length;
+    if (!listEl) return;
+    if (!rows.length) {
+      listEl.innerHTML = '<div style="color:var(--muted);padding:2rem;text-align:center;font-size:.84rem">No testimonials added yet. Add one above!</div>';
+      return;
+    }
+    listEl.innerHTML = rows.map(t => `
+      <div style="background:var(--card);border:1px solid var(--cborder);padding:1.2rem 1.5rem;margin-bottom:.7rem;position:relative">
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+          <div style="flex:1">
+            <div style="font-weight:500;color:var(--text);font-size:.92rem;margin-bottom:.2rem">${t.author||t.name||'—'}</div>
+            <div style="font-size:.72rem;color:var(--red);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem">${t.role||''}</div>
+            <div id="ttext_${t.id}" style="font-size:.84rem;color:var(--muted);line-height:1.6;font-style:italic">"${t.text||''}"</div>
+          </div>
+          <div style="display:flex;gap:.4rem;flex-shrink:0;flex-wrap:wrap">
+            <button class="dbtn" onclick="editTesti('${t.id}')">&#x270E; Edit</button>
+            <button class="dbtn del" onclick="deleteTesti('${t.id}')">&#x1F5D1;</button>
+          </div>
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    if (listEl) listEl.innerHTML = `<div style="color:var(--red);padding:1rem;font-size:.84rem">Error: ${e.message}</div>`;
+  }
+}
+
+async function addTestimonial() {
+  const name = document.getElementById('tName').value.trim();
+  const role = document.getElementById('tRole').value.trim();
+  const text = document.getElementById('tText').value.trim();
+  if (!name || !text) { showToast('Please fill Name and Text!','err'); return; }
+  const btn = document.getElementById('tAddBtn');
+  btn.disabled=true; btn.textContent='Saving...';
+  try {
+    await sbInsert('testimonials', { author: name, role, text });
+    showToast('\u2713 Testimonial added!','ok');
+    document.getElementById('tName').value='';
+    document.getElementById('tRole').value='';
+    document.getElementById('tText').value='';
+    await loadTestiAdmin();
+    await loadTestimonials(); // refresh slider
+    const msg = document.getElementById('tAddMsg');
+    msg.style.display='inline'; setTimeout(()=>msg.style.display='none',2500);
+  } catch(e) { showToast(e.message,'err'); }
+  btn.disabled=false; btn.textContent='\u2795 Add Testimonial';
+}
+
+async function editTesti(id) {
+  const textEl = document.getElementById('ttext_'+id);
+  const cur = textEl?.textContent.replace(/^"|"$/g,'') || '';
+  const newText = prompt('Edit testimonial text:', cur);
+  if (newText === null || !newText.trim()) return;
+  try {
+    await sbUpdate('testimonials', id, { text: newText.trim() });
+    showToast('\u2713 Updated!','ok');
+    await loadTestiAdmin();
+    await loadTestimonials();
+  } catch(e) { showToast(e.message,'err'); }
+}
+
+async function deleteTesti(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  try {
+    await sbDelete('testimonials', id);
+    showToast('Deleted.','warn');
+    await loadTestiAdmin();
+    await loadTestimonials();
+  } catch(e) { showToast(e.message,'err'); }
+}
+window.addTestimonial=addTestimonial;
+window.editTesti=editTesti;
+window.deleteTesti=deleteTesti;
+window.loadTestiAdmin=loadTestiAdmin;
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    ADMIN DASHBOARD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 let _file=null, _fileType=null, _fileObjUrl=null;
 
-function openDash(){document.getElementById('dash').classList.add('open');document.body.style.overflow='hidden';loadHomePortfolio();loadInquiries();}
+function openDash(){document.getElementById('dash').classList.add('open');document.body.style.overflow='hidden';loadHomePortfolio();loadInquiries();loadTestimonials();}
 function closeDash(){document.getElementById('dash').classList.remove('open');document.body.style.overflow='';}
 window.openDash=openDash;window.closeDash=closeDash;
 
 function dTab(i){
   document.querySelectorAll('.dtab').forEach((t,j)=>t.classList.toggle('on',j===i));
   document.querySelectorAll('.dpanel').forEach((p,j)=>p.classList.toggle('on',j===i));
-  if(i===2)renderPfTable();
-  if(i===3)loadInquiries();
+  if(i===2) renderPfTable();
+  if(i===3) loadInquiries();
+  if(i===4) loadTestiAdmin();
 }
 window.dTab=dTab;
 
@@ -928,6 +1068,7 @@ async function addItem(){
     await sbInsert('portfolio', newItem);
     showToast('\u2713 "'+name+'" added to portfolio!','ok');
     await loadHomePortfolio();
+loadTestimonials();
     renderPfTable();
     clearAddForm();
     const msg=document.getElementById('addMsg');
