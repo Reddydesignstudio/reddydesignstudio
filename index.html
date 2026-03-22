@@ -566,6 +566,22 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, onSnapshot, serverTimestamp, query, orderBy }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   IMPORTANT: Enable Firebase Storage in your project!
+   Firebase Console → Storage → Get Started → Production mode
+   Then add these Rules:
+   
+   rules_version = '2';
+   service firebase.storage {
+     match /b/{bucket}/o {
+       match /portfolio/{allPaths=**} {
+         allow read: if true;
+         allow write: if true;
+       }
+     }
+   }
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const firebaseConfig = {
   apiKey: "AIzaSyBYcE4HIl4oIJeYtU4g5KwB1_tO4b1WDxA",
   authDomain: "reddy-design-studio.firebaseapp.com",
@@ -769,13 +785,41 @@ const PICO = {
   thumb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
   web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
 };
+function getRandomItems(arr, n) {
+  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, Math.min(n, shuffled.length));
+}
+
+function loadHomePfData() {
+  try {
+    const saved = localStorage.getItem('rds_portfolio');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch(e) {}
+  return PFDATA;
+}
+
+/* Re-render home portfolio when admin updates from another tab */
+window.addEventListener('storage', (e) => {
+  if (e.key === 'rds_portfolio') {
+    renderPF(document.querySelector('.pfbtn-item.on')?.dataset.pf || 'all');
+  }
+});
+
 function renderPF(f) {
-  const items = f==='all' ? PFDATA : PFDATA.filter(p=>p.cat===f);
+  const allItems = loadHomePfData();
+  let filtered = f==='all' ? allItems : allItems.filter(p=>p.cat===f);
+  // Show max 6 random items on home page
+  const items = getRandomItems(filtered, 6);
   document.getElementById('pfGrid').innerHTML = items.map(p=>`
     <div class="pf-item" onclick="openLB('${p.id}')">
-      ${p.mediaUrl && p.mediaType==='image' ? `<img src="${p.mediaUrl}" class="pf-thumb-img"/>` :
-        p.mediaUrl && p.mediaType==='video' ? `<video src="${p.mediaUrl}" class="pf-thumb-vid" muted autoplay loop playsinline></video>` :
-        `<div class="pf-bg ${p.bg}"></div><div class="pf-ph">${PICO[p.cat]||''}</div>`}
+      ${p.mediaUrl && p.mediaType==='image'
+        ? `<img src="${p.mediaUrl}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>`
+        : p.mediaUrl && p.mediaType==='video'
+          ? `<video src="${p.mediaUrl}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" muted autoplay loop playsinline></video>`
+          : `<div class="pf-bg ${p.bg||'pf1'}"></div><div class="pf-ph">${PICO[p.cat]||''}</div>`}
       ${p.mediaType==='video' ? '<div class="pf-media-badge">&#x25B6; Video</div>' : ''}
       <div class="pf-corner"></div>
       <div class="pf-ov">
@@ -1089,6 +1133,10 @@ window.loadInquiries=loadInquiries; window.deleteInq=deleteInq; window.markAllRe
 (function(){
   const saved=localStorage.getItem('rds_portfolio');
   if(saved){ try{ const d=JSON.parse(saved); PFDATA.length=0; d.forEach(x=>PFDATA.push(x)); renderPF('all'); }catch(e){} }
+  // Also seed defaults to localStorage if empty
+  if(!localStorage.getItem('rds_portfolio')) {
+    localStorage.setItem('rds_portfolio', JSON.stringify(PFDATA));
+  }
 })();
 
 </script>

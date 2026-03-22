@@ -180,6 +180,10 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 .lb-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;border-top:1px solid var(--sb);padding-top:1.2rem}
 .lb-m .lk{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;text-align:center}
 .lb-m .lv{font-size:.88rem;color:var(--text);font-weight:500;text-align:center}
+
+.pf-feat{position:absolute;top:.7rem;left:.7rem;z-index:4;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:.18rem .6rem}
+.pf-media-badge{position:absolute;bottom:.5rem;right:.5rem;z-index:5;background:rgba(0,0,0,.7);color:#fff;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .5rem}
+
 </style>
 </head>
 <body>
@@ -451,17 +455,41 @@ window._query = query;
 window._orderBy = orderBy;
 
 
-const PFDATA=[
-  {id:'p1',name:'Gaming Channel Thumbnails',cat:'thumb',desc:'High-CTR thumbnail series for a gaming YouTuber with 500K+ subscribers. Dark red cinematic theme, A/B-tested layouts that boosted CTR by 42%.',tags:['YouTube','Thumbnails','Gaming','CTR'],bg:'pf1',dur:'2 weeks',del:'12 Thumbnails',feat:true},
-  {id:'p2',name:'Brand Promo Reel',cat:'video',desc:'60-second brand promo with professional colour grading, custom motion graphics, and cinematic pacing. Edited in Premiere Pro with DaVinci colour finishing.',tags:['Video','Motion GFX','Branding','Premiere'],bg:'pf2',dur:'1 week',del:'60s Video'},
-  {id:'p3',name:'Brand Identity System',cat:'graphic',desc:'Full brand identity for a boutique design agency. Logo system, colour palette, typography guidelines, stationery, and a digital brand book.',tags:['Logo','Brand','Identity','Print'],bg:'pf3',dur:'3 weeks',del:'Full Brand Kit'},
-  {id:'p4',name:'Creative Agency Website',cat:'web',desc:'Premium responsive website with dark theme, Three.js hero section, smooth scroll animations, and custom portfolio lightbox. Built with HTML/CSS/JS.',tags:['Web Design','HTML/CSS','Dark UI','Three.js'],bg:'pf4',dur:'4 weeks',del:'Full Website',feat:true},
-  {id:'p5',name:'Instagram Content Kit',cat:'graphic',desc:'30-piece Instagram kit: posts, stories, and reels templates with brand consistency. Canva Pro, delivered as editable files.',tags:['Instagram','Social','Templates','Canva'],bg:'pf5',dur:'1 week',del:'30 Templates'},
-  {id:'p6',name:'Cinematic Short Film Edit',cat:'video',desc:'5-minute cinematic short film with LUT colour grading, sound design, and motion title cards. Shot on Sony A7S III, finished in DaVinci Resolve.',tags:['Cinematic','Short Film','DaVinci','Colour'],bg:'pf6',dur:'10 days',del:'5-Min Film'},
-  {id:'p7',name:'Tech Review Thumbnails',cat:'thumb',desc:'High-CTR thumbnails for a tech review YouTube channel. Clean, modern with product shots and data-driven title frameworks.',tags:['YouTube','Tech','Thumbnails','Product'],bg:'pf7',dur:'1 week',del:'8 Thumbnails'},
-  {id:'p8',name:'Restaurant Branding & Menu',cat:'graphic',desc:'Complete restaurant branding: logo, colour palette, menu design, social media templates, and table card designs.',tags:['Restaurant','Branding','Print','Menu'],bg:'pf8',dur:'2 weeks',del:'Brand + Print'},
-  {id:'p9',name:'SaaS Landing Page',cat:'web',desc:'High-converting landing page for a B2B SaaS product. Feature sections, pricing table, animated CTAs. Built for 95+ PageSpeed.',tags:['Landing Page','SaaS','Web Design','Conversion'],bg:'pf9',dur:'3 weeks',del:'Landing Page',feat:true},
+/* ── DEFAULT ITEMS (shown if admin hasn't added anything yet) ── */
+const DEFAULT_ITEMS = [
+  {id:'p1',name:'Gaming Channel Thumbnails',cat:'thumb',desc:'High-CTR thumbnail series for a gaming YouTuber. Boosted CTR by 42%.',tags:['YouTube','Thumbnails','Gaming'],bg:'pf1',dur:'2 weeks',del:'12 Thumbnails',feat:true,mediaUrl:null,mediaType:null},
+  {id:'p2',name:'Brand Promo Reel',cat:'video',desc:'60-second brand promo with colour grading and motion graphics.',tags:['Video','Branding','Premiere'],bg:'pf2',dur:'1 week',del:'60s Video',mediaUrl:null,mediaType:null},
+  {id:'p3',name:'Brand Identity System',cat:'graphic',desc:'Full brand identity: logo, palette, typography, stationery.',tags:['Logo','Brand','Print'],bg:'pf3',dur:'3 weeks',del:'Brand Kit',mediaUrl:null,mediaType:null},
+  {id:'p4',name:'Creative Agency Website',cat:'web',desc:'Premium responsive website with dark theme and animations.',tags:['Web','HTML/CSS','Dark UI'],bg:'pf4',dur:'4 weeks',del:'Full Site',feat:true,mediaUrl:null,mediaType:null},
+  {id:'p5',name:'Instagram Content Kit',cat:'graphic',desc:'30-piece Instagram kit: posts, stories, reels templates.',tags:['Instagram','Social','Templates'],bg:'pf5',dur:'1 week',del:'30 Files',mediaUrl:null,mediaType:null},
+  {id:'p6',name:'Cinematic Short Film',cat:'video',desc:'5-minute cinematic edit with LUT grading and sound design.',tags:['Cinematic','DaVinci','Colour'],bg:'pf6',dur:'10 days',del:'5-Min Film',mediaUrl:null,mediaType:null},
+  {id:'p7',name:'Tech Review Thumbnails',cat:'thumb',desc:'High-CTR thumbnails for tech review channel.',tags:['YouTube','Tech','Thumbnails'],bg:'pf7',dur:'1 week',del:'8 Thumbnails',mediaUrl:null,mediaType:null},
+  {id:'p8',name:'Restaurant Branding',cat:'graphic',desc:'Complete restaurant brand: logo, menu, social templates.',tags:['Restaurant','Branding','Print'],bg:'pf8',dur:'2 weeks',del:'Brand+Print',mediaUrl:null,mediaType:null},
+  {id:'p9',name:'SaaS Landing Page',cat:'web',desc:'High-converting landing page for B2B SaaS product.',tags:['Landing Page','SaaS','Conversion'],bg:'pf9',dur:'3 weeks',del:'Landing Page',feat:true,mediaUrl:null,mediaType:null},
 ];
+
+/* ── LOAD FROM LOCALSTORAGE (set by Admin on index.html) ── */
+function loadPortfolioItems() {
+  try {
+    const saved = localStorage.getItem('rds_portfolio');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch(e) { console.warn('Portfolio load error:', e); }
+  return DEFAULT_ITEMS;
+}
+
+let PFDATA = loadPortfolioItems();
+
+/* Re-load when another tab (admin) updates storage */
+window.addEventListener('storage', (e) => {
+  if (e.key === 'rds_portfolio') {
+    PFDATA = loadPortfolioItems();
+    renderPF(document.querySelector('.pfb.on')?.dataset.pf || 'all');
+    updateFilterCounts();
+  }
+});
 const CATS={graphic:'Graphic Design',video:'Video Editing',thumb:'Thumbnails',web:'Web Design'};
 const ICO={
   graphic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>',
@@ -470,20 +498,45 @@ const ICO={
   web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
 };
 function renderPF(f){
-  const items=f==='all'?PFDATA:PFDATA.filter(p=>p.cat===f);
-  document.getElementById('pfGrid').innerHTML=items.map(p=>`
-    <div class="pf-item" onclick="openLB('${p.id}')">
-      <div class="pf-bg ${p.bg}"></div>
-      <div class="pf-ph">${ICO[p.cat]||''}</div>
-      ${p.feat?'<div class="pf-feat">Featured</div>':''}
+  PFDATA = loadPortfolioItems(); // always fresh
+  const items = f==='all' ? PFDATA : PFDATA.filter(p=>p.cat===f);
+  const grid = document.getElementById('pfGrid');
+  if (!items.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;color:var(--muted);font-size:.9rem">No items in this category yet.</div>`;
+    return;
+  }
+  grid.innerHTML = items.map(p => {
+    const hasImg   = p.mediaUrl && p.mediaType === 'image';
+    const hasVid   = p.mediaUrl && p.mediaType === 'video';
+    const mediaBg  = hasImg
+      ? `<img src="${p.mediaUrl}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>`
+      : hasVid
+        ? `<video src="${p.mediaUrl}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" muted autoplay loop playsinline></video>`
+        : `<div class="pf-bg ${p.bg||'pf1'}"></div><div class="pf-ph">${ICO[p.cat]||''}</div>`;
+    return `<div class="pf-item" onclick="openLB_pf('${p.id}')">
+      ${mediaBg}
+      ${p.feat ? '<div class="pf-feat">Featured</div>' : ''}
+      ${hasVid  ? '<div class="pf-media-badge">&#x25B6; Video</div>' : ''}
       <div class="pf-corn"></div>
       <div class="pf-ov">
         <div class="pf-cl">${CATS[p.cat]||p.cat}</div>
         <div class="pf-nm">${p.name}</div>
-        <div class="pf-ds">${p.desc.substring(0,80)}...</div>
-        <div class="pf-zm">&#x2197; View Details</div>
+        <div class="pf-ds">${p.desc.substring(0,90)}...</div>
+        <div class="pf-zm">&#x2197; View Full Details</div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+  updateFilterCounts();
+}
+
+function updateFilterCounts() {
+  document.querySelectorAll('.pfb').forEach(btn => {
+    const cat = btn.dataset.pf;
+    const count = cat === 'all' ? PFDATA.length : PFDATA.filter(p=>p.cat===cat).length;
+    const badge = btn.querySelector('.pfb-badge');
+    if (badge) badge.textContent = count;
+    else btn.textContent = btn.textContent.replace(/\s*\(\d+\)/, '') + ` (${count})`;
+  });
 }
 renderPF('all');
 document.querySelectorAll('.pfb').forEach(btn=>{
@@ -492,7 +545,8 @@ document.querySelectorAll('.pfb').forEach(btn=>{
     btn.classList.add('on'); renderPF(btn.dataset.pf);
   });
 });
-function openLB(id){
+function openLB_pf(id){
+  PFDATA = loadPortfolioItems();
   const p=PFDATA.find(x=>x.id===id); if(!p) return;
   document.getElementById('lbHero').className='lb-hero '+p.bg;
   document.getElementById('lbLet').textContent=p.name.charAt(0);
@@ -509,7 +563,7 @@ function openLB(id){
 function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLB()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
-window.openLB=openLB; window.closeLB=closeLB;
+window.openLB_pf=openLB_pf; window.closeLB=closeLB;
 
 </script>
 </body>
