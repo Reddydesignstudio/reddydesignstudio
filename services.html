@@ -1,414 +1,482 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Services — Reddy Design Studio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root{--red:#E8192C;--red-glow:rgba(232,25,44,.35);--bg:#080809;--bg2:#0f0f11;--glass:rgba(255,255,255,.035);--glass-b:rgba(255,255,255,.08);--text:#f2efe9;--muted:#6b6b74}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
-    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.028}
-    #cur{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-    #cur-r{width:32px;height:32px;border:1px solid rgba(232,25,44,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .28s cubic-bezier(.22,1,.36,1),top .28s cubic-bezier(.22,1,.36,1),width .3s,height .3s}
-    nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:rgba(8,8,9,.75);backdrop-filter:blur(24px);border-bottom:1px solid var(--glass-b);transition:padding .3s}
-    nav.scrolled{padding:.7rem 3.5rem;background:rgba(8,8,9,.94)}
-    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.1em;color:var(--text);text-decoration:none}
-    .nav-logo span{color:var(--red)}
-    .nav-links{display:flex;gap:2.2rem;list-style:none}
-    .nav-links a{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;transition:color .2s}
-    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s}
-    .nav-links a:hover,.nav-links a.active{color:var(--text)}
-    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
-    .nav-cta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:.45rem 1.1rem;text-decoration:none;transition:background .2s,color .2s}
-    .nav-cta:hover{background:var(--red);color:#fff}
-    .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
-    .burger span{display:block;width:22px;height:1.5px;background:var(--text)}
-    @media(max-width:860px){nav{padding:1rem 1.5rem}.nav-links,.nav-cta{display:none}.burger{display:flex}}
-    .drawer{display:none;position:fixed;inset:0;background:rgba(8,8,9,.97);z-index:790;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
-    .drawer.open{display:flex}
-    .drawer a{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:var(--text);text-decoration:none;transition:color .2s}
-    .drawer a:hover{color:var(--red)}
-    .drawer-x{position:absolute;top:1.4rem;right:1.8rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Services &mdash; Reddy Design Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+[data-theme="dark"]{
+  --bg:#080809;--bg2:#0f0f11;--bg3:#18181b;
+  --sb:rgba(255,255,255,.08);--sb2:rgba(255,255,255,.04);
+  --text:#f2efe9;--text2:#c4c0b8;--muted:#6b6b74;--muted2:#3a3a3f;
+  --card:rgba(255,255,255,.04);--cborder:rgba(255,255,255,.09);
+  --nav:rgba(8,8,9,.85);--inp:rgba(255,255,255,.04);
+}
+[data-theme="light"]{
+  --bg:#f7f5f1;--bg2:#edeae6;--bg3:#e2dfd9;
+  --sb:rgba(0,0,0,.1);--sb2:rgba(0,0,0,.05);
+  --text:#1a1a1c;--text2:#3a3a40;--muted:#72727a;--muted2:#c0bdb8;
+  --card:rgba(255,255,255,.8);--cborder:rgba(0,0,0,.1);
+  --nav:rgba(247,245,241,.93);--inp:rgba(0,0,0,.05);
+}
+:root{
+  --red:#E8192C;--rg:rgba(232,25,44,.38);--rd:rgba(232,25,44,.11);
+  --green:#22c55e;--gg:rgba(34,197,94,.35);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;transition:background .35s,color .35s}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.022}
 
-    /* PAGE HERO */
-    .page-hero{padding:10rem 3.5rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--glass-b)}
-    .page-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,.06),transparent 70%);pointer-events:none}
-    .page-hero-tag{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
-    .page-hero-tag::before{content:'';width:22px;height:1px;background:var(--red)}
-    .page-hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);line-height:.95;margin-bottom:1.5rem;opacity:0;animation:fadeUp .9s .3s forwards}
-    .page-hero-title span{color:var(--red)}
-    .page-hero-sub{max-width:520px;font-size:1rem;line-height:1.8;color:var(--muted);opacity:0;animation:fadeUp .9s .5s forwards}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+/* CURSOR */
+#cur{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s}
+#cur-r{width:32px;height:32px;border:1.5px solid rgba(232,25,44,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .2s cubic-bezier(.22,1,.36,1),top .2s cubic-bezier(.22,1,.36,1),width .25s,height .25s,border-color .25s}
+body.chov #cur{transform:translate(-50%,-50%) scale(2.2);opacity:.6}
+body.chov #cur-r{width:50px;height:50px;border-color:rgba(232,25,44,.7)}
 
-    /* 3D TILT CARDS */
-    .services-section{padding:6rem 3.5rem}
-    .services-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:3rem}
-    .services-section h2 span{color:var(--red)}
-
-    .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-bottom:1.5rem}
-    .svc-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-
-    .svc-card{
-      background:var(--glass);
-      border:1px solid var(--glass-b);
-      padding:2.5rem;
-      position:relative;
-      overflow:hidden;
-      transform-style:preserve-3d;
-      transition:border-color .3s, box-shadow .3s;
-      cursor:default;
-    }
-    .svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity .4s}
-    .svc-card:hover{border-color:rgba(232,25,44,.3);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(232,25,44,.07)}
-    .svc-card:hover::before{opacity:1}
-
-    .svc-ico{width:48px;height:48px;color:var(--red);margin-bottom:1.5rem}
-    .svc-num{position:absolute;top:1.5rem;right:1.8rem;font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:rgba(232,25,44,.08);line-height:1}
-    .svc-title{font-size:1.15rem;font-weight:500;color:var(--text);margin-bottom:.8rem;letter-spacing:.02em}
-    .svc-desc{font-size:.85rem;line-height:1.75;color:var(--muted);margin-bottom:1.5rem}
-    .svc-tags{display:flex;flex-wrap:wrap;gap:.4rem}
-    .svc-tag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(232,25,44,.08);color:var(--red);padding:.25rem .6rem}
-    .svc-price{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--glass-b);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-    .svc-price span{color:var(--red);font-size:.9rem;font-weight:500;margin-left:.3rem}
-
-    @media(max-width:900px){.svc-grid{grid-template-columns:1fr}.svc-grid-3{grid-template-columns:1fr 1fr}}
-    @media(max-width:580px){.svc-grid-3{grid-template-columns:1fr}}
-
-    /* PROCESS */
-    .process-section{padding:6rem 3.5rem;background:var(--bg2);border-top:1px solid var(--glass-b)}
-    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3rem;position:relative}
-    .process-steps::before{content:'';position:absolute;top:28px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),var(--red),transparent);opacity:.2}
-    .proc-step{padding:0 1.5rem;padding-top:0;text-align:center}
-    .proc-num{width:56px;height:56px;border:1px solid rgba(232,25,44,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--red);margin:0 auto 1.5rem;background:var(--bg);position:relative;z-index:1}
-    .proc-title{font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.5rem;letter-spacing:.02em}
-    .proc-desc{font-size:.78rem;line-height:1.65;color:var(--muted)}
-    @media(max-width:700px){.process-steps{grid-template-columns:1fr 1fr;gap:2rem}.process-steps::before{display:none}}
-
-    /* WHY US */
-    .why-section{padding:6rem 3.5rem}
-    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
-    .why-list{display:flex;flex-direction:column;gap:1.2rem}
-    .why-item{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;background:var(--glass);border:1px solid var(--glass-b);transition:border-color .3s}
-    .why-item:hover{border-color:rgba(232,25,44,.2)}
-    .why-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:.35rem}
-    .why-text strong{display:block;font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.3rem}
-    .why-text p{font-size:.8rem;line-height:1.65;color:var(--muted)}
-    .why-visual{background:var(--glass);border:1px solid var(--glass-b);padding:3rem 2.5rem;position:relative}
-    .why-visual::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red)}
-    .big-quote{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--red);opacity:.15;line-height:1;margin-bottom:.5rem}
-    .quote-text{font-size:1.1rem;line-height:1.7;color:var(--text);font-style:italic;margin-bottom:1.5rem}
-    .quote-author{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-    @media(max-width:800px){.why-grid{grid-template-columns:1fr}}
-
-    /* CTA */
-    .svc-cta{padding:5rem 3.5rem;text-align:center;position:relative}
-    .svc-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(232,25,44,.07),transparent 70%);pointer-events:none}
-    .svc-cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);line-height:1;margin-bottom:1.2rem}
-    .svc-cta-title span{color:var(--red)}
-    .btn-red{background:var(--red);color:#fff;padding:.85rem 2rem;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 24px var(--red-glow);transition:box-shadow .3s,transform .2s;display:inline-block}
-    .btn-red:hover{box-shadow:0 8px 40px rgba(232,25,44,.6);transform:translateY(-2px)}
-
-    /* FOOTER */
-    footer{background:var(--bg2);border-top:1px solid var(--glass-b);padding:2.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-    .f-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.1em}
-    .f-logo span{color:var(--red)}
-    .f-copy{font-size:.68rem;color:var(--muted);letter-spacing:.06em}
-    .f-socs{display:flex;gap:.6rem}
-    .f-soc{width:30px;height:30px;border:1px solid var(--glass-b);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.65rem;font-weight:700;transition:border-color .2s,color .2s}
-    .f-soc:hover{border-color:var(--red);color:var(--red)}
-    @media(max-width:600px){footer{padding:2rem 1.5rem}.f-copy{order:3;width:100%;text-align:center}}
-
-    .wa{position:fixed;bottom:2rem;right:2rem;z-index:850;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1da851);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.35);text-decoration:none;animation:wap 2.5s ease-in-out infinite;transition:transform .2s}
-    .wa:hover{transform:scale(1.1)}
-    .wa svg{width:26px;height:26px;fill:#fff}
-    @keyframes wap{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 8px 28px rgba(37,211,102,.5),0 0 0 14px rgba(37,211,102,0)}}
-
-    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    @media(max-width:768px){.services-section,.process-section,.why-section,.svc-cta{padding:4rem 1.5rem}.page-hero{padding:8rem 1.5rem 4rem}}
-    .section-tag{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.7rem;display:flex;align-items:center;gap:.7rem}
-    .section-tag::before{content:'';width:22px;height:1px;background:var(--red)}
-  
-/* theme toggle btn */
-.btn-th{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#6b6b74;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:.95rem;line-height:1}
-.btn-th:hover{border-color:var(--red,#E8192C);color:var(--red,#E8192C)}
-.btn-adm{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red,#E8192C);border:1px solid var(--red,#E8192C);padding:.38rem .9rem;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s,color .2s}
-.btn-adm:hover{background:var(--red,#E8192C);color:#fff}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;background:var(--nav);backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--sb);transition:padding .3s,background .35s}
+nav.scrolled{padding:.65rem 3.5rem}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:var(--text);text-decoration:none;transition:color .3s}
+.logo span{color:var(--red)}
+.nl{display:flex;gap:2rem;list-style:none;align-items:center}
+.nl a{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;transition:color .2s}
+.nl a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s}
+.nl a:hover,.nl a.active{color:var(--text)}
+.nl a:hover::after,.nl a.active::after{width:100%}
 .nav-r{display:flex;align-items:center;gap:.8rem}
-/* admin modal */
-.adm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:3000;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
-.adm-modal.open{display:flex}
-.adm-box{background:var(--bg2,#0f0f11);border:1px solid rgba(255,255,255,.08);width:90%;max-width:440px;padding:2.5rem;position:relative}
-.adm-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,#E8192C,transparent)}
-.adm-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#6b6b74;font-size:1.3rem;cursor:pointer;transition:color .2s}
-.adm-close:hover{color:#E8192C}
-.adm-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text,#f2efe9);margin-bottom:.3rem}
-.adm-sub{font-size:.78rem;color:#6b6b74;margin-bottom:1.8rem}
-.adm-err{display:none;background:rgba(232,25,44,.08);border:1px solid rgba(232,25,44,.2);padding:.7rem 1rem;font-size:.8rem;color:#E8192C;margin-bottom:1rem}
-/* wa float */
+.btn-th{background:var(--card);border:1px solid var(--sb);color:var(--muted);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;line-height:1;transition:all .2s}
+.btn-th:hover{border-color:var(--red);color:var(--red)}
+.btn-adm{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:.38rem .9rem;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s,color .2s}
+.btn-adm:hover{background:var(--red);color:#fff}
+.nav-cta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:.44rem 1.1rem;text-decoration:none;transition:background .2s,color .2s}
+.nav-cta:hover{background:var(--red);color:#fff}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.3s}
+@media(max-width:900px){nav{padding:1rem 1.5rem}.nl,.nav-cta{display:none}.burger{display:flex}}
+
+/* DRAWER */
+.drawer{display:none;position:fixed;inset:0;background:rgba(8,8,9,.97);z-index:795;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.drawer.open{display:flex}
+.drawer a,.drawer .dl{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:var(--text);text-decoration:none;background:none;border:none;cursor:pointer;transition:color .2s}
+.drawer a:hover,.drawer .dl:hover{color:var(--red)}
+.dx{position:absolute;top:1.4rem;right:1.8rem;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
+
+/* SHARED BUTTONS */
+.btn-red{background:var(--red);color:#fff;padding:.88rem 2.2rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 24px var(--rg);transition:box-shadow .3s,transform .2s;display:inline-block;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-red:hover{box-shadow:0 8px 40px rgba(232,25,44,.6);transform:translateY(-2px)}
+.btn-ghost{color:var(--muted);border:1px solid var(--sb);padding:.85rem 2.2rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:color .2s,border-color .2s;background:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
+
+/* SECTIONS */
+section{padding:7rem 3.5rem}
+@media(max-width:768px){section{padding:5rem 1.5rem}}
+.sec-tag{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.sec-tag::before{content:'';width:22px;height:1px;background:var(--red)}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:1rem;color:var(--text)}
+.sec-title em{font-style:italic;color:var(--red)}
+
+/* PAGE HERO */
+.ph{padding:10rem 3.5rem 5rem;border-bottom:1px solid var(--sb);position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;top:0;right:0;width:500px;height:500px;background:radial-gradient(circle,rgba(232,25,44,.055),transparent 65%);pointer-events:none}
+.ph-tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
+.ph-tag::before{content:'';width:20px;height:1px;background:var(--red)}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,7rem);line-height:.95;opacity:0;animation:fu .9s .25s forwards}
+.ph-title span{color:var(--red)}
+.ph-sub{max-width:520px;font-size:1rem;line-height:1.8;color:var(--muted);margin-top:1rem;opacity:0;animation:fu .9s .45s forwards}
+@media(max-width:768px){.ph{padding:8rem 1.5rem 3.5rem}}
+
+/* WA FLOAT */
 .waf{position:fixed;bottom:2rem;right:2rem;z-index:850;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#25d366,#1da851);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,.35);text-decoration:none;animation:wap 2.5s ease-in-out infinite;transition:transform .2s}
 .waf:hover{transform:scale(1.1)}
 .waf svg{width:26px;height:26px;fill:#fff}
 @keyframes wap{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 8px 28px rgba(37,211,102,.5),0 0 0 14px rgba(37,211,102,0)}}
 
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.flogo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--text)}
+.flogo span{color:var(--red)}
+.fcopy{font-size:.7rem;color:var(--muted)}
+.fsocs{display:flex;gap:.6rem}
+.fsoc{width:32px;height:32px;border:1px solid var(--sb);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.65rem;font-weight:700;transition:all .2s}
+.fsoc:hover{border-color:var(--red);color:var(--red)}
+@media(max-width:600px){footer{padding:2rem 1.5rem}.fcopy{order:3;width:100%;text-align:center}}
+
+/* ADMIN MODAL */
+.adm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:3000;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.adm-modal.open{display:flex}
+.adm-box{background:var(--bg2);border:1px solid var(--sb);width:90%;max-width:440px;padding:2.5rem;position:relative}
+.adm-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
+.adm-close-btn{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s}
+.adm-close-btn:hover{color:var(--red)}
+.adm-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text);margin-bottom:.3rem}
+.adm-sub{font-size:.78rem;color:var(--muted);margin-bottom:1.8rem}
+.adm-err{display:none;background:rgba(232,25,44,.08);border:1px solid rgba(232,25,44,.2);padding:.7rem 1rem;font-size:.8rem;color:var(--red);margin-bottom:1rem}
+.fin{background:var(--inp);border:1px solid var(--sb);color:var(--text);padding:.78rem 1rem;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%;-webkit-appearance:none;resize:none}
+.fin::placeholder{color:var(--muted);opacity:.65}
+.fin:focus{border-color:var(--red)}
+.fin option{background:var(--bg2)}
+.flabel{font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.4rem}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.reveal.vis{opacity:1;transform:translateY(0)}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--red);color:#fff;padding:.75rem 1.8rem;font-size:.8rem;letter-spacing:.05em;z-index:9999;opacity:0;transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .3s;pointer-events:none;white-space:nowrap;border-radius:2px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.success{background:var(--green)}
+
+/* GLASS CARD */
+.gc{background:var(--card);border:1px solid var(--cborder);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .3s}
+.gc:hover{transform:translateY(-5px);border-color:rgba(232,25,44,.25);box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 36px rgba(232,25,44,.06)}
+
+.svc-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+@media(max-width:900px){.svc-detail-grid{grid-template-columns:1fr}}
+.svc-card{background:var(--card);border:1px solid var(--cborder);padding:2.5rem;position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .3s;cursor:default}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--red),transparent);opacity:0;transition:opacity .3s}
+.svc-card:hover{transform:translateY(-5px) perspective(800px) rotateX(-2deg);box-shadow:0 20px 50px rgba(0,0,0,.3),0 0 30px rgba(232,25,44,.07);border-color:rgba(232,25,44,.25)}
+.svc-card:hover::before{opacity:1}
+.svc-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--rd);line-height:1;margin-bottom:1.2rem}
+.svc-ico{width:44px;height:44px;color:var(--red);margin-bottom:1.2rem}
+.svc-name{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.8rem;color:var(--text)}
+.svc-desc{font-size:.85rem;line-height:1.75;color:var(--muted);margin-bottom:1.5rem}
+.svc-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.stag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--rd);color:var(--red);padding:.22rem .58rem}
+.svc-price{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--sb);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.svc-price span{color:var(--red);font-size:.9rem;font-weight:500;margin-left:.3rem}
+
+/* process */
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3rem;position:relative}
+.proc-steps::before{content:'';position:absolute;top:28px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),var(--red),transparent);opacity:.2}
+.proc-step{padding:0 1.5rem;text-align:center}
+.proc-num{width:56px;height:56px;border:1px solid rgba(232,25,44,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--red);margin:0 auto 1.5rem;background:var(--bg);position:relative;z-index:1}
+.proc-title{font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.5rem}
+.proc-desc{font-size:.78rem;line-height:1.65;color:var(--muted)}
+@media(max-width:700px){.proc-steps{grid-template-columns:1fr 1fr;gap:2rem}.proc-steps::before{display:none}}
+
+/* why us */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+@media(max-width:800px){.why-grid{grid-template-columns:1fr}}
+.why-list{display:flex;flex-direction:column;gap:1.2rem}
+.why-item{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;background:var(--card);border:1px solid var(--cborder);transition:border-color .3s}
+.why-item:hover{border-color:rgba(232,25,44,.2)}
+.wdot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:.35rem}
+.why-text strong{display:block;font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.3rem}
+.why-text p{font-size:.8rem;line-height:1.65;color:var(--muted)}
+.why-visual{background:var(--card);border:1px solid var(--cborder);padding:3rem 2.5rem;position:relative}
+.why-visual::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red)}
+.bq{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--red);opacity:.15;line-height:1;margin-bottom:.5rem}
+.qt{font-size:1.1rem;line-height:1.7;color:var(--text);font-style:italic;margin-bottom:1.5rem}
+.qa{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 </style>
 </head>
 <body>
-<div id="cur"></div>
-<div id="cur-r"></div>
+<div id="cur"></div><div id="cur-r"></div>
 
 <div class="drawer" id="drawer">
-  <button class="drawer-x" onclick="toggleDrawer()">✕</button>
-  <a href="index.html" onclick="toggleDrawer()">Home</a>
+  <button class="dx" onclick="DD()">&#x2715;</button>
+  <a href="index.html" onclick="DD()">Home</a>
   <a href="portfolio.html" onclick="DD()">Portfolio</a>
-  <a href="services.html" onclick="toggleDrawer()">Services</a>
-  <a href="free-materials.html" onclick="toggleDrawer()">Free Materials</a>
-  <a href="contact.html" onclick="toggleDrawer()">Contact</a>
+  <a href="services.html" onclick="DD()">Services</a>
+  <a href="free-materials.html" onclick="DD()">Free Materials</a>
+  <a href="contact.html" onclick="DD()">Contact</a>
+  <button class="dl" onclick="DD();openAdm()">Admin</button>
 </div>
-
 <nav id="nav">
-  <a href="index.html" class="nav-logo">Reddy<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="services.html" class="active">Services</a></li>
-    <li><a href="free-materials.html">Free Materials</a></li>
-    <li><a href="contact.html">Contact</a></li>
+  <a href="index.html" class="logo">Reddy<span>.</span></a>
+  <ul class="nl">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="portfolio.html" >Portfolio</a></li>
+    <li><a href="services.html" class='active'>Services</a></li>
+    <li><a href="free-materials.html" >Free Materials</a></li>
+    <li><a href="contact.html" >Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Hire Us</a>
-  <button class="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
+  <div class="nav-r">
+    <button class="btn-th" id="thBtn" onclick="toggleTheme()" title="Toggle theme">&#9790;</button>
+    <button class="btn-adm" onclick="openAdm()">&#x1F512; Admin</button>
+    <a href="contact.html" class="nav-cta">Hire Us</a>
+  </div>
+  <button class="burger" onclick="DD()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="page-hero-tag">Our Expertise</div>
-  <h1 class="page-hero-title">Services &<br/><span>Studio</span></h1>
-  <p class="page-hero-sub">Four core disciplines. Every project gets our full creative and technical attention — from concept to delivery.</p>
+<div class="ph">
+  <div class="ph-tag">Our Expertise</div>
+  <h1 class="ph-title">Services &amp;<br/><span>Studio</span></h1>
+  <p class="ph-sub">Four core disciplines. Every project gets our full creative and technical attention — from concept to delivery.</p>
 </div>
 
-<!-- SERVICES -->
-<section class="services-section">
-  <div class="section-tag">Core Services</div>
-  <h2 class="reveal">What We <span>Deliver</span></h2>
-
-  <div class="svc-grid">
-    <!-- Graphic Design -->
-    <div class="svc-card reveal" id="card1">
+<section style="background:var(--bg)">
+  <div class="sec-tag">Core Services</div>
+  <h2 class="sec-title reveal">What We <em>Deliver</em></h2>
+  <div class="svc-detail-grid">
+    <div class="svc-card reveal">
       <div class="svc-num">01</div>
       <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
-      <div class="svc-title">Graphic Design</div>
-      <p class="svc-desc">We create brand identities, social media kits, digital assets, print materials, and UI elements. Every pixel is intentional — built to communicate your message with precision and style.</p>
-      <div class="svc-tags">
-        <span class="svc-tag">Logo Design</span>
-        <span class="svc-tag">Brand Identity</span>
-        <span class="svc-tag">Social Media Kits</span>
-        <span class="svc-tag">Print Design</span>
-        <span class="svc-tag">Posters & Flyers</span>
-        <span class="svc-tag">UI Assets</span>
-      </div>
-      <div class="svc-price">Starting from<span>₹999</span></div>
+      <div class="svc-name">Graphic Design</div>
+      <p class="svc-desc">Brand identities, social media kits, digital assets, and print materials. Every pixel is intentional — built to communicate your message with precision and style.</p>
+      <div class="svc-tags"><span class="stag">Logo Design</span><span class="stag">Brand Identity</span><span class="stag">Social Media</span><span class="stag">Print</span><span class="stag">UI Assets</span></div>
+      <div class="svc-price">Starting from<span>&#x20B9;999</span></div>
     </div>
-
-    <!-- Video Editing -->
-    <div class="svc-card reveal" id="card2">
+    <div class="svc-card reveal">
       <div class="svc-num">02</div>
       <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M17 9l5-3v12l-5-3V9z"/></svg>
-      <div class="svc-title">Video Editing</div>
-      <p class="svc-desc">Cinematic YouTube videos, Instagram Reels, corporate promos, and short films. We handle colour grading, motion graphics, sound design, and pacing to keep audiences hooked.</p>
-      <div class="svc-tags">
-        <span class="svc-tag">YouTube Videos</span>
-        <span class="svc-tag">Reels / Shorts</span>
-        <span class="svc-tag">Colour Grading</span>
-        <span class="svc-tag">Motion Graphics</span>
-        <span class="svc-tag">Promos</span>
-        <span class="svc-tag">Sound Design</span>
-      </div>
-      <div class="svc-price">Starting from<span>₹1,499</span></div>
+      <div class="svc-name">Video Editing</div>
+      <p class="svc-desc">Cinematic YouTube videos, Instagram Reels, corporate promos, and short films. Colour grading, motion graphics, sound design, and perfect pacing.</p>
+      <div class="svc-tags"><span class="stag">YouTube</span><span class="stag">Reels / Shorts</span><span class="stag">Colour Grade</span><span class="stag">Motion GFX</span><span class="stag">Sound</span></div>
+      <div class="svc-price">Starting from<span>&#x20B9;1,499</span></div>
     </div>
-  </div>
-
-  <div class="svc-grid" style="margin-top:1.5rem">
-    <!-- Thumbnail -->
     <div class="svc-card reveal">
       <div class="svc-num">03</div>
       <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
-      <div class="svc-title">Thumbnail Creation & YouTube Strategy</div>
-      <p class="svc-desc">High-CTR thumbnails that make viewers stop scrolling. We combine psychology, design, and analytics to craft thumbnails proven to boost click-through rates and grow your channel.</p>
-      <div class="svc-tags">
-        <span class="svc-tag">Custom Thumbnails</span>
-        <span class="svc-tag">Channel Art</span>
-        <span class="svc-tag">CTR Optimisation</span>
-        <span class="svc-tag">A/B Testing</span>
-        <span class="svc-tag">Title Strategy</span>
-        <span class="svc-tag">Branding</span>
-      </div>
-      <div class="svc-price">Starting from<span>₹499 / thumbnail</span></div>
+      <div class="svc-name">Thumbnail Creation &amp; YouTube Strategy</div>
+      <p class="svc-desc">High-CTR thumbnails that make viewers stop scrolling. Psychology, design, and analytics combined to boost your click-through rate and grow your channel.</p>
+      <div class="svc-tags"><span class="stag">Custom Thumbnails</span><span class="stag">Channel Art</span><span class="stag">CTR Optimisation</span><span class="stag">A/B Testing</span></div>
+      <div class="svc-price">Starting from<span>&#x20B9;499 / thumb</span></div>
     </div>
-
-    <!-- Website Dev -->
     <div class="svc-card reveal">
       <div class="svc-num">04</div>
       <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l-3 4 3 4M17 8l3 4-3 4"/></svg>
-      <div class="svc-title">Website Design & Development</div>
-      <p class="svc-desc">Premium responsive websites and landing pages — designed with character and coded with precision. From portfolio sites to full business websites, we build digital experiences that convert.</p>
-      <div class="svc-tags">
-        <span class="svc-tag">Portfolio Sites</span>
-        <span class="svc-tag">Landing Pages</span>
-        <span class="svc-tag">Business Websites</span>
-        <span class="svc-tag">HTML/CSS/JS</span>
-        <span class="svc-tag">WordPress</span>
-        <span class="svc-tag">Responsive Design</span>
-      </div>
-      <div class="svc-price">Starting from<span>₹4,999</span></div>
+      <div class="svc-name">Website Design &amp; Development</div>
+      <p class="svc-desc">Premium responsive websites and landing pages — designed with character and coded with precision. From portfolio sites to full business websites that convert.</p>
+      <div class="svc-tags"><span class="stag">Portfolio Sites</span><span class="stag">Landing Pages</span><span class="stag">HTML/CSS/JS</span><span class="stag">WordPress</span></div>
+      <div class="svc-price">Starting from<span>&#x20B9;4,999</span></div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="process-section">
-  <div class="section-tag">How We Work</div>
-  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:0" class="reveal">Our <span style="color:var(--red)">Process</span></h2>
-  <div class="process-steps">
-    <div class="proc-step reveal">
-      <div class="proc-num">01</div>
-      <div class="proc-title">Discovery Call</div>
-      <p class="proc-desc">We understand your brand, goals, target audience, and project requirements.</p>
-    </div>
-    <div class="proc-step reveal">
-      <div class="proc-num">02</div>
-      <div class="proc-title">Concept & Strategy</div>
-      <p class="proc-desc">We develop a creative direction and strategy tailored to your objectives.</p>
-    </div>
-    <div class="proc-step reveal">
-      <div class="proc-num">03</div>
-      <div class="proc-title">Design & Execute</div>
-      <p class="proc-desc">Our team crafts the deliverables with precision, sharing progress along the way.</p>
-    </div>
-    <div class="proc-step reveal">
-      <div class="proc-num">04</div>
-      <div class="proc-title">Deliver & Support</div>
-      <p class="proc-desc">Final assets delivered. We support revisions and ensure you're 100% satisfied.</p>
-    </div>
+<section style="background:var(--bg2);border-top:1px solid var(--sb)">
+  <div class="sec-tag">How We Work</div>
+  <h2 class="sec-title reveal">Our <em>Process</em></h2>
+  <div class="proc-steps">
+    <div class="proc-step reveal"><div class="proc-num">01</div><div class="proc-title">Discovery Call</div><p class="proc-desc">We understand your brand, goals, target audience, and project requirements.</p></div>
+    <div class="proc-step reveal"><div class="proc-num">02</div><div class="proc-title">Concept &amp; Strategy</div><p class="proc-desc">We develop a creative direction and strategy tailored to your objectives.</p></div>
+    <div class="proc-step reveal"><div class="proc-num">03</div><div class="proc-title">Design &amp; Execute</div><p class="proc-desc">Our team crafts the deliverables with precision, sharing progress along the way.</p></div>
+    <div class="proc-step reveal"><div class="proc-num">04</div><div class="proc-title">Deliver &amp; Support</div><p class="proc-desc">Final assets delivered. We support revisions until you're 100% satisfied.</p></div>
   </div>
 </section>
 
-<!-- WHY US -->
-<section class="why-section">
-  <div class="section-tag">Why Reddy Design Studio</div>
+<section style="background:var(--bg)">
+  <div class="sec-tag">Why Choose Us</div>
   <div class="why-grid">
     <div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:2rem" class="reveal">Built different.<br/><span style="color:var(--red)">Designed better.</span></h2>
+      <h2 class="sec-title reveal">Built different.<br/><em>Designed better.</em></h2>
       <div class="why-list">
-        <div class="why-item reveal">
-          <div class="why-dot"></div>
-          <div class="why-text"><strong>Technical + Creative Depth</strong><p>Our background spans IT networking and creative design — giving us a unique analytical edge most studios lack.</p></div>
-        </div>
-        <div class="why-item reveal">
-          <div class="why-dot"></div>
-          <div class="why-text"><strong>Fast Turnaround</strong><p>We respect your deadlines. Standard projects delivered in 24–72 hours without compromising quality.</p></div>
-        </div>
-        <div class="why-item reveal">
-          <div class="why-dot"></div>
-          <div class="why-text"><strong>Unlimited Revisions Policy</strong><p>We work until you're completely happy. No hidden fees, no revision limits on standard packages.</p></div>
-        </div>
-        <div class="why-item reveal">
-          <div class="why-dot"></div>
-          <div class="why-text"><strong>Data-Informed Design</strong><p>Every creative decision is backed by analytics, user psychology, and platform-specific best practices.</p></div>
-        </div>
+        <div class="why-item reveal"><div class="wdot"></div><div class="why-text"><strong>Technical + Creative Depth</strong><p>Our background in IT networking and design gives us an analytical edge most studios lack.</p></div></div>
+        <div class="why-item reveal"><div class="wdot"></div><div class="why-text"><strong>Fast Turnaround</strong><p>We respect your deadlines. Standard projects delivered in 24–72 hours without compromising quality.</p></div></div>
+        <div class="why-item reveal"><div class="wdot"></div><div class="why-text"><strong>Unlimited Revisions</strong><p>We work until you're completely happy. No hidden fees, no revision limits on standard packages.</p></div></div>
+        <div class="why-item reveal"><div class="wdot"></div><div class="why-text"><strong>Data-Informed Design</strong><p>Every creative decision is backed by analytics, user psychology, and platform best practices.</p></div></div>
       </div>
     </div>
     <div class="why-visual reveal">
-      <div class="big-quote">"</div>
-      <p class="quote-text">Design isn't just what it looks like — it's how it performs. Every piece we make is built to achieve a specific result.</p>
-      <div class="quote-author">— Omkar, Founder · Reddy Design Studio</div>
+      <div class="bq">&ldquo;</div>
+      <p class="qt">Design isn't just what it looks like — it's how it performs. Every piece we make is built to achieve a specific result.</p>
+      <div class="qa">— Omkar, Founder &middot; Reddy Design Studio</div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="svc-cta">
-  <h2 class="svc-cta-title reveal">Let's work<br/><span>together</span></h2>
-  <p style="color:var(--muted);font-size:.95rem;margin-bottom:2rem;max-width:420px;margin-inline:auto" class="reveal">Ready to elevate your brand? Reach out and let's build something premium.</p>
+<section style="background:var(--bg2);border-top:1px solid var(--sb);text-align:center;position:relative;overflow:hidden">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(232,25,44,.07),transparent 70%);pointer-events:none"></div>
+  <h2 class="sec-title reveal" style="margin-bottom:1.2rem">Let's work<br/><em>together</em></h2>
+  <p class="reveal" style="color:var(--muted);font-size:.95rem;margin-bottom:2rem;max-width:420px;margin-inline:auto">Ready to elevate your brand? Reach out and let's build something premium.</p>
   <div class="reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
     <a href="contact.html" class="btn-red">Start a Project</a>
-    <a href="https://wa.me/919404873078" target="_blank" style="color:var(--muted);border:1px solid var(--glass-b);padding:.82rem 2rem;font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--text)';this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--glass-b)'">💬 WhatsApp Us</a>
+    <a href="https://wa.me/919404873078" target="_blank" class="btn-ghost">&#x1F4AC; WhatsApp Us</a>
   </div>
 </section>
 
+
 <footer>
-  <div class="f-logo">Reddy<span>.</span></div>
-  <div class="f-copy">© 2025 Reddy Design Studio · Hyderabad, India</div>
-  <div class="f-socs">
-    <a class="f-soc" href="#">YT</a>
-    <a class="f-soc" href="#">IG</a>
-    <a class="f-soc" href="#">Be</a>
-    <a class="f-soc" href="#">in</a>
+  <div class="flogo">Reddy<span>.</span></div>
+  <div class="fcopy">&copy; 2025 Reddy Design Studio &middot; Hyderabad, India</div>
+  <div class="fsocs">
+    <a class="fsoc" href="#">YT</a><a class="fsoc" href="#">IG</a>
+    <a class="fsoc" href="#">Be</a><a class="fsoc" href="#">in</a>
   </div>
 </footer>
-
-<a class="wa" href="https://wa.me/919404873078?text=Hi%20Reddy%20Design%20Studio%2C%20I%27m%20interested%20in%20your%20services!" target="_blank">
+<a class="waf" href="https://wa.me/919404873078?text=Hi%20Reddy%20Design%20Studio!" target="_blank">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
 </a>
 
-<script>
-const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop)})();
-document.querySelectorAll('a,button,.svc-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{curR.style.width='52px';curR.style.height='52px'});
-  el.addEventListener('mouseleave',()=>{curR.style.width='32px';curR.style.height='32px'});
-});
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
-function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
-const obs=new IntersectionObserver(entries=>entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*90);obs.unobserve(e.target)}}),{threshold:.1});
-document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
-
-/* 3D tilt on cards */
-document.querySelectorAll('.svc-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    card.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*6}deg) translateZ(8px)`;
-  });
-  card.addEventListener('mouseleave',()=>card.style.transform='perspective(800px) rotateY(0) rotateX(0) translateZ(0)');
-});
-
-function toggleTheme(){
-  const h=document.documentElement,dark=h.getAttribute('data-theme')==='dark'||!h.getAttribute('data-theme');
-  h.setAttribute('data-theme',dark?'light':'dark');
-  const btn=document.getElementById('thBtn');
-  if(btn)btn.textContent=dark?'\u2600':'\u263E';
-}
-function openAdm(){document.getElementById('admModal').classList.add('open')}
-function closeAdm(){document.getElementById('admModal').classList.remove('open')}
-document.getElementById('admModal').addEventListener('click',function(e){if(e.target===e.currentTarget)closeAdm()});
-document.getElementById('admP').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
-function doLogin(){
-  var u=document.getElementById('admU').value.trim();
-  var p=document.getElementById('admP').value;
-  if(u==='omkar'&&p==='Reddy#2020'){closeAdm();window.location.href='index.html';}
-  else{document.getElementById('admErr').style.display='block';}
-}
-
-</script>
-
 <div class="adm-modal" id="admModal">
   <div class="adm-box">
-    <button class="adm-close" onclick="closeAdm()">&#x2715;</button>
+    <button class="adm-close-btn" onclick="closeAdm()">&#x2715;</button>
     <div class="adm-title">Admin Login</div>
-    <p class="adm-sub">Enter credentials to access the Studio Dashboard.</p>
+    <p class="adm-sub">Enter your credentials to access the Studio Dashboard.</p>
     <div class="adm-err" id="admErr">Incorrect username or password.</div>
-    <div style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem"><label style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:#6b6b74">Username</label><input type="text" id="admU" placeholder="omkar" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text,#f2efe9);padding:.78rem 1rem;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%" onfocus="this.style.borderColor='#E8192C'" onblur="this.style.borderColor='rgba(255,255,255,.08)'"/></div>
-    <div style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem"><label style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:#6b6b74">Password</label><input type="password" id="admP" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text,#f2efe9);padding:.78rem 1rem;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%" onfocus="this.style.borderColor='#E8192C'" onblur="this.style.borderColor='rgba(255,255,255,.08)'"/></div>
-    <button onclick="doLogin()" style="background:#E8192C;color:#fff;padding:.88rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;width:100%;font-family:'DM Sans',sans-serif;box-shadow:0 4px 24px rgba(232,25,44,.38)">Access Dashboard &#x2192;</button>
+    <div style="margin-bottom:1rem">
+      <label class="flabel">Username</label>
+      <input id="admU" type="text" class="fin" placeholder="omkar"/>
+    </div>
+    <div style="margin-bottom:1.5rem">
+      <label class="flabel">Password</label>
+      <input id="admP" type="password" class="fin" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/>
+    </div>
+    <button class="btn-red" style="width:100%" onclick="doLogin()">Access Dashboard &#x2192;</button>
   </div>
 </div>
+<div class="toast" id="globalToast"></div>
+<script type="module">
+
+/* ═══════════════════════════════════════════════════
+   FIREBASE INIT (module compat layer)
+═══════════════════════════════════════════════════ */
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, onSnapshot, serverTimestamp, query, orderBy }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBYcE4HIl4oIJeYtU4g5KwB1_tO4b1WDxA",
+  authDomain: "reddy-design-studio.firebaseapp.com",
+  projectId: "reddy-design-studio",
+  storageBucket: "reddy-design-studio.firebasestorage.app",
+  messagingSenderId: "928134043383",
+  appId: "1:928134043383:web:4045c971f24dfd1e9565f2"
+};
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+/* ═══════════════════════════════════════════════════
+   THEME  —  localStorage persist, all pages sync
+═══════════════════════════════════════════════════ */
+(function applyTheme(){
+  const t = localStorage.getItem('rds_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('thBtn');
+    if (btn) btn.textContent = t === 'dark' ? '\u263E' : '\u2600';
+  });
+})();
+
+function toggleTheme() {
+  const cur  = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('rds_theme', next);
+  const btn = document.getElementById('thBtn');
+  if (btn) btn.textContent = next === 'dark' ? '\u263E' : '\u2600';
+}
+window.toggleTheme = toggleTheme;
+
+/* ═══════════════════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════════════════ */
+(function cursor(){
+  const $c = document.getElementById('cur');
+  const $r = document.getElementById('cur-r');
+  if (!$c || !$r) return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    $c.style.left = mx+'px'; $c.style.top = my+'px';
+  });
+  (function L(){
+    rx += (mx-rx)*.16; ry += (my-ry)*.16;
+    $r.style.left = rx+'px'; $r.style.top = ry+'px';
+    requestAnimationFrame(L);
+  })();
+  document.querySelectorAll('a,button,.gc,.card,.pf-item,.svc-card,.tcard').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('chov'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('chov'));
+  });
+})();
+
+/* ═══════════════════════════════════════════════════
+   NAV + DRAWER
+═══════════════════════════════════════════════════ */
+window.addEventListener('scroll', () =>
+  document.getElementById('nav')?.classList.toggle('scrolled', scrollY > 60)
+);
+function DD(){ document.getElementById('drawer')?.classList.toggle('open'); }
+window.DD = DD;
+
+/* ═══════════════════════════════════════════════════
+   ADMIN LOGIN MODAL
+═══════════════════════════════════════════════════ */
+function openAdm(){ document.getElementById('admModal')?.classList.add('open'); }
+function closeAdm(){ document.getElementById('admModal')?.classList.remove('open'); }
+window.openAdm = openAdm;
+window.closeAdm = closeAdm;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('admModal')?.addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeAdm();
+  });
+  document.getElementById('admP')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+});
+
+function doLogin() {
+  const u = document.getElementById('admU')?.value.trim();
+  const p = document.getElementById('admP')?.value;
+  const err = document.getElementById('admErr');
+  if (u === 'omkar' && p === 'Reddy#2020') {
+    closeAdm();
+    if (typeof openDash === 'function') openDash();
+    else window.location.href = 'index.html#dash';
+  } else {
+    if (err) err.style.display = 'block';
+  }
+}
+window.doLogin = doLogin;
+
+/* ═══════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════ */
+function showToast(msg, type='error') {
+  let t = document.getElementById('globalToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'globalToast';
+    t.className = 'toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.className = 'toast' + (type==='success' ? ' success' : '');
+  t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => t.classList.remove('show'), 2800);
+}
+window.showToast = showToast;
+
+/* ═══════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('vis'), i * 90);
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(x => ro.observe(x));
+});
+
+/* ═══════════════════════════════════════════════════
+   SHARED FIREBASE HELPERS
+═══════════════════════════════════════════════════ */
+window._db = db;
+window._col = collection;
+window._addDoc = addDoc;
+window._getDocs = getDocs;
+window._deleteDoc = deleteDoc;
+window._doc = doc;
+window._setDoc = setDoc;
+window._onSnapshot = onSnapshot;
+window._serverTimestamp = serverTimestamp;
+window._query = query;
+window._orderBy = orderBy;
+
+// Services page - no extra JS needed
+</script>
 </body>
 </html>
