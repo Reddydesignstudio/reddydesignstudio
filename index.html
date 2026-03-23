@@ -513,8 +513,8 @@ footer{background:var(--bg2);border-top:1px solid var(--sb);padding:2.5rem 3.5re
 </div>
 
 <footer>
-  <div class="flogo">RDS<span>.</span></div>
-  <div class="fcopy">&copy; 2025 Reddy Design Studio &middot; Latur, India</div>
+  <div class="flogo">Reddy<span>.</span></div>
+  <div class="fcopy">&copy; 2025 Reddy Design Studio &middot; Hyderabad, India</div>
   <div class="fsocs">
     <a class="fsoc" href="#">YT</a><a class="fsoc" href="#">IG</a>
     <a class="fsoc" href="#">Be</a><a class="fsoc" href="#">in</a>
@@ -904,7 +904,7 @@ function renderTestiSlider(items){
 
 async function loadTestimonials(){
   try{
-    const rows = await sbSelect('testimonials');
+    const rows = await sbSelect('testimonials', 'order=created_at.asc');
     LIVE_TESTIS = rows.length ? rows : DEFAULT_TESTIS;
   }catch(e){
     console.warn('Testimonials load error:', e.message);
@@ -931,7 +931,7 @@ async function loadTestiAdmin(){
   if(listEl) listEl.innerHTML='<div style="color:var(--muted);padding:1.5rem;text-align:center;font-size:.84rem">Loading reviews...</div>';
 
   try{
-    const rows = await sbSelect('testimonials');
+    const rows = await sbSelect('testimonials', 'order=created_at.asc');
     if(countEl) countEl.textContent = rows.length;
     if(!listEl) return;
     if(!rows.length){
@@ -1138,7 +1138,7 @@ async function addItem(){
     await sbInsert('portfolio', newItem);
     showToast('\u2713 "'+name+'" added to portfolio!','ok');
     await loadHomePortfolio();
-loadTestimonials();
+    await loadTestimonials();
     renderPfTable();
     clearAddForm();
     const msg=document.getElementById('addMsg');
@@ -1237,6 +1237,7 @@ function updateDashStats(){
 
 /* INIT */
 loadHomePortfolio();
+loadTestimonials();
 </script>
 </body>
 </html>
