@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FleetConnect India — Corporate Passenger Vehicle Solutions | Latur, Maharashtra</title>
+  <meta name="description"
+    content="Maharashtra's largest corporate passenger vehicle network. 3000+ verified vehicle owners. Serving Pune, Mumbai, Nagpur, Chhatrapati Sambhajinagar, Nashik, Latur. Sedans, Tempo Travellers, Buses for employee transport.">
+  <meta name="keywords"
+    content="corporate vehicle hire Maharashtra, employee transport Pune, bus hire Mumbai, tempo traveller Nagpur, fleet service Chhatrapati Sambhajinagar, corporate cab Nashik, vehicle on rent Latur">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="FleetConnect India — Corporate Passenger Vehicle Solutions">
+  <meta property="og:description"
+    content="3000+ verified vehicle owners. Sedans, Buses, Tempo Travellers for corporate needs across Maharashtra.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon inline SVG as data URI -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A1628'/><text y='22' x='4' font-size='20'>🚐</text></svg>">
+
+  <!-- FAQ / Local Business Schema -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "name": "FleetConnect India",
+      "description": "Corporate passenger vehicle solutions across Maharashtra",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Latur",
+        "addressLocality": "Latur",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      },
+      "telephone": "+918600313495",
+      "areaServed": ["Latur","Pune","Mumbai","Nagpur","Chhatrapati Sambhajinagar","Nashik","Solapur","Dharashiv"]
+    }
+  ]
+}
+</script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #0F2040;
+      --blue: #1E6FFF;
+      --blue-light: #4A8FFF;
+      --gold: #F4B942;
+      --green: #16A34A;
+      --red: #DC2626;
+      --white: #FFFFFF;
+      --gray-100: #F5F7FA;
+      --gray-200: #E8ECF2;
+      --gray-400: #8C9AB0;
+      --gray-600: #4A5568;
+      --text: #1A2540;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 22, 40, 0.97);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-light) !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 5% 60px;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(30, 111, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 111, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 111, 255, 0.18) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 185, 66, 0.08) 0%, transparent 70%);
+      bottom: 0;
+      left: 20%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(30, 111, 255, 0.15);
+      border: 1px solid rgba(30, 111, 255, 0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.3);
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.75;
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(30, 111, 255, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      color: var(--white);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      color: var(--white);
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .stat-number .plus {
+      color: var(--gold);
+      font-size: 1.6rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 500;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* TRUST STRIP */
+    .trust-strip {
+      background: var(--gray-100);
+      padding: 1.2rem 5%;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-label {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .trust-items {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    .trust-item svg {
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* SECTION BASE */
+    section {
+      padding: 80px 5%;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--navy);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      max-width: 620px;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* VEHICLES */
+    .vehicles {
+      background: var(--white);
+    }
+
+    .vehicle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .vehicle-card {
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vehicle-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      transform-origin: left;
+    }
+
+    .vehicle-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      border-color: var(--blue);
+    }
+
+    .vehicle-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .vehicle-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .vehicle-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .vehicle-desc {
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .vehicle-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(30, 111, 255, 0.08);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* COVERAGE / LOCAL SEO */
+    .coverage {
+      background: var(--navy);
+    }
+
+    .coverage .section-tag {
+      color: var(--gold);
+    }
+
+    .coverage .section-title {
+      color: var(--white);
+    }
+
+    .coverage .section-sub {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .city-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .city-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      transition: all 0.2s;
+    }
+
+    .city-card:hover {
+      background: rgba(30, 111, 255, 0.15);
+      border-color: rgba(30, 111, 255, 0.4);
+    }
+
+    .city-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .city-info {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background: var(--gray-100);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 1.8rem;
+      border: 1px solid var(--gray-200);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      font-size: 4rem;
+      color: var(--blue);
+      opacity: 0.12;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-size: 0.92rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .author-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--navy);
+    }
+
+    .author-role {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      background: var(--white);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(30, 111, 255, 0.1);
+      border: 1px solid rgba(30, 111, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+    }
+
+    .step h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+
+    /* WHY US */
+    .why-us {
+      background: var(--gray-100);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .benefit-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 2rem;
+      border: 1px solid var(--gray-200);
+      display: flex;
+      gap: 1.2rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .benefit-card:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(30, 111, 255, 0.1), rgba(30, 111, 255, 0.05));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .benefit-content h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .benefit-content p {
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* INDUSTRIES */
+    .industries {
+      background: var(--white);
+    }
+
+    .industry-list {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .industry-tag {
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      font-weight: 500;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: default;
+    }
+
+    .industry-tag:hover {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+
+    /* FAQ */
+    .faq {
+      background: var(--gray-100);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 800px;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .faq-question span {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: left;
+    }
+
+    .faq-icon {
+      font-size: 1.3rem;
+      color: var(--blue);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      font-style: normal;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding: 0 1.5rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+
+    /* LEAD MAGNET */
+    .lead-magnet {
+      background: linear-gradient(135deg, #0F2040 0%, var(--navy) 100%);
+      padding: 60px 5%;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .lead-magnet-text {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .lead-magnet-text h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.7rem;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+
+    .lead-magnet-text p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+    }
+
+    .lead-magnet-action {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-gold:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* CONTACT */
+    .contact {
+      background: var(--navy);
+    }
+
+    .contact .section-tag {
+      color: var(--gold);
+    }
+
+    .contact .section-title {
+      color: var(--white);
+    }
+
+    .contact .section-sub {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: rgba(30, 111, 255, 0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .contact-text strong {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+
+    .contact-text span {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      background: rgba(30, 111, 255, 0.3);
+      border-color: var(--blue);
+    }
+
+    /* FORM */
+    .contact-form {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: var(--red) !important;
+    }
+
+    .field-error {
+      font-size: 0.75rem;
+      color: #F87171;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .field-error.show {
+      display: block;
+    }
+
+    .form-group select option {
+      background: var(--navy-mid);
+      color: var(--white);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover {
+      background: var(--blue-light);
+      transform: translateY(-1px);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .privacy-note {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.3);
+      text-align: center;
+      margin-top: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .privacy-note a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* CTA BAND */
+    .cta-band {
+      background: linear-gradient(135deg, var(--blue) 0%, #0A4FCC 100%);
+      padding: 60px 5%;
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-band p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--blue);
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #060E1A;
+      padding: 2rem 5%;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 0.5rem;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .footer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .footer-info span {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .footer-info strong {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-bottom a {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* PRIVACY MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--gray-100);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-box h2 {
+      font-family: 'Syne', sans-serif;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .modal-box p {
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-box h3 {
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin: 1rem 0 0.4rem;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+      z-index: 999;
+      transition: all 0.2s;
+      font-size: 1.6rem;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.55);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      background: var(--green);
+      color: var(--white);
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.35s;
+      pointer-events: none;
+      z-index: 998;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 4%;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 90px 4% 50px;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      section {
+        padding: 60px 4%;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-main {
+        flex-direction: column;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .lead-magnet {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .city-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PRIVACY MODAL -->
+  <div class="modal-overlay" id="privacyModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('privacyModal')">✕</button>
+      <h2>Privacy Policy</h2>
+      <p>Last updated: June 2025</p>
+      <h3>Information We Collect</h3>
+      <p>When you submit an enquiry form, we collect your company name, contact person name, phone number, email
+        address, and vehicle requirements. This information is used solely to respond to your business enquiry.</p>
+      <h3>How We Use Your Information</h3>
+      <p>Your contact details are used to provide vehicle quotations and fleet solutions. We do not sell, share, or rent
+        your personal data to third parties. Your data may be shared only with vehicle owners within our network
+        strictly for fulfilling your requirement.</p>
+      <h3>Data Retention</h3>
+      <p>We retain enquiry data for up to 12 months for business correspondence purposes. You may request deletion of
+        your data at any time by contacting us via WhatsApp or email.</p>
+      <h3>Your Rights (DPDP Act, 2023)</h3>
+      <p>Under India's Digital Personal Data Protection Act 2023, you have the right to access, correct, and request
+        deletion of your personal data. Contact us at fleet@fleetconnectindia.com to exercise these rights.</p>
+      <h3>Contact</h3>
+      <p>For privacy-related queries: fleet@fleetconnectindia.com | +91 86003 13495</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="successToast">✅ Enquiry sent! We'll call you within 2 hours.</div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Fleet<span>Connect</span> India</a>
+    <ul class="nav-links">
+      <li><a href="#vehicles">Vehicles</a></li>
+      <li><a href="#coverage">Coverage</a></li>
+      <li><a href="#how">Process</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>Maharashtra's Trusted Corporate Passenger Fleet Partner</span>
+      </div>
+      <h1>Any Passenger Vehicle.<br>Any Scale.<br><em>Delivered Fast.</em></h1>
+      <p class="hero-desc">
+        Maharashtra's largest verified passenger vehicle network — connecting corporations with
+        pre-vetted car owners, tempo traveller operators & bus fleet owners across Pune, Mumbai,
+        Nagpur, Chhatrapati Sambhajinagar, Nashik, Latur and beyond.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">📋 Request Fleet Now</a>
+        <a href="#how" class="btn-outline">See How It Works →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number"><span id="counter1">0</span><span class="plus">+</span></div>
+          <div class="stat-label">Verified Vehicle Owners</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span id="counter2">0</span><span class="plus">+</span></div>
+          <div class="stat-label">Corporate Clients Served</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span id="counter3">0</span><span class="plus">+</span></div>
+          <div class="stat-label">Cities Covered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><span id="counter4">0</span><span class="plus">hrs</span></div>
+          <div class="stat-label">Response Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <span class="trust-label">Trusted by:</span>
+    <div class="trust-items">
+      <div class="trust-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+          viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>IT Companies</div>
+      <div class="trust-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+          viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>Manufacturing Units</div>
+      <div class="trust-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+          viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>Hospitals & Healthcare</div>
+      <div class="trust-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+          viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>Event Management</div>
+      <div class="trust-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+          viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>Government Projects</div>
+    </div>
+  </div>
+
+  <!-- VEHICLES -->
+  <section class="vehicles" id="vehicles">
+    <div class="section-tag">Our Passenger Fleet Network</div>
+    <div class="section-title">Every Passenger Vehicle, One Reliable Source</div>
+    <p class="section-sub">With 3000+ verified vehicle owners in our network, we match your exact passenger transport
+      requirement — single car or a fleet of 50 buses.</p>
+    <div class="vehicle-grid">
+      <div class="vehicle-card">
+        <div class="vehicle-icon">🚗</div>
+        <div class="vehicle-title">Sedans & SUVs</div>
+        <p class="vehicle-desc">Executive cars for leadership travel, airport pickups, client meetings, and VIP
+          transport.</p>
+        <span class="vehicle-count">🔵 800+ vehicles</span>
+      </div>
+      <div class="vehicle-card">
+        <div class="vehicle-icon">🚙</div>
+        <div class="vehicle-title">Tempo Travellers (9–13 Seater)</div>
+        <p class="vehicle-desc">Ideal for small team outings, airport group pickups, and short corporate tour trips.</p>
+        <span class="vehicle-count">🔵 500+ vehicles</span>
+      </div>
+      <div class="vehicle-card">
+        <div class="vehicle-icon">🚐</div>
+        <div class="vehicle-title">Mini Buses & Vans (14–26 Seater)</div>
+        <p class="vehicle-desc">Employee shuttle services, client group transfers, and daily office commute solutions.
+        </p>
+        <span class="vehicle-count">🔵 600+ vehicles</span>
+      </div>
+      <div class="vehicle-card">
+        <div class="vehicle-icon">🚌</div>
+        <div class="vehicle-title">Buses (32–55 Seater)</div>
+        <p class="vehicle-desc">Full-size buses for large-scale employee transport, corporate trips, and annual
+          gatherings.</p>
+        <span class="vehicle-count">🔵 400+ vehicles</span>
+      </div>
+      <div class="vehicle-card">
+        <div class="vehicle-icon">🚍</div>
+        <div class="vehicle-title">Luxury & AC Coaches</div>
+        <p class="vehicle-desc">Premium air-conditioned coaches for executive travel, client tours, and VIP corporate
+          events.</p>
+        <span class="vehicle-count">🔵 300+ vehicles</span>
+      </div>
+      <div class="vehicle-card">
+        <div class="vehicle-icon">🚖</div>
+        <div class="vehicle-title">Daily Employee Transport</div>
+        <p class="vehicle-desc">Dedicated monthly contracts for daily pick-up & drop services for your entire workforce.
+        </p>
+        <span class="vehicle-count">🔵 400+ vehicles</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE / LOCAL SEO -->
+  <section class="coverage" id="coverage">
+    <div class="section-tag">Service Coverage</div>
+    <div class="section-title">Serving All Major Cities in Maharashtra</div>
+    <p class="section-sub">Our 3000+ vehicle owner network is spread across Maharashtra — ensuring fast deployment
+      wherever your business needs it.</p>
+    <div class="city-grid">
+      <div class="city-card">
+        <div class="city-name">📍 Pune</div>
+        <div class="city-info">IT Parks, Hinjewadi, Kharadi</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Mumbai</div>
+        <div class="city-info">BKC, Andheri, Thane, Navi Mumbai</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Nagpur</div>
+        <div class="city-info">MIHAN, Wardha Road Corridor</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Chhatrapati Sambhajinagar</div>
+        <div class="city-info">MIDC, Chikalthana Industrial Area</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Nashik</div>
+        <div class="city-info">Satpur, Ambad MIDC</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Latur</div>
+        <div class="city-info">HQ — Marathwada Region</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Solapur</div>
+        <div class="city-info">Industrial Belt, Textile Hub</div>
+      </div>
+      <div class="city-card">
+        <div class="city-name">📍 Nanded & Dharashiv</div>
+        <div class="city-info">Marathwada Coverage</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-tag">Client Feedback</div>
+    <div class="section-title">What Our Corporate Clients Say</div>
+    <p class="section-sub">Businesses across Maharashtra trust FleetConnect India for reliable, on-time passenger
+      transport solutions.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">We needed 12 Tempo Travellers for our annual off-site at very short notice.
+          FleetConnect delivered all vehicles on time with verified drivers. Highly professional service.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div>
+            <div class="author-name">Rajesh Kumar</div>
+            <div class="author-role">HR Manager, Manufacturing Company — Pune</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">Monthly employee transport for 200+ staff, managed seamlessly. GST invoices on time,
+          dedicated contact person, zero delays. Best fleet partner we've worked with.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SP</div>
+          <div>
+            <div class="author-name">Sunita Patil</div>
+            <div class="author-role">Admin Head, IT Services Firm — Chhatrapati Sambhajinagar</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★☆</div>
+        <p class="testimonial-text">Booked 3 luxury coaches for our client delegation tour from Nagpur. Premium
+          vehicles, professional drivers. Our clients were very impressed with the arrangement.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AM</div>
+          <div>
+            <div class="author-name">Amit Mahajan</div>
+            <div class="author-role">Operations Director, Events Company — Nagpur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="section-tag">Simple Process</div>
+    <div class="section-title">Fleet in 4 Simple Steps</div>
+    <p class="section-sub">No long delays. No broker chains. Direct access to our verified vehicle owner network.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Submit Your Requirement</h3>
+        <p>Tell us vehicle type, quantity, duration, and city through our enquiry form or WhatsApp. Takes under 2
+          minutes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We Match & Verify</h3>
+        <p>Our team searches our 3000+ owner database and identifies the best-fit, verified vehicles for your exact
+          need.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Get Quote & Confirm</h3>
+        <p>Receive a transparent, competitive quotation within 2 hours. No hidden charges. Confirm with PO or advance.
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Vehicles Deployed</h3>
+        <p>Vehicles arrive on time — drivers background-checked, documents verified, GST invoice provided. 24/7 support
+          throughout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-us" id="why">
+    <div class="section-tag">Why FleetConnect India</div>
+    <div class="section-title">Built for Corporate Requirements</div>
+    <p class="section-sub">We understand what businesses need: reliability, documentation, scale, and speed.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">✅</div>
+        <div class="benefit-content">
+          <h3>3000+ Verified Owners</h3>
+          <p>Every vehicle owner is personally verified — RC, insurance, fitness certificate, and driver background
+            check.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⚡</div>
+        <div class="benefit-content">
+          <h3>24-Hour Deployment</h3>
+          <p>Urgent requirement? We can mobilize verified vehicles within 24 hours across our Maharashtra coverage area.
+          </p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📄</div>
+        <div class="benefit-content">
+          <h3>GST Invoicing & PO Accepted</h3>
+          <p>Full compliance — GST bills, formal contracts, and Purchase Order acceptance for all corporate accounts.
+          </p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📍</div>
+        <div class="benefit-content">
+          <h3>Live Tracking Support</h3>
+          <p>GPS-enabled vehicles and real-time location sharing for full fleet visibility and employee safety.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💰</div>
+        <div class="benefit-content">
+          <h3>Competitive Pricing</h3>
+          <p>Direct owner network — no middleman markup. Get market-best rates with fully transparent pricing.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🤝</div>
+        <div class="benefit-content">
+          <h3>Dedicated Account Manager</h3>
+          <p>Every corporate client gets a single point of contact for all requirements, billing, and ongoing support.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="industries">
+    <div class="section-tag">Industries We Serve</div>
+    <div class="section-title">Across Every Sector</div>
+    <p class="section-sub">From tech parks to factories — if your business needs passenger vehicles, we have the
+      network.</p>
+    <div class="industry-list">
+      <div class="industry-tag">🏭 Manufacturing</div>
+      <div class="industry-tag">💻 IT & Technology</div>
+      <div class="industry-tag">🎪 Events & Exhibitions</div>
+      <div class="industry-tag">🏗️ Construction</div>
+      <div class="industry-tag">🎓 Education & Colleges</div>
+      <div class="industry-tag">🏦 BFSI</div>
+      <div class="industry-tag">🚀 Startups</div>
+    </div>
+  </section>
+
+
+  <!-- LEAD MAGNET -->
+  <div class="lead-magnet">
+    <div class="lead-magnet-text">
+      <h2>📥 Download Our Fleet Brochure</h2>
+      <p>Get our complete vehicle catalog, pricing guide, and corporate package details — sent directly to your WhatsApp
+        or email.</p>
+    </div>
+    <div class="lead-magnet-action">
+      <a href="https://wa.me/918600313495?text=Hello%2C%20please%20send%20me%20the%20FleetConnect%20brochure"
+        class="btn-gold" target="_blank">
+        📲 Get Brochure on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <h2>Need Vehicles for Your Business?</h2>
+    <p>Talk to our corporate fleet specialist. Our team responds within 2 business hours on all working days.</p>
+    <a href="https://wa.me/918600313495?text=Hello%2C%20I%20need%20passenger%20vehicles%20for%20my%20company"
+      class="btn-white" target="_blank">
+      💬 WhatsApp Us Now
+    </a>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-tag">Get In Touch</div>
+    <div class="section-title">Request a Fleet Quote</div>
+    <p class="section-sub">Fill in your requirement and our team will reach out within 2 business hours on all working
+      days.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text">
+            <strong>Phone / WhatsApp</strong>
+            <span>+91 86003 13495</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-text">
+            <strong>Email</strong>
+            <span>fleet@fleetconnectindia.com</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text">
+            <strong>Head Office</strong>
+            <span>Latur, Maharashtra — Serving PAN Maharashtra</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div class="contact-text">
+            <strong>Working Hours</strong>
+            <span>Mon–Sat: 9 AM – 7 PM | Emergency: 24/7</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🔗</div>
+          <div class="contact-text">
+            <strong>Follow Us</strong>
+            <div class="social-links">
+              <a href="#" class="social-link" title="LinkedIn">💼</a>
+              <a href="#" class="social-link" title="Facebook">📘</a>
+              <a href="#" class="social-link" title="Instagram">📸</a>
+              <a href="#" class="social-link" title="YouTube">▶️</a>
+            </div>
+          </div>
+        </div>
+        <div
+          style="padding: 1.2rem; background: rgba(244,185,66,0.1); border: 1px solid rgba(244,185,66,0.2); border-radius: 12px;">
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6;">
+            <strong style="color: var(--gold);">Corporate Accounts Welcome</strong><br>
+            We accept Purchase Orders, provide GST invoices, and offer monthly billing for long-term clients.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Company Name *</label>
+            <input type="text" id="companyName" placeholder="ABC Pvt. Ltd." required>
+            <div class="field-error" id="err-company">Please enter your company name.</div>
+          </div>
+          <div class="form-group">
+            <label>Contact Person *</label>
+            <input type="text" id="contactPerson" placeholder="Your Name" required>
+            <div class="field-error" id="err-person">Please enter your name.</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="phoneNumber" placeholder="+91 98765 43210" required>
+            <div class="field-error" id="err-phone">Please enter a valid 10-digit phone number.</div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="emailAddr" placeholder="hr@company.com">
+            <div class="field-error" id="err-email">Please enter a valid email address.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Type Required *</label>
+          <select id="vehicleType" required>
+            <option value="">Select vehicle type...</option>
+            <option>Sedan / SUV (Executive Cars)</option>
+            <option>Tempo Traveller (9–13 Seater)</option>
+            <option>Mini Bus / Van (14–26 Seater)</option>
+            <option>Bus (32–55 Seater)</option>
+            <option>Luxury AC Coach</option>
+            <option>Daily Employee Transport (Monthly Contract)</option>
+            <option>Multiple Types</option>
+          </select>
+          <div class="field-error" id="err-vehicle">Please select a vehicle type.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity Needed</label>
+            <input type="number" id="quantity" placeholder="e.g. 5" min="1">
+          </div>
+          <div class="form-group">
+            <label>City / Location *</label>
+            <input type="text" id="city" placeholder="e.g. Pune, Nagpur" required>
+            <div class="field-error" id="err-city">Please enter your city.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Additional Requirements</label>
+          <textarea id="requirements"
+            placeholder="Describe your requirement, pickup location, duration, special needs..."></textarea>
+        </div>
+        <button class="form-submit" id="submitBtn" onclick="validateAndSubmit()">
+          📋 Send Enquiry — We'll Call Back in 2 Hrs
+        </button>
+        <p class="privacy-note">
+          By submitting this form, you agree to our <a onclick="openModal('privacyModal')">Privacy Policy</a>.
+          Your data is used only to respond to your fleet enquiry and is never sold to third parties.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="logo" style="font-size:1.1rem;">Fleet<span>Connect</span> India</div>
+        <p>Maharashtra's largest verified corporate passenger vehicle network. 3000+ owners. Pune, Mumbai, Nagpur,
+          Chhatrapati Sambhajinagar, Nashik, Latur and beyond.</p>
+      </div>
+      <div class="footer-info">
+        <span><strong>Head Office:</strong> Latur, Maharashtra</span>
+        <span><strong>Phone:</strong> +91 86003 13495</span>
+        <span><strong>Email:</strong> fleet@fleetconnectindia.com</span>
+        <span><strong>GST No:</strong> [Your GST Number]</span>
+        <span><strong>Business Reg:</strong> [Your Registration No]</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FleetConnect India. All rights reserved.</p>
+      <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+        <a onclick="openModal('privacyModal')">Privacy Policy</a>
+        <span style="color:rgba(255,255,255,0.2);">|</span>
+        <p style="color:rgba(255,255,255,0.2); font-size:0.78rem;">Designed by Reddy Design Studio</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/918600313495?text=Hello%2C%20I%20need%20passenger%20vehicles%20for%20my%20company"
+    class="whatsapp-btn" target="_blank" title="Chat on WhatsApp">💬</a>
+
+  <script>
+    // ── COUNTER ANIMATION ──
+    function animateCounter(id, target, duration) {
+      const el = document.getElementById(id);
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current).toLocaleString('en-IN');
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    }
+    let countersStarted = false;
+    new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !countersStarted) {
+        countersStarted = true;
+        setTimeout(() => {
+          animateCounter('counter1', 3000, 2000);
+          animateCounter('counter2', 150, 2000);
+          animateCounter('counter3', 25, 1500);
+          animateCounter('counter4', 2, 1000);
+        }, 400);
+      }
+    }).observe(document.querySelector('.hero'));
+
+    // ── NAV HIGHLIGHT ──
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section[id]').forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? '#fff' : 'rgba(255,255,255,0.7)';
+      });
+    });
+
+
+    // ── MODAL ──
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    document.getElementById('privacyModal').addEventListener('click', function (e) {
+      if (e.target === this) closeModal('privacyModal');
+    });
+
+    // ── TOAST ──
+    function showToast() {
+      const t = document.getElementById('successToast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 4000);
+    }
+
+    // ── FORM VALIDATION ──
+    function validateAndSubmit() {
+      let valid = true;
+      const rules = [
+        { id: 'companyName', errId: 'err-company', check: v => v.trim().length > 1 },
+        { id: 'contactPerson', errId: 'err-person', check: v => v.trim().length > 1 },
+        { id: 'phoneNumber', errId: 'err-phone', check: v => /^[+\d\s\-]{10,15}$/.test(v.trim()) },
+        { id: 'vehicleType', errId: 'err-vehicle', check: v => v !== '' },
+        { id: 'city', errId: 'err-city', check: v => v.trim().length > 1 },
+      ];
+      // optional email validation if filled
+      const emailEl = document.getElementById('emailAddr');
+      const emailErrEl = document.getElementById('err-email');
+      if (emailEl.value.trim() !== '') {
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+        emailEl.classList.toggle('error', !emailOk);
+        emailErrEl.classList.toggle('show', !emailOk);
+        if (!emailOk) valid = false;
+      } else {
+        emailEl.classList.remove('error');
+        emailErrEl.classList.remove('show');
+      }
+      rules.forEach(({ id, errId, check }) => {
+        const el = document.getElementById(id);
+        const errEl = document.getElementById(errId);
+        const ok = check(el.value);
+        el.classList.toggle('error', !ok);
+        errEl.classList.toggle('show', !ok);
+        if (!ok) valid = false;
+      });
+      if (!valid) return;
+
+      // ── SUBMIT ──
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Sending...';
+
+      // Retrieve form values
+      const companyName = document.getElementById('companyName').value;
+      const contactPerson = document.getElementById('contactPerson').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const emailAddr = document.getElementById('emailAddr').value || 'Not provided';
+      const vehicleType = document.getElementById('vehicleType').value;
+      const quantity = document.getElementById('quantity').value || '1';
+      const city = document.getElementById('city').value;
+      const requirements = document.getElementById('requirements').value || 'None';
+
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbyIEOFrhf8pGDEmtGjatON07JUwCj5wptgxg9i4hWDNgwFLqDhy7ZsL04CBO0h5ZpiN/exec';
+
+      // Format the message
+      const message = `🔔 *New Enquiry Received!*\n\n` +
+        `🏢 *Company:* ${companyName}\n` +
+        `👤 *Contact Person:* ${contactPerson}\n` +
+        `📞 *Phone:* ${phoneNumber}\n` +
+        `📧 *Email:* ${emailAddr}\n` +
+        `🚗 *Vehicle Type:* ${vehicleType}\n` +
+        `🔢 *Quantity:* ${quantity}\n` +
+        `📍 *Location:* ${city}\n` +
+        `📝 *Requirements:* ${requirements}`;
+
+      // Send data to Google Apps Script
+      fetch(scriptURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        redirect: 'follow',
+        body: JSON.stringify({ message: message })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Apps Script responded with an error');
+          }
+          return response.json();
+        })
+        .then(data => {
+          btn.textContent = '✅ Enquiry Sent!';
+          btn.style.background = 'var(--green)';
+          showToast();
+
+          // Clear form
+          ['companyName', 'contactPerson', 'phoneNumber', 'emailAddr', 'vehicleType', 'quantity', 'city', 'requirements']
+            .forEach(id => { document.getElementById(id).value = ''; });
+          document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+        })
+        .catch(error => {
+          console.error('Error sending message:', error);
+          btn.textContent = '❌ Failed to Send';
+          btn.style.background = 'var(--red)';
+          alert('Failed to send enquiry. Please try again or contact us directly.');
+        })
+        .finally(() => {
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.textContent = "📋 Send Enquiry — We'll Call Back in 2 Hrs";
+            btn.style.background = '';
+          }, 5000);
+        });
+    }
+  </script>
+</body>
+
+</html>
