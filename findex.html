@@ -1973,15 +1973,28 @@
           'Content-Type': 'text/plain;charset=utf-8'
         },
         redirect: 'follow',
-        body: JSON.stringify({ message: message })
+        body: JSON.stringify({
+          companyName: companyName,
+          contactPerson: contactPerson,
+          phoneNumber: phoneNumber,
+          emailAddr: emailAddr,
+          vehicleType: vehicleType,
+          quantity: quantity,
+          city: city,
+          requirements: requirements,
+          message: message
+        })
       })
         .then(response => {
           if (!response.ok) {
-            throw new Error('Apps Script responded with an error');
+            throw new Error('Network response was not ok');
           }
           return response.json();
         })
         .then(data => {
+          if (data && data.status === 'error') {
+            throw new Error(data.error || 'Google Apps Script error');
+          }
           btn.textContent = '✅ Enquiry Sent!';
           btn.style.background = 'var(--green)';
           showToast();
@@ -1995,7 +2008,7 @@
           console.error('Error sending message:', error);
           btn.textContent = '❌ Failed to Send';
           btn.style.background = 'var(--red)';
-          alert('Failed to send enquiry. Please try again or contact us directly.');
+          alert(`Failed to send enquiry: ${error.message || error}\nPlease try again or contact us directly.`);
         })
         .finally(() => {
           setTimeout(() => {
